@@ -1,0 +1,35 @@
+using System.Collections.Generic;
+using UnityEngine;
+
+public class TempEnemySpawner : MonoBehaviour
+{
+    public static TempEnemySpawner Instance;
+
+    [SerializeField] private GameObject enemyPrefab;
+    [SerializeField] private List<EnemySO> enemies;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
+
+    public void SpawnEnemy()
+    {
+        int enemiesToSpawn = EnemyManager.Instance.maxEnemies * (EnemyManager.Instance.currentWave + 1);
+        for (int i = 0; i <= enemiesToSpawn; i++)
+        {
+            int randomEnemyIndex = Random.Range(0, enemies.Count);
+            EnemySO randomEnemy = enemies[randomEnemyIndex];
+
+            Vector2 randomPosition = new Vector2(Random.Range(-5, 5), Random.Range(-5, 5));
+
+            GameObject spawnedEnemy = Instantiate(enemyPrefab, randomPosition, Quaternion.identity);
+
+            spawnedEnemy.name = randomEnemy.enemyName;
+            spawnedEnemy.GetComponent<SpriteRenderer>().sprite = randomEnemy.enemySprite;
+
+            EnemyAI spawnedEnemyScript = spawnedEnemy.GetComponent<EnemyAI>();
+            spawnedEnemyScript.currentEnemy = randomEnemy;
+        }
+    }
+}
