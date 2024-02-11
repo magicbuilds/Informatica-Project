@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
         switch (state)
         {
             case GameState.CreateMap:
-                TempWaypointSpawner.Instance.CreateWaypoints();
+                ChunckManager.Instance.TempPathSpawner();
                 break;
             case GameState.StartNewWave:
                 TempEnemySpawner.Instance.SpawnEnemy();
