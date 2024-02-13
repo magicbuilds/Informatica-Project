@@ -15,8 +15,8 @@ public class TempEnemySpawner : MonoBehaviour
 
     public void SpawnEnemy()
     {
-        int enemiesToSpawn = EnemyManager.Instance.maxEnemies * (EnemyManager.Instance.currentWave + 1);
-        for (int i = 0; i <= enemiesToSpawn; i++)
+        int enemiesToSpawn = 1 * (EnemyManager.Instance.currentWave + 1);
+        for (int i = 0; i < enemiesToSpawn; i++)
         {
             int randomEnemyIndex = Random.Range(0, enemies.Count);
             EnemySO randomEnemy = enemies[randomEnemyIndex];
@@ -34,5 +34,7 @@ public class TempEnemySpawner : MonoBehaviour
             EnemyStats spawnedEnemyStatsScript = spawnedEnemy.GetComponent<EnemyStats>();
             spawnedEnemyStatsScript.currentEnemy = randomEnemy;
         }
+        EnemyManager.Instance.currentEnemies = enemiesToSpawn;
+        UIManager.Instance.UpdateEnemysLeftUI(enemiesToSpawn);
     }
 }

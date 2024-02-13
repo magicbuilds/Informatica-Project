@@ -67,27 +67,23 @@ public class ChunckManager : MonoBehaviour
 
     private PathSO RandomPathTile()
     {
-        return pathChunks[Random.Range(0, pathChunks.Count - 1)];
-
-
-
-        /*int totalWeight = 0;
+        var totalWeight = 0;
         foreach (PathSO path in pathChunks)
         {
             totalWeight += path.weight;
         }
+        var randomWeightValue = Random.Range(1, totalWeight + 1);
 
-        float randomNumber = Random.Range(0, totalWeight);
-        for (int i = 0; i < pathChunks.Count; i++)
+        var processedWeight = 0;
+        foreach (PathSO path in pathChunks)
         {
-            totalWeight -= pathChunks[i].weight;
-            if (totalWeight <= randomNumber)
+            processedWeight += path.weight;
+
+            if (randomWeightValue <= processedWeight)
             {
-                return pathChunks[i];
+                return path;
             }
         }
-        Debug.Log("No Path Found !!!!!");
         return null;
-        */
     }
 }

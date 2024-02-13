@@ -9,7 +9,8 @@ public class GameManager : MonoBehaviour
     public enum GameState
     {
         CreateMap,
-        StartNewWave
+        StartNewWave,
+        EndOfWave
     }
 
     private void Awake()
@@ -31,6 +32,8 @@ public class GameManager : MonoBehaviour
                 break;
             case GameState.StartNewWave:
                 TempEnemySpawner.Instance.SpawnEnemy();
+                break;
+            case GameState.EndOfWave:
                 break;
             default:
                 Debug.Log("Gamestate not found");

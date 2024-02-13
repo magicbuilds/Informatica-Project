@@ -12,7 +12,7 @@ public class EnemyStats : MonoBehaviour
     private void Start()
     {
         health = currentEnemy.baseHealth;
-        UpdateUI();
+        UpdateEnemyUI();
     }
 
     public void DealDamange(float damage)
@@ -21,13 +21,14 @@ public class EnemyStats : MonoBehaviour
 
         if (health <= 0)
         {
+            EnemyManager.Instance.ReduceEnemyCount();
             Destroy(gameObject);
         }
 
-        UpdateUI();
+        UpdateEnemyUI();
     }
 
-    private void UpdateUI()
+    private void UpdateEnemyUI()
     {
         if (health < 0)
         {

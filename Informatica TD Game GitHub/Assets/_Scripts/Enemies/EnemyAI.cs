@@ -27,6 +27,8 @@ public class EnemyAI : MonoBehaviour
         {
             Destroy(gameObject);
 
+            EnemyManager.Instance.ReduceEnemyCount();
+
             Debug.Log("Tower Reached");
 
             return;
