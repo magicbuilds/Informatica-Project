@@ -34,6 +34,7 @@ public class GameManager : MonoBehaviour
                 TempEnemySpawner.Instance.SpawnEnemy();
                 break;
             case GameState.EndOfWave:
+                CardDrawManager.Instance.SpawnCards();
                 break;
             default:
                 Debug.Log("Gamestate not found");

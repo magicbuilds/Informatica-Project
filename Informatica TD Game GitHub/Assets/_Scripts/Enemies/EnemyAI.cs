@@ -13,7 +13,6 @@ public class EnemyAI : MonoBehaviour
         currentWaypointID.waypointNumber = 0;
         foreach ((int,int) waypointID in WaypointManager.Instance.waypoints.Keys)
         {
-            Debug.Log(waypointID);
             if(waypointID.Item2 > currentWaypointID.waypointNumber && waypointID.Item1 == currentWaypointID.pathIndex)
             {
                 currentWaypointID.waypointNumber = waypointID.Item2;    
