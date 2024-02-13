@@ -33,7 +33,7 @@ public class EnemyAI : MonoBehaviour
         }
 
         Vector2 targetPosition = WaypointManager.Instance.waypoints[currentWaypointID].transform.position;
-        transform.position = Vector2.MoveTowards(transform.position, targetPosition, currentEnemy.enemySpeed * Time.deltaTime);
+        transform.position = Vector2.MoveTowards(transform.position, targetPosition, currentEnemy.speed * Time.deltaTime);
 
         if(Vector2.Distance(transform.position, targetPosition) < 0.1f)
         {

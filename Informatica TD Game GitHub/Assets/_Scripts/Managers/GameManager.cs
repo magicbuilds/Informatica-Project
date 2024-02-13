@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        //SwitchGameState(GameState.CreateMap);
+        SwitchGameState(GameState.CreateMap);
     }
 
     public void SwitchGameState(GameState state)

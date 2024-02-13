@@ -26,10 +26,13 @@ public class TempEnemySpawner : MonoBehaviour
             GameObject spawnedEnemy = Instantiate(enemyPrefab, randomPosition, Quaternion.identity);
 
             spawnedEnemy.name = randomEnemy.enemyName;
-            spawnedEnemy.GetComponent<SpriteRenderer>().sprite = randomEnemy.enemySprite;
+            spawnedEnemy.GetComponent<SpriteRenderer>().sprite = randomEnemy.sprite;
 
-            EnemyAI spawnedEnemyScript = spawnedEnemy.GetComponent<EnemyAI>();
-            spawnedEnemyScript.currentEnemy = randomEnemy;
+            EnemyAI spawnedEnemyAIScript = spawnedEnemy.GetComponent<EnemyAI>();
+            spawnedEnemyAIScript.currentEnemy = randomEnemy;
+
+            EnemyStats spawnedEnemyStatsScript = spawnedEnemy.GetComponent<EnemyStats>();
+            spawnedEnemyStatsScript.currentEnemy = randomEnemy;
         }
     }
 }

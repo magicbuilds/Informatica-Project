@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Beer
   m_EditorClassIdentifier: 
   enemyName: Beer
-  enemySprite: {fileID: 21300000, guid: b2326ce5eea99894f884f7d389bb558f, type: 3}
-  enemySpeed: 2.5
+  sprite: {fileID: 21300000, guid: b2326ce5eea99894f884f7d389bb558f, type: 3}
+  baseHealth: 10
+  speed: 3.5
