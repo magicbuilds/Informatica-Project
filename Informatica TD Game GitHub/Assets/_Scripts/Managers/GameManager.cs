@@ -32,9 +32,15 @@ public class GameManager : MonoBehaviour
                 break;
             case GameState.StartNewWave:
                 TempEnemySpawner.Instance.SpawnEnemy();
+
+                InputManager.Instance.EnablePlayerInput();
+                InputManager.Instance.DisableUIInput();
                 break;
             case GameState.EndOfWave:
                 CardDrawManager.Instance.SpawnCards();
+
+                InputManager.Instance.EnableUIInput();
+                InputManager.Instance.DisablePlayerInput();
                 break;
             default:
                 Debug.Log("Gamestate not found");

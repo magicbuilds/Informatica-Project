@@ -9,7 +9,7 @@ public class CardDrawManager : MonoBehaviour
     [SerializeField] private GameObject cardPrefab;
 
     [SerializeField] private List<CardSO> cards;
-    private List<GameObject> spawnedCards;
+    public List<GameObject> spawnedCards;
 
     [SerializeField] private List<Transform> spawnLocations;
 
@@ -27,11 +27,10 @@ public class CardDrawManager : MonoBehaviour
         foreach (Transform location in spawnLocations) 
         {
             GameObject spawnedCard = Instantiate(cardPrefab, location.position, Quaternion.identity);
-            spawnedCard.GetComponent<Card>().CardInitialization(RandomCard());
+            spawnedCard.GetComponentInChildren<Card>().CardInitialization(RandomCard());
 
             spawnedCard.transform.SetParent(canvas.transform);
 
-            Debug.Log(spawnedCard);
             spawnedCards.Add(spawnedCard);
         }
     }
@@ -42,6 +41,7 @@ public class CardDrawManager : MonoBehaviour
         {
             Destroy(card);
         }
+        spawnedCards.Clear();
     }
 
     private CardSO RandomCard()

@@ -4,6 +4,7 @@ using UnityEngine;
 public class CardSO : ScriptableObject
 {
     public string cardName;
+    public string stats;
     public string discription;
     public Sprite icon;
 
