@@ -12,4 +12,10 @@ public class PathSO : ScriptableObject
     public List<Vector2> extraWaypointPositions;
 
     public List<Vector2> nextChunkPositions;
+    public List<Rotations> nextChunckRotations;
+
+    public enum Rotations
+    {
+        None, Right, Backwards, Left 
+    }
 }

@@ -42,10 +42,10 @@ public class GameManager : MonoBehaviour
                 TempEnemySpawner.Instance.SpawnEnemy();
                 break;
             case GameState.EndOfWave:
-                CardDrawManager.Instance.SpawnCards();
+                //CardDrawManager.Instance.SpawnCards();
 
-                InputManager.Instance.EnableUIInput();
-                InputManager.Instance.DisablePlayerInput();
+                //InputManager.Instance.EnableUIInput();
+                //InputManager.Instance.DisablePlayerInput();
                 break;
             default:
                 Debug.Log("Gamestate not found");
@@ -53,6 +53,5 @@ public class GameManager : MonoBehaviour
         }
 
         gameState = state;
-        Debug.Log(gameState.ToString());
     }
 }

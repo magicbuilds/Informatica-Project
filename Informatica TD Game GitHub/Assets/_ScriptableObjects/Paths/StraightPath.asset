@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: StraightPath
   m_EditorClassIdentifier: 
   pathName: Straight
-  weight: 10
+  weight: 6
   basePathPositions:
   - {x: -3, y: 0}
   - {x: -2, y: 0}
@@ -28,3 +28,4 @@ MonoBehaviour:
   extraWaypointPositions: []
   nextChunkPositions:
   - {x: -7, y: 0}
+  nextChunckRotations: 00000000
