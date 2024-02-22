@@ -1456,7 +1456,7 @@ GameObject:
   - component: {fileID: 1347649971}
   - component: {fileID: 1347649972}
   m_Layer: 0
-  m_Name: ChunckManager
+  m_Name: ChunkManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1486,10 +1486,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1347649970}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc5ddbab3a2050b4eb5c5fb0ca68441d, type: 3}
+  m_Script: {fileID: 11500000, guid: 193b773e650b0044e8c3de14a08f2f65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   pathPrefab: {fileID: 6777029222535364866, guid: ae7a51397ba23ea41aba1ef0ba82dd44, type: 3}
+  emptyChunkPrefab: {fileID: 2006594034815173320, guid: fa8857514f91e8746bde8cb3f99fdb6b, type: 3}
   startPath: {fileID: 11400000, guid: eea2d8d212da95844832fb98788ac774, type: 2}
   pathChunks:
   - {fileID: 11400000, guid: 2668533bc43bf85498cf2570875ee676, type: 2}
@@ -2007,6 +2008,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70f2863805347e240a32d8c57b51ea54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameState: 0
 --- !u!1 &2113025632
 GameObject:
   m_ObjectHideFlags: 0

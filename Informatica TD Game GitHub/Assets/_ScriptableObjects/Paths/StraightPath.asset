@@ -26,3 +26,5 @@ MonoBehaviour:
   - {x: 3, y: 0}
   - {x: -3, y: 0}
   extraWaypointPositions: []
+  nextChunkPositions:
+  - {x: -7, y: 0}

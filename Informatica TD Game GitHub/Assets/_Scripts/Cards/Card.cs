@@ -21,6 +21,7 @@ public class Card : MonoBehaviour
     public void OnCardSelected()
     {
         CardDrawManager.Instance.RemoveCards();
+        GameManager.Instance.SwitchGameState(GameManager.GameState.ChoseNextChunk);
     }
 
     public void OnExtraInformationSelected()

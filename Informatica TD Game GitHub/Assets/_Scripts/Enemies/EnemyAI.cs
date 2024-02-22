@@ -8,7 +8,7 @@ public class EnemyAI : MonoBehaviour
 
     private void Start()
     {
-        currentWaypointID.pathIndex = Random.Range(0, ChunckManager.Instance.totalPathCount);
+        currentWaypointID.pathIndex = Random.Range(0, ChunkManager.Instance.totalPathCount);
 
         currentWaypointID.waypointNumber = 0;
         foreach ((int,int) waypointID in WaypointManager.Instance.waypoints.Keys)

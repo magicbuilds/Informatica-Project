@@ -6,9 +6,12 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
+    public GameState gameState;
+
     public enum GameState
     {
-        CreateMap,
+        StartUp,
+        ChoseNextChunk,
         StartNewWave,
         EndOfWave
     }
@@ -16,25 +19,27 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        
     }
-
     private void Start()
     {
-        SwitchGameState(GameState.CreateMap);
+        SwitchGameState(GameState.StartUp);
+        SwitchGameState(GameState.ChoseNextChunk);
     }
 
     public void SwitchGameState(GameState state)
     {
         switch (state)
         {
-            case GameState.CreateMap:
-                ChunckManager.Instance.TempPathSpawner();
+            case GameState.StartUp:
+                ChunkManager.Instance.SpawnFirstChunk();
+                break;
+            case GameState.ChoseNextChunk:
+                InputManager.Instance.EnablePlayerInput();
+                InputManager.Instance.DisableUIInput();
                 break;
             case GameState.StartNewWave:
                 TempEnemySpawner.Instance.SpawnEnemy();
-
-                InputManager.Instance.EnablePlayerInput();
-                InputManager.Instance.DisableUIInput();
                 break;
             case GameState.EndOfWave:
                 CardDrawManager.Instance.SpawnCards();
@@ -46,5 +51,8 @@ public class GameManager : MonoBehaviour
                 Debug.Log("Gamestate not found");
                 break;
         }
+
+        gameState = state;
+        Debug.Log(gameState.ToString());
     }
 }
