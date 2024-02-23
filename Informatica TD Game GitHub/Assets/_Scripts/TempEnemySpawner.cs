@@ -15,7 +15,7 @@ public class TempEnemySpawner : MonoBehaviour
 
     public void SpawnEnemy()
     {
-        int enemiesToSpawn = 1 * (EnemyManager.Instance.currentWave + 1);
+        int enemiesToSpawn = 100 * (EnemyManager.Instance.currentWave + 1);
         for (int i = 0; i < enemiesToSpawn; i++)
         {
             int randomEnemyIndex = Random.Range(0, enemies.Count);

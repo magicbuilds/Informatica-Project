@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TJunctionPath
   m_EditorClassIdentifier: 
   pathName: T-Junction
-  weight: 1
+  weight: 2
   basePathPositions:
   - {x: 3, y: 0}
   - {x: 2, y: 0}
