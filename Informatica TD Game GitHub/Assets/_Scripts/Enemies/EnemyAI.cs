@@ -3,16 +3,21 @@ using UnityEngine;
 public class EnemyAI : MonoBehaviour
 {
     public EnemySO currentEnemy;
+    public int targetPathIndex;
 
     private (int pathIndex, int waypointNumber) currentWaypointID;
 
     private void Start()
     {
-        currentWaypointID.pathIndex = Random.Range(0, ChunkManager.Instance.totalPathCount);
-
+        currentWaypointID.pathIndex = 0;
         currentWaypointID.waypointNumber = 0;
+        
         foreach ((int,int) waypointID in WaypointManager.Instance.waypoints.Keys)
         {
+            if (waypointID.Item1 > currentWaypointID.pathIndex && waypointID.Item1 <= targetPathIndex)
+            {
+                currentWaypointID.pathIndex = waypointID.Item1;
+            }
             if(waypointID.Item2 > currentWaypointID.waypointNumber && waypointID.Item1 == currentWaypointID.pathIndex)
             {
                 currentWaypointID.waypointNumber = waypointID.Item2;    
@@ -38,12 +43,18 @@ public class EnemyAI : MonoBehaviour
 
         if(Vector2.Distance(transform.position, targetPosition) < 0.1f)
         {
-            if (!WaypointManager.Instance.waypoints.ContainsKey((currentWaypointID.pathIndex, currentWaypointID.waypointNumber -1)))
+            if (!WaypointManager.Instance.waypoints.ContainsKey((currentWaypointID.pathIndex, currentWaypointID.waypointNumber - 1)))
             {
-                currentWaypointID.pathIndex--;
+                for (int i = 0; i < currentWaypointID.pathIndex; i++)
+                {
+                    currentWaypointID.pathIndex--;
+                    if (WaypointManager.Instance.waypoints.ContainsKey((currentWaypointID.pathIndex, currentWaypointID.waypointNumber - 1)))
+                    {
+                        break;
+                    }
+                }
             }
             currentWaypointID.waypointNumber--;
-
         }
     }
 }

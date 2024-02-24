@@ -1489,14 +1489,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 193b773e650b0044e8c3de14a08f2f65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  groundPrefab: {fileID: 6777029222535364866, guid: 6f8956e674445cf49b7149ab110dd48e, type: 3}
   pathPrefab: {fileID: 6777029222535364866, guid: ae7a51397ba23ea41aba1ef0ba82dd44, type: 3}
   emptyChunkPrefab: {fileID: 2006594034815173320, guid: fa8857514f91e8746bde8cb3f99fdb6b, type: 3}
-  startPath: {fileID: 11400000, guid: eea2d8d212da95844832fb98788ac774, type: 2}
+  startPath: {fileID: 11400000, guid: 1029137c25cba4c48864313e16829289, type: 2}
   pathChunks:
-  - {fileID: 11400000, guid: 2668533bc43bf85498cf2570875ee676, type: 2}
-  - {fileID: 11400000, guid: c315d3ddb3c82474ca5d402221f0c906, type: 2}
-  - {fileID: 11400000, guid: dde11cf9b995ff04cb2a339876a18762, type: 2}
-  - {fileID: 11400000, guid: d69c4a45ce6023546a4b1666ffefde46, type: 2}
+  - {fileID: 11400000, guid: f79bee9d5e4d3f14fadd90d3f9fbbd67, type: 2}
+  - {fileID: 11400000, guid: 2a4234e99719a794e985c461947cbeb6, type: 2}
+  - {fileID: 11400000, guid: 95c2fbe775f698d44b94a18690bb67e1, type: 2}
+  - {fileID: 11400000, guid: ca284743597c2bc4db9c74e6a8021234, type: 2}
   totalPathCount: 1
 --- !u!1 &1353661366
 GameObject:
@@ -1840,8 +1841,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baec585d631d33e4f9a1353ce85d8bd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentEnemies: 0
-  timeBetweenWaves: 0
+  enemyPrefab: {fileID: 2960077048477578210, guid: d428a1ec536af2d469f3eeccfd5fc542, type: 3}
+  enemies:
+  - {fileID: 11400000, guid: dbc40b5f077179f4490381d4711ecdea, type: 2}
+  - {fileID: 11400000, guid: a66df2dddb65b814e80cef4b688ecaee, type: 2}
+  - {fileID: 11400000, guid: 94607ef5d3da6c148a16851a16c3c6f8, type: 2}
+  currentWave: 1
+  currentEnemyNumber: 0
 --- !u!1 &1599292998
 GameObject:
   m_ObjectHideFlags: 0
@@ -1877,54 +1883,6 @@ RectTransform:
   m_AnchoredPosition: {x: 85, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &1805635291
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1805635293}
-  - component: {fileID: 1805635292}
-  m_Layer: 0
-  m_Name: TempEnemySpawner
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1805635292
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1805635291}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93f67c7327d04a44094427c80075b13d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 2960077048477578210, guid: d428a1ec536af2d469f3eeccfd5fc542, type: 3}
-  enemies:
-  - {fileID: 11400000, guid: dbc40b5f077179f4490381d4711ecdea, type: 2}
-  - {fileID: 11400000, guid: a66df2dddb65b814e80cef4b688ecaee, type: 2}
---- !u!4 &1805635293
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1805635291}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2008057045
 GameObject:
   m_ObjectHideFlags: 0
@@ -2119,6 +2077,5 @@ SceneRoots:
   m_Roots:
   - {fileID: 624674513}
   - {fileID: 519420032}
-  - {fileID: 1805635293}
   - {fileID: 2113025636}
   - {fileID: 42568501}

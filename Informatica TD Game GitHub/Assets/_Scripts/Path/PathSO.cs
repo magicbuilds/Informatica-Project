@@ -9,10 +9,11 @@ public class PathSO : ScriptableObject
 
     public List<Vector2> basePathPositions;
     public List<Vector2> baseWaypointPositions;
-    public List<Vector2> extraWaypointPositions;
 
     public List<Vector2> nextChunkPositions;
     public List<Rotations> nextChunckRotations;
+
+    public List<Vector2> baseEnemySpawnPositions;
 
     public enum Rotations
     {

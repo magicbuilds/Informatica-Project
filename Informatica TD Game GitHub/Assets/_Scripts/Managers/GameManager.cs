@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
 
     public void SwitchGameState(GameState state)
     {
+        Debug.Log(state.ToString());
         switch (state)
         {
             case GameState.StartUp:
@@ -39,7 +40,7 @@ public class GameManager : MonoBehaviour
                 InputManager.Instance.DisableUIInput();
                 break;
             case GameState.StartNewWave:
-                TempEnemySpawner.Instance.SpawnEnemy();
+                EnemyManager.Instance.SpawnEnemies();
                 break;
             case GameState.EndOfWave:
                 //CardDrawManager.Instance.SpawnCards();

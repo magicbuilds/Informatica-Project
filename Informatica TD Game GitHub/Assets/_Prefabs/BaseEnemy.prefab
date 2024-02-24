@@ -96,7 +96,6 @@ GameObject:
   - component: {fileID: 4920452190556063311}
   - component: {fileID: 1373347514232289321}
   - component: {fileID: -819414013111025015}
-  - component: {fileID: 3538046041822106419}
   - component: {fileID: 8365006494941751764}
   m_Layer: 0
   m_Name: BaseEnemy
@@ -188,19 +187,6 @@ MonoBehaviour:
   currentEnemy: {fileID: 0}
   health: 0
   healthText: {fileID: 6886226613234075234}
---- !u!114 &3538046041822106419
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2960077048477578210}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1619829e793902e45b0a3160d4845e03, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentEnemy: {fileID: 0}
 --- !u!61 &8365006494941751764
 BoxCollider2D:
   m_ObjectHideFlags: 0

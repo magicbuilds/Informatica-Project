@@ -10,23 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1554fa6e8a6de474d97f3404c3f1415e, type: 3}
-  m_Name: LTurnPath
+  m_Name: StraightPath
   m_EditorClassIdentifier: 
-  pathName: Left Turn
-  weight: 3
+  pathName: Straight
+  weight: 6
   basePathPositions:
-  - {x: 3, y: 0}
-  - {x: 2, y: 0}
-  - {x: 1, y: 0}
-  - {x: 0, y: 0}
-  - {x: 0, y: -1}
+  - {x: 0, y: -3}
   - {x: 0, y: -2}
-  - {x: 0, y: -3}
-  baseWaypointPositions:
-  - {x: 3, y: 0}
+  - {x: 0, y: -1}
   - {x: 0, y: 0}
-  - {x: 0, y: -3}
-  extraWaypointPositions: []
+  - {x: 0, y: 1}
+  - {x: 0, y: 2}
+  - {x: 0, y: 3}
+  baseWaypointPositions: []
   nextChunkPositions:
-  - {x: 0, y: -7}
-  nextChunckRotations: 03000000
+  - {x: 0, y: 7}
+  nextChunckRotations: 00000000
+  baseEnemySpawnPositions:
+  - {x: 0, y: 3}
