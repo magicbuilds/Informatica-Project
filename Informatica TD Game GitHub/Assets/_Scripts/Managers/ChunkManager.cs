@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class ChunkManager : MonoBehaviour
 {
@@ -9,10 +10,13 @@ public class ChunkManager : MonoBehaviour
     [SerializeField] private GameObject pathPrefab;
     [SerializeField] private GameObject emptyChunkPrefab;
 
-    [SerializeField] private PathSO startPath;
+    [SerializeField] private PathSO startChunk;
+    [SerializeField] private PathSO endChunk;
     [SerializeField] private List<PathSO> pathChunks;
 
-    private Dictionary<Vector2, PathSO> spawnedChunks;
+    private Dictionary<Vector2, PathSO> spawnedChunks = new Dictionary<Vector2, PathSO>();
+
+    [SerializeField]  private PositionsToCheckSO positionsToCheckSO;
 
     private int baseChunkXMin = -3;
     private int baseChunkXMax = 3;
@@ -20,31 +24,37 @@ public class ChunkManager : MonoBehaviour
     public int totalPathCount = 1;
     private int waypointNumber;
 
+    private int totalChunksSpawned = 0;
+
+    public enum Rotations
+    {
+        None, Right, Backwards, Left
+    }
+
     private void Awake()
     {
         Instance = this;
     }
 
-    private void Start()
-    {
-        spawnedChunks = new Dictionary<Vector2, PathSO>();
-    }
-
     public void SpawnFirstChunk()
     {
-        PathSO.Rotations randomRotation = (PathSO.Rotations)Random.Range(0, 4);
-        SpawnNewChunk(Vector2.zero, randomRotation, 0, 0, startPath);
+        GameObject firstEmptyChunk = new GameObject();
+
+        EmptyChunk startChunkData = firstEmptyChunk.AddComponent<EmptyChunk>();
+        startChunkData.rotation = (Rotations)Random.Range(0, 4);
+        startChunkData.waypoint = null;
+
+        SpawnNewChunk(startChunkData);
         
     }
 
-    public void SpawnNextChunk(Vector2 position, PathSO.Rotations rotation, int pathIndex, int pathNumber)
+    public void SpawnNewChunk(EmptyChunk chunkData)
     {
-        SpawnNewChunk(position, rotation, pathIndex, pathNumber, RandomChunk(position, rotation));
-    }
+        Vector2 positionOffset = new Vector2(chunkData.transform.position.x, chunkData.transform.position.y);
+        PathSO chunkToSpawn = RandomChunk(positionOffset, chunkData.rotation);
 
-    private void SpawnNewChunk(Vector2 positionOffset, PathSO.Rotations rotation, int pathIndex, int pathNumber, PathSO chunkToSpawn)
-    {
-        
+        if (totalChunksSpawned == 0) chunkToSpawn = startChunk;
+        if (chunkToSpawn == null) chunkToSpawn = endChunk;
 
         GameObject chunkContainer = new GameObject();
 
@@ -54,7 +64,7 @@ public class ChunkManager : MonoBehaviour
         spawnedChunks[chunkCord] = chunkToSpawn;
 
         //Spawn Path Tiles
-        List<Vector2> rotatedPathPositions = RotatedPositions(chunkToSpawn.basePathPositions, rotation);
+        List<Vector2> rotatedPathPositions = RotatedPositions(chunkToSpawn.basePathPositions, chunkData.rotation);
         foreach (Vector2 pathPosition in rotatedPathPositions)
         {
             Vector2 position = pathPosition + positionOffset;
@@ -78,61 +88,80 @@ public class ChunkManager : MonoBehaviour
         }
 
         //Spawn Waypoints
-        waypointNumber = pathNumber;
-        List<Vector2> rotatedWaypointPositions = RotatedPositions(chunkToSpawn.baseWaypointPositions, rotation);
+        Waypoint latestWaypoint = null;
+
+        waypointNumber = chunkData.pathNumber;
+        List<Vector2> rotatedWaypointPositions = RotatedPositions(chunkToSpawn.baseWaypointPositions, chunkData.rotation);
         foreach (Vector2 waypointPosition in rotatedWaypointPositions)
         {
             Vector2 position = waypointPosition + positionOffset;
-            WaypointManager.Instance.AddNewWaypoint(position, pathIndex, waypointNumber);
+            latestWaypoint = WaypointManager.Instance.AddNewWaypoint(position, chunkData.pathIndex, waypointNumber, chunkData.waypoint);
 
             waypointNumber++;
         }
 
-        //Spawn Next Chunck Locations
+        //Spawn Next Chunck Positions + Update Enemy Spawn Positions
         int emptyChunksSpawned = 0;
-        List<Vector2> rotatedEmptyChunkPositions = RotatedPositions(chunkToSpawn.nextChunkPositions, rotation);
-        List<Vector2> rotatedEnemySpawnPositions = RotatedPositions(chunkToSpawn.baseEnemySpawnPositions, rotation);
+        List<Vector2> rotatedEmptyChunkPositions = RotatedPositions(chunkToSpawn.nextChunkPositions, chunkData.rotation);
+        List<Vector2> rotatedEnemySpawnPositions = RotatedPositions(chunkToSpawn.baseEnemySpawnPositions, chunkData.rotation);
         foreach (Vector2 nextChunckPosition in rotatedEmptyChunkPositions)
         {
             Vector2 position = nextChunckPosition + positionOffset;
             Vector2 enemySpawnPosition = rotatedEnemySpawnPositions[emptyChunksSpawned] + positionOffset;
+
+            Vector2 newChunkCord = new Vector2(position.x / 7, position.y / 7);
+            spawnedChunks[newChunkCord] = null;
 
             GameObject nextChunck = Instantiate(emptyChunkPrefab, position, Quaternion.identity);
 
             EmptyChunk chunkScript = nextChunck.GetComponent<EmptyChunk>();
 
             chunkScript.pathNumber = waypointNumber;
-            chunkScript.rotation = CalculateNextChunkRotation(rotation, chunkToSpawn.nextChunckRotations[emptyChunksSpawned]);
+            chunkScript.rotation = CalculateNextChunkRotation(chunkData.rotation, chunkToSpawn.nextChunckRotations[emptyChunksSpawned]);
+
+            if (latestWaypoint == null)
+            {
+                chunkScript.waypoint = chunkData.waypoint;
+            }
+            else
+            {
+                chunkScript.waypoint = latestWaypoint;
+            }
 
             if (emptyChunksSpawned == 0)
             {
-                chunkScript.pathIndex = pathIndex;
-                EnemyManager.Instance.UpdateSpawnLocations(pathIndex, enemySpawnPosition);
+                chunkScript.pathIndex = chunkData.pathIndex;
+                EnemyManager.Instance.UpdateSpawnLocations(chunkScript.waypoint, enemySpawnPosition, chunkData.pathIndex);
             }
                 
             else
             {
                 chunkScript.pathIndex = totalPathCount;
-                EnemyManager.Instance.UpdateSpawnLocations(totalPathCount, enemySpawnPosition);
+                EnemyManager.Instance.UpdateSpawnLocations(chunkScript.waypoint, enemySpawnPosition, totalPathCount);
+
                 totalPathCount++;
             }
+            
+            
+
             emptyChunksSpawned++;
         }
 
+        totalChunksSpawned++;
         GameManager.Instance.SwitchGameState((GameManager.GameState)((int)GameManager.Instance.gameState + 1));
     }
 
-    private List<Vector2> RotatedPositions(List<Vector2> positions, PathSO.Rotations rotation)
+    private List<Vector2> RotatedPositions(List<Vector2> positions, Rotations rotation)
     {
         List<Vector2> rotatedPositions = new List<Vector2>();
 
         switch (rotation)
         {
-            case PathSO.Rotations.None:
+            case Rotations.None:
 
                 return positions;
 
-            case PathSO.Rotations.Left:
+            case Rotations.Left:
 
                 foreach (Vector2 position in positions)
                 {
@@ -142,7 +171,7 @@ public class ChunkManager : MonoBehaviour
 
                 return rotatedPositions;
 
-            case PathSO.Rotations.Right:
+            case Rotations.Right:
 
                 foreach (Vector2 position in positions)
                 {
@@ -152,7 +181,7 @@ public class ChunkManager : MonoBehaviour
 
                 return rotatedPositions;
 
-            case PathSO.Rotations.Backwards:
+            case Rotations.Backwards:
 
                 foreach (Vector2 position in positions)
                 {
@@ -168,17 +197,17 @@ public class ChunkManager : MonoBehaviour
 
     }
 
-    private PathSO.Rotations CalculateNextChunkRotation(PathSO.Rotations currentRotation, PathSO.Rotations nextRotation)
+    private Rotations CalculateNextChunkRotation(Rotations currentRotation, Rotations nextRotation)
     {
         switch (nextRotation)
         {
             //4 rotations so 0 <= PathSO.Rotations <= 3
-            case PathSO.Rotations.None:
+            case Rotations.None:
                 return currentRotation;
-            case PathSO.Rotations.Left:
+            case Rotations.Left:
                 if ((int)currentRotation - 1 >= 0) return currentRotation - 1;
                 else return currentRotation + 3;
-            case PathSO.Rotations.Right:
+            case Rotations.Right:
                 if ((int)currentRotation + 1 <= 3) return currentRotation + 1;
                 else return currentRotation - 3;
             default:
@@ -188,27 +217,89 @@ public class ChunkManager : MonoBehaviour
         }
     }
 
-    private PathSO RandomChunk(Vector2 position, PathSO.Rotations rotation)
+    private PathSO RandomChunk(Vector2 position, Rotations rotation)
     {
-        //List<PathSO> spawnableChunks = SpawnableChunks(position, rotation);
+        List<PathSO> spawnableChunks = SpawnableChunks(position, rotation);
 
         var totalWeight = 0;
-        foreach (PathSO path in pathChunks)
+        foreach (PathSO chunk in spawnableChunks)
         {
-            totalWeight += path.weight;
+            totalWeight += chunk.weight;
         }
         var randomWeightValue = Random.Range(1, totalWeight + 1);
 
         var processedWeight = 0;
-        foreach (PathSO path in pathChunks)
+        foreach (PathSO chunk in spawnableChunks)
         {
-            processedWeight += path.weight;
+            processedWeight += chunk.weight;
 
             if (randomWeightValue <= processedWeight)
             {
-                return path;
+                return chunk;
             }
         }
         return null;
+    }
+
+    private List<PathSO> SpawnableChunks(Vector2 currentPosition, Rotations currentRotation)
+    {
+        List<PathSO> spawnableChunks = new List<PathSO>();
+
+        foreach (PathSO chunk in pathChunks)
+        {
+            spawnableChunks.Add(chunk);
+        }
+
+        int index = 0;
+
+        List<Vector2> rotatedPositions = RotatedPositions(positionsToCheckSO.positionsToCheck, currentRotation);
+        foreach (Vector2 rotatedPosition in rotatedPositions)
+        {
+            Vector2 positionToCheck = rotatedPosition + currentPosition / 7;
+
+            if (spawnedChunks.ContainsKey(positionToCheck))
+            {
+                switch (positionsToCheckSO.correspondingRotations[index])
+                {
+                    case Rotations.Left:
+                        spawnableChunks = RemoveChunks(spawnableChunks, Rotations.Left);
+                        break;
+                    case Rotations.Right:
+                        spawnableChunks = RemoveChunks(spawnableChunks, Rotations.Right);
+                        break;
+                    case Rotations.None:
+                        spawnableChunks = RemoveChunks(spawnableChunks, Rotations.None);
+                        break;
+                    default:
+                        Debug.Log("Corresponding Rotation doesn't exist");
+                        break;
+                }
+            }
+
+            index++;
+        }
+        return spawnableChunks;
+    }
+
+    private List<PathSO> RemoveChunks(List<PathSO> spawnableChunks, Rotations rotationToCheck)
+    {
+        List<PathSO> unspawnableChunks = new List<PathSO>();
+        foreach (PathSO chunk in spawnableChunks)
+        {
+            foreach (Rotations rotation in chunk.nextChunckRotations)
+            {
+                if (rotation == rotationToCheck)
+                {
+                    unspawnableChunks.Add(chunk);
+                }
+            }
+        }
+
+        foreach (PathSO unspawnableChunk in unspawnableChunks)
+        {
+            spawnableChunks.Remove(unspawnableChunk);
+        }
+
+        return spawnableChunks;
     }
 }

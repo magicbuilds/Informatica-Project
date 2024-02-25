@@ -21,15 +21,17 @@ public class WaypointManager : MonoBehaviour
         waypointContainer.name = "Waypoint Container";
     }
 
-    public void AddNewWaypoint(Vector2 position, int pathIndex, int waypointNumber)
+    public Waypoint AddNewWaypoint(Vector2 position, int pathIndex, int waypointNumber, Waypoint nextWaypoint)
     {
         Waypoint newWaypoint = Instantiate(waypointPrefab, position, Quaternion.identity);
-
+        newWaypoint.nextWaypoint = nextWaypoint;
+        newWaypoint.waypointIndex = pathIndex;
         
-        (int, int) currentWaypoint = (pathIndex, waypointNumber);
-        waypoints[currentWaypoint] = newWaypoint;
+        waypoints[(pathIndex, waypointNumber)] = newWaypoint;
 
-        newWaypoint.name = "Waypoint " + currentWaypoint.Item1 + "-" + currentWaypoint.Item2;
+        newWaypoint.name = "Waypoint " + pathIndex + "-" + waypointNumber;
         newWaypoint.transform.parent = waypointContainer.transform;
+
+        return newWaypoint;
     }
 }

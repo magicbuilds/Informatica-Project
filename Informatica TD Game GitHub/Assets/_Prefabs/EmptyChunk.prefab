@@ -91,6 +91,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8916e8209b4a05419c53fe724b66b40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pathIndex: 0
+  pathNumber: 0
+  rotation: 0
+  waypoint: {fileID: 0}
 --- !u!1 &8387222485523841007
 GameObject:
   m_ObjectHideFlags: 0

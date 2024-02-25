@@ -8,7 +8,9 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] private GameObject enemyPrefab;
     [SerializeField] private List<EnemySO> enemies;
 
-    private Dictionary<int, Vector2> spawnPositions = new Dictionary<int, Vector2>();
+    private List<Vector2> spawnPositions = new List<Vector2>();
+    private List<int> usedWaypointIndexes = new List<int>();
+    private List<Waypoint> correspondingWaypoints = new List<Waypoint>();
 
     public int currentWave = 1;
 
@@ -19,9 +21,20 @@ public class EnemyManager : MonoBehaviour
         Instance = this; 
     }
 
-    public void UpdateSpawnLocations(int newPathIndex, Vector2 newPosition)
+    public void UpdateSpawnLocations(Waypoint waypoint, Vector2 newPosition, int waypointIndex)
     {
-        spawnPositions[newPathIndex] = newPosition;
+        if (usedWaypointIndexes.Contains(waypointIndex))
+        {
+            spawnPositions.RemoveAt(waypointIndex);
+            correspondingWaypoints.RemoveAt(waypointIndex);
+        }
+        else usedWaypointIndexes.Add(waypointIndex);
+
+        spawnPositions.Insert(waypointIndex, newPosition);
+        correspondingWaypoints.Insert(waypointIndex, waypoint);
+
+        Debug.Log(spawnPositions[waypointIndex]);
+        Debug.Log(correspondingWaypoints[waypointIndex]);
     }
 
     public void SpawnEnemies()
@@ -41,7 +54,7 @@ public class EnemyManager : MonoBehaviour
 
             EnemyAI spawnedEnemyAIScript = spawnedEnemy.AddComponent<EnemyAI>();
             spawnedEnemyAIScript.currentEnemy = randomEnemy;
-            spawnedEnemyAIScript.targetPathIndex = randomPathIndex;
+            spawnedEnemyAIScript.target = correspondingWaypoints[randomPathIndex];
 
             EnemyStats spawnedEnemyStatsScript = spawnedEnemy.GetComponent<EnemyStats>();
             spawnedEnemyStatsScript.currentEnemy = randomEnemy;

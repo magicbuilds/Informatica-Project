@@ -4,7 +4,9 @@ public class EmptyChunk : MonoBehaviour
 {
     public int pathIndex;
     public int pathNumber;
-    public PathSO.Rotations rotation;
+    public ChunkManager.Rotations rotation;
+
+    public Waypoint waypoint;
 
     private bool isntAlreadyPressed = true;
 
@@ -13,9 +15,15 @@ public class EmptyChunk : MonoBehaviour
         //GameManager.Instance.gameState == GameManager.GameState.ChoseNextChunk &&  
         if (isntAlreadyPressed)
         {
-            ChunkManager.Instance.SpawnNextChunk(transform.position, rotation, pathIndex, pathNumber);
+            ChunkManager.Instance.SpawnNewChunk(this);
             Destroy(gameObject);
             isntAlreadyPressed = false;
         }
+    }
+
+    public void SpawnChunk()
+    {
+        ChunkManager.Instance.SpawnNewChunk(this);
+        Destroy(gameObject);
     }
 }
