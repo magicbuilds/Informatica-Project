@@ -39,7 +39,7 @@ public class EnemyManager : MonoBehaviour
 
     public void SpawnEnemies()
     {
-        int enemiesToSpawn = 100;
+        int enemiesToSpawn = 5;
         for (int i = 0; i < enemiesToSpawn; i++)
         {
             EnemySO randomEnemy = enemies[Random.Range(0, enemies.Count)];

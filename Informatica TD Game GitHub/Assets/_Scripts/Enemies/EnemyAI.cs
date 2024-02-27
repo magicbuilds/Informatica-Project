@@ -5,7 +5,14 @@ public class EnemyAI : MonoBehaviour
     public EnemySO currentEnemy;
     public int targetPathIndex;
 
+    private Vector2 positionOffset = Vector2.zero;
+
     public Waypoint target;
+
+    private void Start()
+    {
+        positionOffset = new Vector2(Random.Range(-0.2f, 0.2f), Random.Range(-0.2f, 0.2f));
+    }
 
     private void Update()
     {
@@ -20,9 +27,10 @@ public class EnemyAI : MonoBehaviour
             return;
         }
 
-        transform.position = Vector2.MoveTowards(transform.position, target.transform.position, currentEnemy.speed * Time.deltaTime);
+        Vector2 targetVector = (Vector2)target.transform.position + positionOffset;
+        transform.position = Vector2.MoveTowards(transform.position, targetVector, currentEnemy.speed * Time.deltaTime);
 
-        if(Vector2.Distance(transform.position, target.transform.position) < 0.1f)
+        if(Vector2.Distance(transform.position, targetVector) < 0.1f)
         {
             target = target.nextWaypoint;
         }

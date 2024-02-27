@@ -23,7 +23,12 @@ public class EmptyChunk : MonoBehaviour
 
     public void SpawnChunk()
     {
-        ChunkManager.Instance.SpawnNewChunk(this);
-        Destroy(gameObject);
+        if (isntAlreadyPressed)
+        {
+            ChunkManager.Instance.SpawnNewChunk(this);
+            Destroy(gameObject);
+            isntAlreadyPressed = false;
+        }
+        
     }
 }

@@ -1,26 +1,26 @@
+using System.Threading;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class TempPathTester : MonoBehaviour
 {
-    [SerializeField] private int number;
+    [SerializeField] private int number = 1000;
 
-    [SerializeField] private float timePassed;
     private void Update()
     {
-        
-        if (number <= 5000)
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            timePassed += Time.deltaTime;
-            if (timePassed > .5f) 
-            {
-                EmptyChunk[] chunks = FindObjectsOfType<EmptyChunk>();
-                foreach (EmptyChunk chunk in chunks)
-                {
-                    chunk.SpawnChunk();
-                    number++;
-                }
+            number = 0;
+        }
 
-                timePassed = 0;
+        if (number <= 100)
+        {
+            EmptyChunk[] chunks = FindObjectsOfType<EmptyChunk>();
+            foreach (EmptyChunk chunk in chunks)
+            {
+                Task.Delay(200);
+                chunk.SpawnChunk();
+                number++;
             }
         }
     }

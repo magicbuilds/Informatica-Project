@@ -1499,6 +1499,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2a4234e99719a794e985c461947cbeb6, type: 2}
   - {fileID: 11400000, guid: 95c2fbe775f698d44b94a18690bb67e1, type: 2}
   - {fileID: 11400000, guid: ca284743597c2bc4db9c74e6a8021234, type: 2}
+  - {fileID: 11400000, guid: 2418b924cf775e349b30893bbfd10115, type: 2}
+  - {fileID: 11400000, guid: afd71301c39608d4eb3cf585e668d95a, type: 2}
+  - {fileID: 11400000, guid: bda943c10b0b272438b4172419a430c1, type: 2}
   positionsToCheckSO: {fileID: 11400000, guid: c0fa10728e656c048878f20e14ab0395, type: 2}
   totalPathCount: 1
 --- !u!1 &1353661366
@@ -1985,7 +1988,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2111293924
 Transform:
   m_ObjectHideFlags: 0
@@ -2013,8 +2016,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5346b29e72e06a84fb5de85703ddb8ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  number: 0
-  timePassed: 0
+  number: 1000
 --- !u!1 &2113025632
 GameObject:
   m_ObjectHideFlags: 0

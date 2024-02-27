@@ -45,6 +45,8 @@ public class ChunkManager : MonoBehaviour
         startChunkData.waypoint = null;
 
         SpawnNewChunk(startChunkData);
+
+        Destroy(startChunkData.gameObject);
         
     }
 
@@ -88,15 +90,25 @@ public class ChunkManager : MonoBehaviour
         }
 
         //Spawn Waypoints
-        Waypoint latestWaypoint = null;
+        Waypoint lastWaypointSpawned = null;
 
         waypointNumber = chunkData.pathNumber;
         List<Vector2> rotatedWaypointPositions = RotatedPositions(chunkToSpawn.baseWaypointPositions, chunkData.rotation);
         foreach (Vector2 waypointPosition in rotatedWaypointPositions)
         {
             Vector2 position = waypointPosition + positionOffset;
-            latestWaypoint = WaypointManager.Instance.AddNewWaypoint(position, chunkData.pathIndex, waypointNumber, chunkData.waypoint);
 
+            Waypoint spawnedWaypoint = WaypointManager.Instance.AddNewWaypoint(position, chunkData.pathIndex, waypointNumber, chunkData.waypoint);
+            if (waypointNumber == chunkData.pathNumber)
+            {
+                spawnedWaypoint.nextWaypoint = chunkData.waypoint;
+            }
+            else
+            {
+                spawnedWaypoint.nextWaypoint = lastWaypointSpawned;
+            }
+            
+            lastWaypointSpawned = spawnedWaypoint;
             waypointNumber++;
         }
 
@@ -119,13 +131,13 @@ public class ChunkManager : MonoBehaviour
             chunkScript.pathNumber = waypointNumber;
             chunkScript.rotation = CalculateNextChunkRotation(chunkData.rotation, chunkToSpawn.nextChunckRotations[emptyChunksSpawned]);
 
-            if (latestWaypoint == null)
+            if (lastWaypointSpawned == null)
             {
                 chunkScript.waypoint = chunkData.waypoint;
             }
             else
             {
-                chunkScript.waypoint = latestWaypoint;
+                chunkScript.waypoint = lastWaypointSpawned;
             }
 
             if (emptyChunksSpawned == 0)
