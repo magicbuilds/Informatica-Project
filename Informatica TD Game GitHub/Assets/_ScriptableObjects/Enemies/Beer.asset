@@ -15,4 +15,4 @@ MonoBehaviour:
   enemyName: Beer
   sprite: {fileID: 21300000, guid: ce9c71d6d9ea7114bbe89aa86bd34275, type: 3}
   baseHealth: 10
-  speed: 25
+  speed: 5
