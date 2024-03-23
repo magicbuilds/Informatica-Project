@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class EnemyStats : MonoBehaviour
 {
+    
     public EnemySO currentEnemy;
 
     [SerializeField] private float health;

@@ -11,6 +11,7 @@ public class BulletScript : MonoBehaviour
 
     [Header("Attributes")] 
     [SerializeField] private float bulletSpeed = 5f;
+    [SerializeField] private float damage = 10f;
     
     private Transform target;
 
@@ -23,11 +24,12 @@ public class BulletScript : MonoBehaviour
         if (!target) return;
         Vector2 direction = (target.position - transform.position).normalized;
 
-        //rb.velocity = direction * bulletspeed;
+        rb.velocity = direction * bulletSpeed;
     }
 
     private void OnCollisionEnter2D(Collision2D other)
     {
+        other.gameObject.GetComponent<EnemyStats>().DealDamange(damage);
         Destroy(gameObject);
     }
 }
