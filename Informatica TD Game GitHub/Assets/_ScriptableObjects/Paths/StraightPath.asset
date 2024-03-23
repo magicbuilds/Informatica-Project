@@ -12,23 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1554fa6e8a6de474d97f3404c3f1415e, type: 3}
   m_Name: StraightPath
   m_EditorClassIdentifier: 
-  pathName: Straight
+  pathType: 2
   weight: 6
   basePathPositions:
-  - {x: 0, y: -3}
-  - {x: 0, y: -2}
-  - {x: 0, y: -1}
-  - {x: 0, y: 0}
-  - {x: 0, y: 1}
-  - {x: 0, y: 2}
   - {x: 0, y: 3}
-  adjacentPathPositions:
-  - {x: 0, y: -4}
-  - {x: 0, y: 4}
+  - {x: 0, y: 2}
+  - {x: 0, y: 1}
+  - {x: 0, y: 0}
+  - {x: 0, y: -1}
+  - {x: 0, y: -2}
+  - {x: 0, y: -3}
   baseWaypointPositions: []
   nextChunkPositions:
   - {x: 0, y: 7}
   nextChunckRotations: 00000000
   baseEnemySpawnPositions:
   - {x: 0, y: 3}
-  basePathRotations: 00000000000000000000000000000000000000000000000000000000

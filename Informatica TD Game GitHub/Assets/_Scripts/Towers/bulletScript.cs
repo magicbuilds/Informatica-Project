@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class bulletScript : MonoBehaviour
+public class BulletScript : MonoBehaviour
 {
     [Header("References")] [SerializeField]
     private Rigidbody2D rb;
@@ -23,7 +23,7 @@ public class bulletScript : MonoBehaviour
         if (!target) return;
         Vector2 direction = (target.position - transform.position).normalized;
 
-        rb.velocity = direction * bulletspeed;
+        //rb.velocity = direction * bulletspeed;
     }
 
     private void OnCollisionEnter2D(Collision2D other)

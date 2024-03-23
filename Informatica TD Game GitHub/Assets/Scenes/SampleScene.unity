@@ -1671,13 +1671,13 @@ MonoBehaviour:
   - {fileID: 11400000, guid: afd71301c39608d4eb3cf585e668d95a, type: 2}
   positionsToCheckSO: {fileID: 11400000, guid: c0fa10728e656c048878f20e14ab0395, type: 2}
   totalPathCount: 1
-  straightPathSprite: {fileID: 1291147052, guid: e0b349cfa93d29443bcf57d4b2d9a21d, type: 3}
-  RTurnPathSprite: {fileID: 933983927, guid: e0b349cfa93d29443bcf57d4b2d9a21d, type: 3}
-  LTurnPathSprite: {fileID: 175799101, guid: e0b349cfa93d29443bcf57d4b2d9a21d, type: 3}
-  TJunctionLRPathSprite: {fileID: 357614774, guid: e0b349cfa93d29443bcf57d4b2d9a21d, type: 3}
-  TJunctionRPathSprite: {fileID: 594786482, guid: e0b349cfa93d29443bcf57d4b2d9a21d, type: 3}
-  TJunctionLPathSprite: {fileID: -650285987, guid: e0b349cfa93d29443bcf57d4b2d9a21d, type: 3}
-  crossroadpathSprite: {fileID: -318498709, guid: e0b349cfa93d29443bcf57d4b2d9a21d, type: 3}
+  straightPathSprite: {fileID: 1291147052, guid: dca2b06f3a3a4804cae89ab1e3206c22, type: 3}
+  RTurnPathSprite: {fileID: 933983927, guid: dca2b06f3a3a4804cae89ab1e3206c22, type: 3}
+  LTurnPathSprite: {fileID: 175799101, guid: dca2b06f3a3a4804cae89ab1e3206c22, type: 3}
+  TJunctionLRPathSprite: {fileID: 357614774, guid: dca2b06f3a3a4804cae89ab1e3206c22, type: 3}
+  TJunctionRPathSprite: {fileID: 594786482, guid: dca2b06f3a3a4804cae89ab1e3206c22, type: 3}
+  TJunctionLPathSprite: {fileID: -650285987, guid: dca2b06f3a3a4804cae89ab1e3206c22, type: 3}
+  crossroadPathSprite: {fileID: -318498709, guid: dca2b06f3a3a4804cae89ab1e3206c22, type: 3}
 --- !u!1 &1353661366
 GameObject:
   m_ObjectHideFlags: 0
@@ -2113,7 +2113,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1684717084
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2126,8 +2126,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c994f7a565db07b44b940a2591faee51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 0}
-  bulletSpeed: 5
 --- !u!50 &1684717085
 Rigidbody2D:
   serializedVersion: 4
@@ -2367,7 +2365,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2078838171
 Transform:
   m_ObjectHideFlags: 0

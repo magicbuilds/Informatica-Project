@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.UIElements;
+using static UnityEngine.GraphicsBuffer;
 
 public class ChunkManager : MonoBehaviour
 {
@@ -34,11 +35,11 @@ public class ChunkManager : MonoBehaviour
     [SerializeField] private Sprite TJunctionLRPathSprite;
     [SerializeField] private Sprite TJunctionRPathSprite;
     [SerializeField] private Sprite TJunctionLPathSprite;
-    [SerializeField] private Sprite crossroadpathSprite;
+    [SerializeField] private Sprite crossroadPathSprite;
 
     public enum Directions
     {
-        Up, Right, Down, Left
+        Up, Left, Down, Right
     }
 
     private void Awake()
@@ -53,6 +54,8 @@ public class ChunkManager : MonoBehaviour
         EmptyChunk startChunkData = firstEmptyChunk.AddComponent<EmptyChunk>();
         startChunkData.rotation = (Directions)Random.Range(0, 4);
         startChunkData.waypoint = null;
+
+        startChunkData.rotation = Directions.Up;
 
         SpawnNewChunk(startChunkData);
 
@@ -71,7 +74,7 @@ public class ChunkManager : MonoBehaviour
         GameObject chunkContainer = new GameObject();
 
         Vector2 chunkCord = new Vector2(positionOffset.x / 7, positionOffset.y / 7);
-        chunkContainer.name = chunkToSpawn.pathName + " (" + chunkCord.x + "," + chunkCord.y + ")";
+        chunkContainer.name = chunkToSpawn.pathType.ToString() + " (" + chunkCord.x + "," + chunkCord.y + ")";
 
         spawnedChunks[chunkCord] = chunkToSpawn;
 
@@ -83,11 +86,10 @@ public class ChunkManager : MonoBehaviour
             Vector2 position = pathPosition + positionOffset;
             
             GameObject spawnedPath = Instantiate(pathPrefab, position, Quaternion.identity, chunkContainer.transform);
-            spawnedPath.name = chunkToSpawn.pathName + " (" + pathPosition.x + "," + pathPosition.y + ")";
+            spawnedPath.name = chunkToSpawn.pathType.ToString() + " (" + pathPosition.x + "," + pathPosition.y + ")";
 
             spawnedPaths.Add(spawnedPath);
         }
-        UpdatePathSprites(spawnedPaths, rotatedPathPositions,chunkToSpawn, chunkData.rotation);
 
         //Spawn Ground Tiles
         for (int x = baseChunkXMin; x <= baseChunkXMax; x++)
@@ -126,6 +128,8 @@ public class ChunkManager : MonoBehaviour
             lastWaypointSpawned = spawnedWaypoint;
             waypointNumber++;
         }
+
+        UpdatePathSprites(spawnedPaths, rotatedPathPositions, rotatedWaypointPositions, chunkToSpawn);
 
         //Spawn Next Chunck Positions + Update Enemy Spawn Positions
         int emptyChunksSpawned = 0;
@@ -188,7 +192,7 @@ public class ChunkManager : MonoBehaviour
 
                 return positions;
 
-            case Directions.Left:
+            case Directions.Right:
 
                 foreach (Vector2 position in positions)
                 {
@@ -198,7 +202,7 @@ public class ChunkManager : MonoBehaviour
 
                 return rotatedPositions;
 
-            case Directions.Right:
+            case Directions.Left:
 
                 foreach (Vector2 position in positions)
                 {
@@ -231,10 +235,10 @@ public class ChunkManager : MonoBehaviour
             //4 rotations so 0 <= PathSO.Rotations <= 3
             case Directions.Up:
                 return currentRotation;
-            case Directions.Left:
+            case Directions.Right:
                 if ((int)currentRotation - 1 >= 0) return currentRotation - 1;
                 else return currentRotation + 3;
-            case Directions.Right:
+            case Directions.Left:
                 if ((int)currentRotation + 1 <= 3) return currentRotation + 1;
                 else return currentRotation - 3;
             default:
@@ -244,9 +248,109 @@ public class ChunkManager : MonoBehaviour
         }
     }
 
-    private void UpdatePathSprites(List<GameObject> paths, List<Vector2> positions, PathSO chunkToSpawn, Directions rotation)
+    private void UpdatePathSprites(List<GameObject> paths, List<Vector2> positions, List<Vector2> waypointPositions, PathSO chunkToSpawn)
     {
-        List<Vector2> positionsToCheck = positions;
+        Vector2 targetPosition = Vector2.zero;
+        Vector2 endPosition = positions[positions.Count - 1];
+
+        GameObject previousRotatedPath = null;
+        GameObject unrotatedPath = null;
+
+        int index = 0; int waypointIndex = 0;
+        foreach (Vector2 position in positions)
+        {
+            Sprite sprite = straightPathSprite;
+
+            if (waypointPositions.Count != 0 && waypointIndex != -1)
+            {
+                if (position == waypointPositions[waypointIndex])
+                {
+                    if (waypointIndex <= waypointPositions.Count - 1 && waypointIndex >= 0)
+                    {
+                        waypointIndex = -1;
+                    }
+                    else
+                    {
+                        waypointIndex++;
+                        targetPosition = waypointPositions[waypointIndex];
+                    }
+
+                    switch (chunkToSpawn.pathType)
+                    {
+                        case PathSO.Paths.RTurn:
+                            sprite = RTurnPathSprite;
+                            break;
+                        case PathSO.Paths.LTurn:
+                            sprite = LTurnPathSprite;
+                            break;
+                        case PathSO.Paths.TJunktionLR:
+                            sprite = TJunctionLRPathSprite;
+                            break;
+                        case PathSO.Paths.TJunktionR:
+                            sprite = TJunctionRPathSprite;
+                            break;
+                        case PathSO.Paths.TJunktionL:
+                            sprite = TJunctionLPathSprite;
+                            break;
+                        case PathSO.Paths.Crossroad:
+                            sprite = crossroadPathSprite;
+                            break;
+                        case PathSO.Paths.Straight:
+                            break;
+                        default:
+                            Debug.Log("Sprite Not Defined");
+                            break;
+                    }
+                }
+            }
+            else
+            {
+                targetPosition = endPosition;
+            }
+
+            paths[index].GetComponent<SpriteRenderer>().sprite = sprite;
+
+            if (targetPosition == position && unrotatedPath == null)
+            {
+                if (index == paths.Count - 1)
+                {
+                    paths[index].transform.rotation = previousRotatedPath.transform.rotation;
+                }
+                else
+                {
+                    unrotatedPath = paths[index];
+                }
+            }
+            if (targetPosition.x - position.x > 0)
+            {
+                paths[index].transform.Rotate(0, 0, -90);
+            }
+            if (targetPosition.x - position.x < 0)
+            {
+                paths[index].transform.Rotate(0, 0, 90);
+            }
+            if (targetPosition.y - position.y < 0)
+            {
+                paths[index].transform.Rotate(0, 0, 180);
+            }
+
+            if (targetPosition != position && unrotatedPath != null)
+            {
+                Debug.Log("Called");
+                unrotatedPath.transform.rotation = paths[index].transform.rotation;
+                unrotatedPath = null;
+            }
+
+            Debug.Log("Position : " + position.ToString() +
+                "\n Target Position : " + targetPosition.ToString());
+
+            previousRotatedPath = paths[index];
+
+            index++;
+        }
+
+
+        /*List<Vector2> positionsToCheck = positions;
         List<Directions> pathRotations = chunkToSpawn.basePathRotations;
 
         paths[0].GetComponent<SpriteRenderer>().sprite = straightPathSprite;
@@ -372,7 +476,7 @@ public class ChunkManager : MonoBehaviour
             Debug.Log("GameObject: " + paths[index].name + "\nup: " + tempUp + "\nright: " + tempRight + "\ndown: " + tempDown + "\nleft: " + tempLeft + "\nrotation: " + rotation);
 
             index++;
-        }
+        }*/
     }
 
     private PathSO RandomChunk(Vector2 position, Directions rotation)
@@ -419,11 +523,11 @@ public class ChunkManager : MonoBehaviour
             {
                 switch (positionsToCheckSO.correspondingRotations[index])
                 {
-                    case Directions.Left:
-                        spawnableChunks = RemoveChunks(spawnableChunks, Directions.Left);
-                        break;
                     case Directions.Right:
                         spawnableChunks = RemoveChunks(spawnableChunks, Directions.Right);
+                        break;
+                    case Directions.Left:
+                        spawnableChunks = RemoveChunks(spawnableChunks, Directions.Left);
                         break;
                     case Directions.Up:
                         spawnableChunks = RemoveChunks(spawnableChunks, Directions.Up);
