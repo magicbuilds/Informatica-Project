@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2769297369848688707}
   - component: {fileID: 6656949874839358953}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 1373347514232289321}
   - component: {fileID: -819414013111025015}
   - component: {fileID: 8365006494941751764}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BaseEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -230,7 +230,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.0001, y: 0.0001}
+  m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
 --- !u!1 &4930921059171813694
 GameObject:
@@ -243,7 +243,7 @@ GameObject:
   - component: {fileID: 4001509197089035274}
   - component: {fileID: 4943991583748232114}
   - component: {fileID: 6886226613234075234}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
