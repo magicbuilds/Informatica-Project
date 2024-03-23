@@ -5,6 +5,6 @@ using UnityEngine;
 public class PositionsToCheckSO : ScriptableObject
 {
     public List<Vector2> positionsToCheck;
-    public List<ChunkManager.Rotations> correspondingRotations;
+    public List<ChunkManager.Directions> correspondingRotations;
 
 }

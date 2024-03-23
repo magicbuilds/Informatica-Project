@@ -28,6 +28,11 @@ MonoBehaviour:
   - {x: 1, y: 0}
   - {x: 2, y: 0}
   - {x: 3, y: 0}
+  adjacentPathPositions:
+  - {x: 0, y: -4}
+  - {x: 0, y: 4}
+  - {x: -4, y: 4}
+  - {x: 4, y: 4}
   baseWaypointPositions:
   - {x: 0, y: 0}
   nextChunkPositions:
@@ -39,3 +44,4 @@ MonoBehaviour:
   - {x: 0, y: 3}
   - {x: -3, y: 0}
   - {x: 3, y: 0}
+  basePathRotations: 00000000000000000000000000000000000000000000000000000000010000000100000001000000030000000300000003000000

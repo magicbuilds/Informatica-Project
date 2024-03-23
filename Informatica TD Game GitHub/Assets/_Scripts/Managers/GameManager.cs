@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
 
     public void SwitchGameState(GameState state)
     {
-        Debug.Log(state.ToString());
+        //Debug.Log(state.ToString());
         switch (state)
         {
             case GameState.StartUp:

@@ -4,7 +4,7 @@ public class EmptyChunk : MonoBehaviour
 {
     public int pathIndex;
     public int pathNumber;
-    public ChunkManager.Rotations rotation;
+    public ChunkManager.Directions rotation;
 
     public Waypoint waypoint;
 

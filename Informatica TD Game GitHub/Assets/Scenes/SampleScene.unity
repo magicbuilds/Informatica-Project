@@ -1501,9 +1501,15 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ca284743597c2bc4db9c74e6a8021234, type: 2}
   - {fileID: 11400000, guid: 2418b924cf775e349b30893bbfd10115, type: 2}
   - {fileID: 11400000, guid: afd71301c39608d4eb3cf585e668d95a, type: 2}
-  - {fileID: 11400000, guid: bda943c10b0b272438b4172419a430c1, type: 2}
   positionsToCheckSO: {fileID: 11400000, guid: c0fa10728e656c048878f20e14ab0395, type: 2}
   totalPathCount: 1
+  straightPathSprite: {fileID: 1291147052, guid: e0b349cfa93d29443bcf57d4b2d9a21d, type: 3}
+  RTurnPathSprite: {fileID: 933983927, guid: e0b349cfa93d29443bcf57d4b2d9a21d, type: 3}
+  LTurnPathSprite: {fileID: 175799101, guid: e0b349cfa93d29443bcf57d4b2d9a21d, type: 3}
+  TJunctionLRPathSprite: {fileID: 357614774, guid: e0b349cfa93d29443bcf57d4b2d9a21d, type: 3}
+  TJunctionRPathSprite: {fileID: 594786482, guid: e0b349cfa93d29443bcf57d4b2d9a21d, type: 3}
+  TJunctionLPathSprite: {fileID: -650285987, guid: e0b349cfa93d29443bcf57d4b2d9a21d, type: 3}
+  crossroadpathSprite: {fileID: -318498709, guid: e0b349cfa93d29443bcf57d4b2d9a21d, type: 3}
 --- !u!1 &1353661366
 GameObject:
   m_ObjectHideFlags: 0

@@ -32,9 +32,6 @@ public class EnemyManager : MonoBehaviour
 
         spawnPositions.Insert(waypointIndex, newPosition);
         correspondingWaypoints.Insert(waypointIndex, waypoint);
-
-        Debug.Log(spawnPositions[waypointIndex]);
-        Debug.Log(correspondingWaypoints[waypointIndex]);
     }
 
     public void SpawnEnemies()

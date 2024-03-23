@@ -25,6 +25,10 @@ MonoBehaviour:
   - {x: 1, y: 0}
   - {x: 2, y: 0}
   - {x: 3, y: 0}
+  adjacentPathPositions:
+  - {x: 0, y: -4}
+  - {x: 0, y: 4}
+  - {x: 4, y: 0}
   baseWaypointPositions:
   - {x: 0, y: 0}
   nextChunkPositions:
@@ -34,3 +38,4 @@ MonoBehaviour:
   baseEnemySpawnPositions:
   - {x: 0, y: 7}
   - {x: 7, y: 0}
+  basePathRotations: 00000000000000000000000000000000000000000000000000000000010000000100000001000000

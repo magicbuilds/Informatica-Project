@@ -8,10 +8,14 @@ public class PathSO : ScriptableObject
     public int weight;
 
     public List<Vector2> basePathPositions;
+    public List<Vector2> adjacentPathPositions;
+
     public List<Vector2> baseWaypointPositions;
 
     public List<Vector2> nextChunkPositions;
-    public List<ChunkManager.Rotations> nextChunckRotations;
+    public List<ChunkManager.Directions> nextChunckRotations;
 
     public List<Vector2> baseEnemySpawnPositions;
+
+    public List<ChunkManager.Directions> basePathRotations;
 }
