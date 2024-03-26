@@ -9,10 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3aa5f09c49376b14baaa61acc3c2deb8, type: 3}
-  m_Name: Mik
+  m_Script: {fileID: 11500000, guid: 7b95c1925b878bc45ba52cd24fc062c6, type: 3}
+  m_Name: Blade 3
   m_EditorClassIdentifier: 
-  enemyName: Mik
-  sprite: {fileID: 21300000, guid: e472de8bad320274f803258c38971b7d, type: 3}
-  baseHealth: 10
-  speed: 5
+  cardName: Blade
+  rarity: 3
+  stats: 
+  discription: It's a blade
+  icon: {fileID: 21300000, guid: 0ce8d9708e1c496419922529d48570b8, type: 3}
+  weight: 10

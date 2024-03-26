@@ -9,6 +9,9 @@ public class UIManager : MonoBehaviour
     //EnemiesLeft
     [SerializeField] private TextMeshProUGUI enemiesLeftText;
 
+    //CardDraw
+    [SerializeField] private GameObject cardDrawUI;
+
     //ExtraCardInformation
     [SerializeField] private GameObject extraCardInformationUI;
 
@@ -28,12 +31,19 @@ public class UIManager : MonoBehaviour
         enemiesLeftText.text = enemysLeft.ToString();
     }
 
+    public void ActivateCardDrawUI()
+    {
+        cardDrawUI.SetActive(true);
+    }
+    
+    public void DeactivateCardDrawUI()
+    {
+        cardDrawUI.SetActive(false);
+    }
+
     public void ActivateExtraInformationUI(CardSO card)
     {
-        foreach (GameObject spawnedCard in CardDrawManager.Instance.spawnedCards)
-        {
-            spawnedCard.SetActive(false);
-        }
+        cardDrawUI.SetActive(false);
 
         extraCardInformationUI.SetActive(true);
 
@@ -46,10 +56,6 @@ public class UIManager : MonoBehaviour
     public void DeactivateExtraInformationUI()
     {
         extraCardInformationUI.SetActive(false);
-
-        foreach (GameObject spawnedCard in CardDrawManager.Instance.spawnedCards)
-        {
-            spawnedCard.SetActive(true);
-        }
+        cardDrawUI.SetActive(true);
     }
 }

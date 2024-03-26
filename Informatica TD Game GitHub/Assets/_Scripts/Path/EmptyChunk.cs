@@ -13,7 +13,7 @@ public class EmptyChunk : MonoBehaviour
     private void OnMouseDown()
     {
         //GameManager.Instance.gameState == GameManager.GameState.ChoseNextChunk &&  
-        if (isntAlreadyPressed)
+        if (GameManager.Instance.gameState == GameManager.GameState.ChoseNextChunk && isntAlreadyPressed)
         {
             ChunkManager.Instance.SpawnNewChunk(this);
             Destroy(gameObject);

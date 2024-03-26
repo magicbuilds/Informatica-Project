@@ -6,6 +6,8 @@ public class Card : MonoBehaviour
 {
     private CardSO currentCard;
 
+    private int amount;
+
     [SerializeField] private TextMeshProUGUI nameText;
     [SerializeField] private TextMeshProUGUI amountText;
     [SerializeField] private Image icon;
@@ -14,13 +16,48 @@ public class Card : MonoBehaviour
     {
         currentCard = spawnedCard;
 
+        switch (spawnedCard.rarity)
+        {
+            case CardSO.Rarity.common:
+                amount = Random.Range(1, amount);
+                nameText.color = Color.white;
+                break;
+            case CardSO.Rarity.uncommon:
+                amount = Random.Range(1, 3);
+                nameText.color = Color.green;
+                break;
+            case CardSO.Rarity.rare:
+                amount = Random.Range(0, 3);
+                nameText.color = Color.cyan;
+                break;
+            case CardSO.Rarity.epic:
+                amount = Random.Range(0, 2);
+                nameText.color = Color.blue;
+                break;
+            case CardSO.Rarity.legendary:
+                amount = 1;
+                nameText.color = Color.yellow;
+                break;
+            case CardSO.Rarity.mythical:
+                amount = 1;
+                nameText.color = Color.black;
+                break;
+            default:
+                Debug.Log("Rarity " + spawnedCard.rarity + " not found");
+                break;
+        }
+     
         nameText.text = currentCard.cardName;
+        amountText.text = amount + "X";
+
         icon.sprite = currentCard.icon;
     }
 
     public void OnCardSelected()
     {
-        CardDrawManager.Instance.RemoveCards();
+        InventoryManager.Instance.AddNewCardToInventory(currentCard, amount);
+        
+        UIManager.Instance.DeactivateCardDrawUI();
         GameManager.Instance.SwitchGameState(GameManager.GameState.ChoseNextChunk);
     }
 

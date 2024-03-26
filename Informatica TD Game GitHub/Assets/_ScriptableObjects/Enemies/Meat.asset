@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyName: Meat
   sprite: {fileID: 21300000, guid: 0288701ea6b0d50419b0006821709fc3, type: 3}
-  baseHealth: 50
-  speed: 10
+  baseHealth: 10
+  speed: 3.5

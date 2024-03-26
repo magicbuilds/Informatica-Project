@@ -66,7 +66,7 @@ public class EnemyManager : MonoBehaviour
 
         if (currentEnemyNumber <= 0) 
         {
-            GameManager.Instance.SwitchGameState(GameManager.GameState.ChoseNextChunk);
+            GameManager.Instance.SwitchGameState(GameManager.GameState.EndOfWave);
         }
 
         UIManager.Instance.UpdateEnemysLeftUI(currentEnemyNumber);

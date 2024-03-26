@@ -336,147 +336,14 @@ public class ChunkManager : MonoBehaviour
 
             if (targetPosition != position && unrotatedPath != null)
             {
-                Debug.Log("Called");
                 unrotatedPath.transform.rotation = paths[index].transform.rotation;
                 unrotatedPath = null;
             }
-
-            Debug.Log("Position : " + position.ToString() +
-                "\n Target Position : " + targetPosition.ToString());
 
             previousRotatedPath = paths[index];
 
             index++;
         }
-
-
-        /*List<Vector2> positionsToCheck = positions;
-        List<Directions> pathRotations = chunkToSpawn.basePathRotations;
-
-        paths[0].GetComponent<SpriteRenderer>().sprite = straightPathSprite;
-        switch (pathRotations[0])
-        {
-            case Directions.Down:
-                paths[0].transform.Rotate(0, 0, 180);
-                break;
-            case Directions.Right:
-                paths[0].transform.Rotate(0, 0, 90);
-                break;
-            case Directions.Left:
-                paths[0].transform.Rotate(0, 0, -90);
-                break;
-        }
-
-
-        paths[paths.Count - 1].GetComponent<SpriteRenderer>().sprite = straightPathSprite;
-        switch (pathRotations[paths.Count - 1])
-        {
-            case Directions.Down:
-                paths[paths.Count - 1].transform.Rotate(0, 0, 180);
-                break;
-            case Directions.Right:
-                paths[paths.Count - 1].transform.Rotate(0, 0, 90);
-                break;
-            case Directions.Left:
-                paths[paths.Count - 1].transform.Rotate(0, 0, -90);
-                break;
-        }
-
-        int index = 0;
-        foreach (Vector2 position in positionsToCheck)
-        {
-            if (index >= paths.Count) break;
-
-            bool tempUp = false; bool up = false;
-            bool tempRight = false; bool right = false;
-            bool tempDown = false; bool down = false;
-            bool tempLeft = false; bool left = false;
-
-            int xPos = (int)position.x; int yPos = (int)position.y;
-
-            if(positionsToCheck.Contains(new Vector2(xPos, yPos + 1)))
-            {
-                tempUp = true;
-            }
-            if(positionsToCheck.Contains(new Vector2(xPos + 1, yPos)))
-            {
-                tempRight = true;
-            }
-            if (positionsToCheck.Contains(new Vector2(xPos, yPos - 1)))
-            {
-                tempDown = true;
-            }
-            if (positionsToCheck.Contains(new Vector2(xPos - 1, yPos)))
-            {
-                tempLeft = true;
-            }
-
-            switch (CalculateNextRotation(rotation, pathRotations[index]))
-            {
-                case Directions.Up:
-                    paths[index].transform.Rotate(0, 0, 180);
-
-                    up = tempUp;
-                    right = tempRight;
-                    down = tempDown;
-                    left = tempLeft;
-                    break;
-                case Directions.Right:
-                    paths[index].transform.Rotate(0, 0, 90);
-
-                    up = tempLeft;
-                    right = tempUp;
-                    down = tempRight;
-                    left = tempDown;
-                    break;
-                case Directions.Down:
-                    up = tempDown;
-                    right = tempLeft;
-                    down = tempUp;
-                    left = tempRight;
-                    break;
-                 case Directions.Left:
-                    paths[index].transform.Rotate(0, 0, -90);
-
-                    up = tempRight;
-                    right = tempDown;
-                    down = tempLeft;
-                    left = tempUp;
-                    break;
-            }
-
-            if (up && !right && down && !left)
-            {
-                paths[index].GetComponent<SpriteRenderer>().sprite = straightPathSprite;
-            }
-            if (up && right && !down && !left)
-            {
-                paths[index].GetComponent<SpriteRenderer>().sprite = RTurnPathSprite;
-            }
-            if (up && !right && !down && left)
-            {
-                paths[index].GetComponent<SpriteRenderer>().sprite = LTurnPathSprite;
-            }
-            if (up && right && !down && left)
-            {
-                paths[index].GetComponent<SpriteRenderer>().sprite = TJunctionLRPathSprite;
-            }
-            if (up && right && down && !left)
-            {
-                paths[index].GetComponent<SpriteRenderer>().sprite = TJunctionRPathSprite;
-            }
-            if (up && !right && down && left)
-            {
-                paths[index].GetComponent<SpriteRenderer>().sprite = TJunctionLPathSprite;
-            }
-            if (up && right && down && left)
-            {
-                paths[index].GetComponent<SpriteRenderer>().sprite = crossroadpathSprite;
-            }
-            Debug.Log("GameObject: " + paths[index].name + "\nup: " + tempUp + "\nright: " + tempRight + "\ndown: " + tempDown + "\nleft: " + tempLeft + "\nrotation: " + rotation);
-
-            index++;
-        }*/
     }
 
     private PathSO RandomChunk(Vector2 position, Directions rotation)
