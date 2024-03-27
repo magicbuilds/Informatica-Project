@@ -242,7 +242,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d452de594195c5243a84b83b34c0ab2e, type: 2}
   - {fileID: 11400000, guid: ca0bb5362c75b5f49bdb9f09cff67c75, type: 2}
   - {fileID: 11400000, guid: e7e8540f61ef5654b85e190d9ba88521, type: 2}
-  displayCardTemplates: []
+  displayCardTemplates:
+  - {fileID: 1353661366}
+  - {fileID: 940163836}
+  - {fileID: 1599292998}
+  - {fileID: 420988395}
   deckCardTemplates: []
 --- !u!1001 &246757326
 PrefabInstance:
@@ -2597,7 +2601,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 351007251992137204, guid: 16315272238e1084599f8d47e4823277, type: 3}
       propertyPath: bps
-      value: 10
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 3090035578576694048, guid: 16315272238e1084599f8d47e4823277, type: 3}
       propertyPath: m_LocalPosition.x

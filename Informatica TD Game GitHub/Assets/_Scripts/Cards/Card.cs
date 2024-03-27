@@ -19,19 +19,19 @@ public class Card : MonoBehaviour
         switch (spawnedCard.rarity)
         {
             case CardSO.Rarity.common:
-                amount = Random.Range(1, amount);
+                amount = Random.Range(2, 6);
                 nameText.color = Color.white;
                 break;
             case CardSO.Rarity.uncommon:
-                amount = Random.Range(1, 3);
+                amount = Random.Range(2, 4);
                 nameText.color = Color.green;
                 break;
             case CardSO.Rarity.rare:
-                amount = Random.Range(0, 3);
+                amount = Random.Range(1, 3);
                 nameText.color = Color.cyan;
                 break;
             case CardSO.Rarity.epic:
-                amount = Random.Range(0, 2);
+                amount = Random.Range(1, 3);
                 nameText.color = Color.blue;
                 break;
             case CardSO.Rarity.legendary:
