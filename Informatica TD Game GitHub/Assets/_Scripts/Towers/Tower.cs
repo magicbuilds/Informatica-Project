@@ -1,8 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 using UnityEngine;
 using UnityEditor;
+using Quaternion = UnityEngine.Quaternion;
+using Vector2 = UnityEngine.Vector2;
+using Vector3 = UnityEngine.Vector3;
 
 public class Tower : MonoBehaviour
 {
@@ -44,6 +48,8 @@ public class Tower : MonoBehaviour
                 timeUntilFire = 0f;
             }
         }
+        
+        
     }
 
     private void Shoot()
@@ -51,6 +57,8 @@ public class Tower : MonoBehaviour
         GameObject bulletObj = Instantiate(bulletPrefab, firingPoint.position, Quaternion.identity);
         BulletScript bulletScript = bulletObj.GetComponent<BulletScript>();
         bulletScript.SetTarget(target);
+
+
     }
 
     private void FindTarget()

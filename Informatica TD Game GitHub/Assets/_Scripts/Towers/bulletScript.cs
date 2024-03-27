@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
+using Object = System.Object;
 
 public class BulletScript : MonoBehaviour
 {
@@ -14,6 +16,7 @@ public class BulletScript : MonoBehaviour
     [SerializeField] private float damage = 10f;
     
     private Transform target;
+    
 
     public void SetTarget(Transform _target)
     {
@@ -30,6 +33,18 @@ public class BulletScript : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D other)
     {
         other.gameObject.GetComponent<EnemyStats>().DealDamange(damage);
+        Destroy(gameObject);
+    }
+
+    private void Awake()
+    {
+        StartCoroutine(waiter());
+        
+    }
+
+    IEnumerator waiter()
+    {
+        yield return new WaitForSeconds(5);
         Destroy(gameObject);
     }
 }

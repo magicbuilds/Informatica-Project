@@ -34,6 +34,7 @@ public class EnemyManager : MonoBehaviour
         correspondingWaypoints.Insert(waypointIndex, waypoint);
     }
 
+
     public void SpawnEnemies()
     {
         int enemiesToSpawn = 100;

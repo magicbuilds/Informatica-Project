@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
 
     public GameState gameState;
 
+    
+
     public enum GameState
     {
         StartUp,
@@ -44,9 +46,11 @@ public class GameManager : MonoBehaviour
                 break;
             case GameState.EndOfWave:
                 InventoryManager.Instance.SpawnDrawCards();
-
+                
                 InputManager.Instance.EnableUIInput();
                 InputManager.Instance.DisablePlayerInput();
+                
+                
                 break;
             default:
                 Debug.Log("Gamestate not found");
