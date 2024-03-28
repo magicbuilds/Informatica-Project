@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -19,6 +20,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI cardStatsText;
     [SerializeField] private TextMeshProUGUI cardDiscription;
     [SerializeField] private Image cardIcon;
+
+    //DeckCards
+    public List<GameObject> deckCardTemplates;
 
 
     private void Awake()
@@ -57,5 +61,21 @@ public class UIManager : MonoBehaviour
     {
         extraCardInformationUI.SetActive(false);
         cardDrawUI.SetActive(true);
+    }
+
+    public void ActivateDeckCardUI()
+    {
+        foreach (GameObject card in deckCardTemplates)
+        {
+            card.SetActive(true);
+        }
+    }
+
+    public void DeactivateDeckCardUI()
+    {
+        foreach (GameObject card in deckCardTemplates)
+        {
+            card.SetActive(false);
+        }
     }
 }

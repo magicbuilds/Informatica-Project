@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b95c1925b878bc45ba52cd24fc062c6, type: 3}
   m_Name: Blade 2
   m_EditorClassIdentifier: 
-  cardName: Blade
+  cardName: SUPER BLADE
   rarity: 2
   stats: 
+  baseCost: 200
   discription: It's a blade
   icon: {fileID: 21300000, guid: 0ce8d9708e1c496419922529d48570b8, type: 3}
   weight: 10

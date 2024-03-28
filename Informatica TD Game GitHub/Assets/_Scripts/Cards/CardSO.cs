@@ -4,8 +4,12 @@ using UnityEngine;
 public class CardSO : ScriptableObject
 {
     public string cardName;
+
     public Rarity rarity;
     public string stats;
+
+    public float baseCost;
+
     public string discription;
     public Sprite icon;
 

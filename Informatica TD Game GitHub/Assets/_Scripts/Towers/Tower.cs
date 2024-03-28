@@ -1,12 +1,6 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Numerics;
+
 using UnityEngine;
 using UnityEditor;
-using Quaternion = UnityEngine.Quaternion;
-using Vector2 = UnityEngine.Vector2;
-using Vector3 = UnityEngine.Vector3;
 
 public class Tower : MonoBehaviour
 {
@@ -58,7 +52,8 @@ public class Tower : MonoBehaviour
         BulletScript bulletScript = bulletObj.GetComponent<BulletScript>();
         bulletScript.SetTarget(target);
 
-
+        bulletScript.towerPosition = (Vector2)this.transform.position;
+        bulletScript.towerRange = targetingRange;
     }
 
     private void FindTarget()

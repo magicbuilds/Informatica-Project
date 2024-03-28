@@ -1,9 +1,5 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using UnityEngine;
-using Object = System.Object;
+
 
 public class BulletScript : MonoBehaviour
 {
@@ -19,41 +15,38 @@ public class BulletScript : MonoBehaviour
     private bool hasHitEnemy = false;
     
 
-    public void SetTarget(Transform _target)
+    public Vector2 towerPosition;
+    public float towerRange;
+
+    private void Start()
     {
-        target = _target;
+        if (target == null) Destroy(gameObject);
     }
 
     private void FixedUpdate()
     {
+        if (!IsInRange()) Destroy(gameObject);
         if (!target) return;
         Vector2 direction = (target.position - transform.position).normalized;
 
         rb.velocity = direction * bulletSpeed;
     }
+    public void SetTarget(Transform _target)
+    {
+        target = _target;
+    }
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (hasHitEnemy)
-        {
-            return;
-        }
+        if (hasHitEnemy) return;
+        else hasHitEnemy = true;
 
         other.gameObject.GetComponent<EnemyStats>().DealDamange(damage);
-        hasHitEnemy = true;
-
         Destroy(gameObject);
     }
 
-    private void Awake()
+    private bool IsInRange()
     {
-        StartCoroutine(waiter());
-        
-    }
-
-    IEnumerator waiter()
-    {
-        yield return new WaitForSeconds(5);
-        Destroy(gameObject);
+        return Vector2.Distance(transform.position, towerPosition) < towerRange;
     }
 }

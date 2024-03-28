@@ -2,7 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Card : MonoBehaviour
+public class DrawCard : MonoBehaviour
 {
     private CardSO currentCard;
 

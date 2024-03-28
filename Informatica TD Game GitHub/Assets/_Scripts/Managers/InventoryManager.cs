@@ -12,11 +12,28 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private List<CardSO> cards;
 
     [SerializeField] private List<GameObject> displayCardTemplates;
-    [SerializeField] private List<GameObject> deckCardTemplates;
+    
+
+    [SerializeField] private List<CardSO> starterCards;
 
     private void Awake()
     {
         Instance = this;
+    }
+
+    private void Start()
+    {
+        foreach (CardSO card in starterCards)
+        {
+            if (cardsInInventory.ContainsKey(card))
+            {
+                cardsInInventory[card]++;
+            }
+            else
+            {
+                cardsInInventory[card] = 1;
+            }
+        }
     }
 
     public void AddNewCardToInventory(CardSO card, int amount)
@@ -38,13 +55,13 @@ public class InventoryManager : MonoBehaviour
 
         foreach (GameObject displayCard in displayCardTemplates)
         {
-            displayCard.GetComponentInChildren<Card>().CardInitialization(RandomCard());
+            displayCard.GetComponentInChildren<DrawCard>().CardInitialization(RandomCard());
         }
     }
 
     public void SpawnDeck()
     {
-        foreach (GameObject deckCard in deckCardTemplates)
+        foreach (GameObject deckCard in UIManager.Instance.deckCardTemplates)
         {
 
         }
