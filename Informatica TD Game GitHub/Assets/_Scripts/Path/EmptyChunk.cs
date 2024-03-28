@@ -16,6 +16,9 @@ public class EmptyChunk : MonoBehaviour
         if (GameManager.Instance.gameState == GameManager.GameState.ChoseNextChunk && isntAlreadyPressed)
         {
             ChunkManager.Instance.SpawnNewChunk(this);
+
+            ChunkManager.Instance.emptyChunks.Remove(this);
+
             Destroy(gameObject);
             isntAlreadyPressed = false;
         }

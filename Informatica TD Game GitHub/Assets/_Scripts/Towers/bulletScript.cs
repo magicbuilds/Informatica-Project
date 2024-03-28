@@ -16,12 +16,14 @@ public class BulletScript : MonoBehaviour
     [SerializeField] private float damage = 10f;
     
     private Transform target;
+    private bool hasHitEnemy = false;
     
 
     public void SetTarget(Transform _target)
     {
         target = _target;
     }
+
     private void FixedUpdate()
     {
         if (!target) return;
@@ -32,7 +34,14 @@ public class BulletScript : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
+        if (hasHitEnemy)
+        {
+            return;
+        }
+
         other.gameObject.GetComponent<EnemyStats>().DealDamange(damage);
+        hasHitEnemy = true;
+
         Destroy(gameObject);
     }
 

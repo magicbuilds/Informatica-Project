@@ -864,8 +864,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ac24253f421b044c9d5ea15d0cb60e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 10
-  zoomSensitivity: 0.01
+  baseMoveSpeed: 1
+  baseZoomSensitivity: 0.0005
   cam: {fileID: 519420031}
 --- !u!50 &519420034
 Rigidbody2D:

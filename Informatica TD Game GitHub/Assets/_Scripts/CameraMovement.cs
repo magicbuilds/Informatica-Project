@@ -1,17 +1,18 @@
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.Animations;
 using UnityEngine.InputSystem;
 
 public class CameraMovement : MonoBehaviour
 {
     private Vector2 moveVector;
-    [SerializeField] private float moveSpeed;
-    [SerializeField] private float zoomSensitivity;
+    [SerializeField] private float baseMoveSpeed;
+    [SerializeField] private float baseZoomSensitivity;
 
     [SerializeField] private Camera cam;
-    private float camSize = 10f;
+    [SerializeField] private float camSize = 5f;
     private Rigidbody2D rb;
+
+    private float minCamSize = 1f;
+    private float maxCamSize = 30f;
 
     private void Awake()
     {
@@ -22,7 +23,7 @@ public class CameraMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rb.velocity = moveVector * moveSpeed;
+        rb.velocity = moveVector * baseMoveSpeed * camSize;
     }
 
     public void OnMovementPerformed(InputAction.CallbackContext context)
@@ -37,7 +38,11 @@ public class CameraMovement : MonoBehaviour
 
     public void OnZoomPerformed(InputAction.CallbackContext context)
     {
-        camSize -= context.ReadValue<float>() * zoomSensitivity;
+        camSize -= context.ReadValue<float>() * baseZoomSensitivity * camSize;
+
+        if (camSize < minCamSize) camSize = minCamSize;
+        if (camSize > maxCamSize) camSize = maxCamSize;
+
         cam.orthographicSize = camSize;
     }
 }

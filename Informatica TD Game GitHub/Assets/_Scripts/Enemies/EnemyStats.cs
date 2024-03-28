@@ -10,6 +10,8 @@ public class EnemyStats : MonoBehaviour
 
     [SerializeField] private TextMeshPro healthText;
 
+    private bool isDead = false;
+
     private void Start()
     {
         health = currentEnemy.baseHealth;
@@ -20,8 +22,10 @@ public class EnemyStats : MonoBehaviour
     {
         health -= damage;
 
-        if (health <= 0)
+        if (health <= 0 && !isDead)
         {
+            isDead = true;
+
             EnemyManager.Instance.ReduceEnemyCount();
             Destroy(gameObject);
         }

@@ -15,6 +15,8 @@ public class ChunkManager : MonoBehaviour
 
     private Dictionary<Vector2, PathSO> spawnedChunks = new Dictionary<Vector2, PathSO>();
 
+    public List<EmptyChunk> emptyChunks = new List<EmptyChunk>();
+
     [SerializeField]  private PositionsToCheckSO positionsToCheckSO;
 
     private int baseChunkXMin = -3;
@@ -52,12 +54,9 @@ public class ChunkManager : MonoBehaviour
         startChunkData.rotation = (Directions)Random.Range(0, 4);
         startChunkData.waypoint = null;
 
-        startChunkData.rotation = Directions.Up;
-
         SpawnNewChunk(startChunkData);
 
         Destroy(startChunkData.gameObject);
-        
     }
 
     public void SpawnNewChunk(EmptyChunk chunkData)
@@ -143,6 +142,7 @@ public class ChunkManager : MonoBehaviour
             GameObject nextChunck = Instantiate(emptyChunkPrefab, position, Quaternion.identity);
 
             EmptyChunk chunkScript = nextChunck.GetComponent<EmptyChunk>();
+            emptyChunks.Add(chunkScript);
 
             chunkScript.pathNumber = waypointNumber;
             chunkScript.rotation = CalculateNextRotation(chunkData.rotation, chunkToSpawn.nextChunckRotations[emptyChunksSpawned]);
