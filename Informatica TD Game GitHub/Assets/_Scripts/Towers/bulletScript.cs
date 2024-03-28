@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -16,6 +17,9 @@ public class BulletScript : MonoBehaviour
     [SerializeField] private float damage = 10f;
     
     private Transform target;
+    public Transform towerPos;
+    public float targetingRange;
+    private float distance;
     
 
     public void SetTarget(Transform _target)
@@ -24,10 +28,18 @@ public class BulletScript : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        distance = Vector2.Distance(transform.position, towerPos.position);
+        Debug.Log(targetingRange);
+        Debug.Log(distance);
+        if (distance > targetingRange)
+        {
+            Destroy(gameObject);
+        }
         if (!target) return;
         Vector2 direction = (target.position - transform.position).normalized;
 
         rb.velocity = direction * bulletSpeed;
+
     }
 
     private void OnCollisionEnter2D(Collision2D other)
@@ -36,15 +48,6 @@ public class BulletScript : MonoBehaviour
         Destroy(gameObject);
     }
 
-    private void Awake()
-    {
-        StartCoroutine(waiter());
-        
-    }
 
-    IEnumerator waiter()
-    {
-        yield return new WaitForSeconds(5);
-        Destroy(gameObject);
-    }
+
 }
