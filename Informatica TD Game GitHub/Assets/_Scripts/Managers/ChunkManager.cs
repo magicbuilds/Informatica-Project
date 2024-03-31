@@ -159,13 +159,13 @@ public class ChunkManager : MonoBehaviour
             if (emptyChunksSpawned == 0)
             {
                 chunkScript.pathIndex = chunkData.pathIndex;
-                EnemyManager.Instance.UpdateSpawnLocations(chunkScript.waypoint, enemySpawnPosition, chunkData.pathIndex);
+                WaveManager.Instance.UpdateSpawnLocations(chunkScript.waypoint, enemySpawnPosition, chunkData.pathIndex);
             }
                 
             else
             {
                 chunkScript.pathIndex = totalPathCount;
-                EnemyManager.Instance.UpdateSpawnLocations(chunkScript.waypoint, enemySpawnPosition, totalPathCount);
+                WaveManager.Instance.UpdateSpawnLocations(chunkScript.waypoint, enemySpawnPosition, totalPathCount);
 
                 totalPathCount++;
             }

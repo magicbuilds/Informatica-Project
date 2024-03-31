@@ -6,8 +6,18 @@ using UnityEngine;
 public class EnemySO : ScriptableObject
 {
     public string enemyName;
-    public Sprite sprite;
 
-    public int baseHealth;
+    [Header("Stats")]
     public float speed;
+    public int baseHealth;
+    public float baseCoins;
+
+    [Header("Sprite(s)")]
+    public Sprite xSprite;
+    public Sprite ySprite;
+
+    [Header("IfHoldingEnemies")]
+    public List<EnemySO> holdingEnemies;
+    public List<int> correspondingAmounts;
+    public bool showHoldingEnemy;
 }

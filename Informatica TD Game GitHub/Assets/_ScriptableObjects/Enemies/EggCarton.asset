@@ -10,13 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3aa5f09c49376b14baaa61acc3c2deb8, type: 3}
-  m_Name: Meat
+  m_Name: EggCarton
   m_EditorClassIdentifier: 
-  enemyName: Meat
+  enemyName: Egg Carton
   speed: 2
   baseHealth: 500
   baseCoins: 20
-  xSprite: {fileID: -1664351538, guid: 01d99cf87cd31d44cbdcb241727b4862, type: 3}
+  xSprite: {fileID: -521476395, guid: 01d99cf87cd31d44cbdcb241727b4862, type: 3}
   ySprite: {fileID: 0}
-  holdingEnemies: []
-  correspondingAmounts: 
+  holdingEnemies:
+  - {fileID: 11400000, guid: a7ca15da869ccde40b94e24c302880c0, type: 2}
+  correspondingAmounts: 0c000000

@@ -10,13 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3aa5f09c49376b14baaa61acc3c2deb8, type: 3}
-  m_Name: Meat
+  m_Name: CardboardBox
   m_EditorClassIdentifier: 
-  enemyName: Meat
+  enemyName: Cardboard Box
   speed: 2
   baseHealth: 500
   baseCoins: 20
-  xSprite: {fileID: -1664351538, guid: 01d99cf87cd31d44cbdcb241727b4862, type: 3}
+  xSprite: {fileID: 1976337319, guid: 01d99cf87cd31d44cbdcb241727b4862, type: 3}
   ySprite: {fileID: 0}
-  holdingEnemies: []
-  correspondingAmounts: 
+  holdingEnemies:
+  - {fileID: 11400000, guid: ffd1fb5c42309e34fb99dac3c131a74f, type: 2}
+  correspondingAmounts: 0a000000
+  showHoldingEnemy: 1

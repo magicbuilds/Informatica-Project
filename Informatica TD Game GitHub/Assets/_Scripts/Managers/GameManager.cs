@@ -42,7 +42,7 @@ public class GameManager : MonoBehaviour
                 InputManager.Instance.DisableUIInput();
                 break;
             case GameState.StartNewWave:
-                EnemyManager.Instance.SpawnEnemies();
+                WaveManager.Instance.SpawnNewWave();
                 break;
             case GameState.EndOfWave:
                 InventoryManager.Instance.SpawnDrawCards();

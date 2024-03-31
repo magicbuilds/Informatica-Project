@@ -3,12 +3,14 @@ using UnityEngine;
 
 public class EnemyStats : MonoBehaviour
 {
-    
     public EnemySO currentEnemy;
+    public EnemyAI enemyAI;
 
     [SerializeField] private float health;
 
     [SerializeField] private TextMeshPro healthText;
+
+    [SerializeField] private SpriteRenderer currentlyHoldingSprite;
 
     private bool isDead = false;
 
@@ -16,6 +18,12 @@ public class EnemyStats : MonoBehaviour
     {
         health = currentEnemy.baseHealth;
         UpdateEnemyUI();
+
+        if (currentEnemy.showHoldingEnemy)
+        {
+            currentlyHoldingSprite.sprite = currentEnemy.holdingEnemies[Random.Range(0, currentEnemy.holdingEnemies.Count)].xSprite;
+        }
+        
     }
 
     public void DealDamange(float damage)
@@ -25,6 +33,8 @@ public class EnemyStats : MonoBehaviour
         if (health <= 0 && !isDead)
         {
             isDead = true;
+
+            if (currentEnemy.holdingEnemies.Count != 0) SummonHoldingEnemies();   
 
             EnemyManager.Instance.ReduceEnemyCount();
             Destroy(gameObject);
@@ -41,5 +51,18 @@ public class EnemyStats : MonoBehaviour
             return;
         }
         healthText.text = health + " HP";
+    }
+    private void SummonHoldingEnemies()
+    {
+        int index = 0;
+        foreach (int amount in currentEnemy.correspondingAmounts)
+        {
+            for (int i = 0; i < amount; i++)
+            {
+                EnemyManager.Instance.SpawnEnemy(currentEnemy.holdingEnemies[index], transform.position, enemyAI.target);
+            }
+            index++;
+        }
+
     }
 }
