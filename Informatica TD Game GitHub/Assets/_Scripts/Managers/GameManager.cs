@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,7 +9,7 @@ public class GameManager : MonoBehaviour
 
     public GameState gameState;
 
-    
+    public float waveNum;
 
     public enum GameState
     {
@@ -27,6 +28,7 @@ public class GameManager : MonoBehaviour
     {
         SwitchGameState(GameState.StartUp);
         SwitchGameState(GameState.ChoseNextChunk);
+        
     }
 
     public void SwitchGameState(GameState state)
@@ -49,7 +51,7 @@ public class GameManager : MonoBehaviour
                 
                 InputManager.Instance.EnableUIInput();
                 InputManager.Instance.DisablePlayerInput();
-                
+
                 
                 break;
             default:
@@ -59,4 +61,5 @@ public class GameManager : MonoBehaviour
 
         gameState = state;
     }
+    
 }

@@ -41,6 +41,7 @@ public class EnemyManager : MonoBehaviour
         if (currentNumberOfEnemies <= 0) 
         {
             GameManager.Instance.SwitchGameState(GameManager.GameState.EndOfWave);
+
         }
 
         UIManager.Instance.UpdateEnemysLeftUI(currentNumberOfEnemies);
