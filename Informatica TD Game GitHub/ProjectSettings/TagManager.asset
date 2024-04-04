@@ -6,6 +6,7 @@ TagManager:
   tags:
   - infoScreen
   - EmptyChunk
+  - Audio
   layers:
   - Default
   - TransparentFX

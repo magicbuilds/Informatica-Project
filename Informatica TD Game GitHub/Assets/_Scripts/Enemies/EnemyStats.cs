@@ -1,5 +1,7 @@
+using System;
 using TMPro;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class EnemyStats : MonoBehaviour
 {
@@ -13,6 +15,14 @@ public class EnemyStats : MonoBehaviour
     [SerializeField] private SpriteRenderer currentlyHoldingSprite;
 
     private bool isDead = false;
+
+    private audioManager AudioManager;
+
+    private void Awake()
+    {
+        AudioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<audioManager>();
+    }
+
 
     private void Start()
     {
@@ -38,6 +48,7 @@ public class EnemyStats : MonoBehaviour
 
             EnemyManager.Instance.ReduceEnemyCount();
             Destroy(gameObject);
+            AudioManager.PlaySFX((AudioManager.death));
         }
 
         UpdateEnemyUI();
