@@ -11,12 +11,13 @@ public class Tower : MonoBehaviour
     [SerializeField] private Transform firingPoint;
     
     [Header("Attribute")]
-    [SerializeField] private float targetingRange = 5f;
+    [SerializeField] public float targetingRange = 5f;
     [SerializeField] private float rotateSpeed = 200f;
     [SerializeField] private float bps = 1f; // Kogels per Seconde
     
     private Transform target;
     private float timeUntilFire;
+    public Transform towerPos;
 
     private void Update()
     {
@@ -51,9 +52,6 @@ public class Tower : MonoBehaviour
         GameObject bulletObj = Instantiate(bulletPrefab, firingPoint.position, Quaternion.identity);
         BulletScript bulletScript = bulletObj.GetComponent<BulletScript>();
         bulletScript.SetTarget(target);
-
-        bulletScript.towerPosition = (Vector2)this.transform.position;
-        bulletScript.towerRange = targetingRange;
     }
 
     private void FindTarget()
@@ -77,6 +75,7 @@ public class Tower : MonoBehaviour
     {
         return Vector2.Distance(target.position, transform.position) <= targetingRange;
     }
+    
     private void OnDrawGizmosSelected()
     {
         //Handles.color = Color.cyan;
