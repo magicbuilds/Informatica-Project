@@ -1,10 +1,5 @@
-using JetBrains.Annotations;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using UnityEngine;
-using Object = System.Object;
+
 
 public class BulletScript : MonoBehaviour
 {
@@ -17,43 +12,41 @@ public class BulletScript : MonoBehaviour
     [SerializeField] private float damage = 10f;
     
     private Transform target;
-    public Transform towerPos;
-    public float targetingRange;
-    private float distance;
+    private bool hasHitEnemy = false;
     
+
+    public Vector2 towerPosition;
+    public float towerRange;
+
+    private void Start()
+    {
+        if (target == null) Destroy(gameObject);
+    }
+
+    private void FixedUpdate()
+    {
+        if (!IsInRange()) Destroy(gameObject);
+        if (!target) return;
+        Vector2 direction = (target.position - transform.position).normalized;
+
+        rb.velocity = direction * bulletSpeed;
+    }
     public void SetTarget(Transform _target)
     {
         target = _target;
     }
 
-    private void FixedUpdate()
-    {
-        distance = Vector2.Distance(transform.position, towerPos.position);
-        
-        if (distance > targetingRange)
-        {
-            Destroy(gameObject);
-        }
-        if (!target) return;
-        Vector2 direction = (target.position - transform.position).normalized;
-
-        rb.velocity = direction * bulletSpeed;
-
-    }
-
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (hasHitEnemy)
-        {
-            return;
-        }
+        if (hasHitEnemy) return;
+        else hasHitEnemy = true;
 
         other.gameObject.GetComponent<EnemyStats>().DealDamange(damage);
-        hasHitEnemy = true;
-
         Destroy(gameObject);
     }
 
-
-
+    private bool IsInRange()
+    {
+        return Vector2.Distance(transform.position, towerPosition) < towerRange;
+    }
 }
