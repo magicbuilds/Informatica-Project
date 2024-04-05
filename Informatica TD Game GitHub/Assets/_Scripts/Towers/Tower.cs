@@ -58,9 +58,12 @@ public class Tower : MonoBehaviour
         GameObject bulletObj = Instantiate(bulletPrefab, firingPoint.position, Quaternion.identity);
         BulletScript bulletScript = bulletObj.GetComponent<BulletScript>();
         bulletScript.SetTarget(target);
+<<<<<<< HEAD
         bulletScript.towerPos = transform;
         bulletScript.targetingRange = this.targetingRange;
 
+=======
+>>>>>>> ab26deaa70ba89db85f0ac6b309002c75cba3f36
     }
 
     private void FindTarget()
@@ -84,6 +87,7 @@ public class Tower : MonoBehaviour
     {
         return Vector2.Distance(target.position, transform.position) <= targetingRange;
     }
+    
     private void OnDrawGizmosSelected()
     {
         //Handles.color = Color.cyan;

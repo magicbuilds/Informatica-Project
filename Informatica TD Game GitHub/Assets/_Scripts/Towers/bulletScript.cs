@@ -21,7 +21,10 @@ public class BulletScript : MonoBehaviour
     public float targetingRange;
     private float distance;
     
+<<<<<<< HEAD
 
+=======
+>>>>>>> ab26deaa70ba89db85f0ac6b309002c75cba3f36
     public void SetTarget(Transform _target)
     {
         target = _target;
@@ -42,9 +45,34 @@ public class BulletScript : MonoBehaviour
 
     }
 
+    private void FixedUpdate()
+    {
+        distance = Vector2.Distance(transform.position, towerPos.position);
+        
+        if (distance > targetingRange)
+        {
+            Destroy(gameObject);
+        }
+        if (!target) return;
+        Vector2 direction = (target.position - transform.position).normalized;
+
+        rb.velocity = direction * bulletSpeed;
+
+    }
+
     private void OnCollisionEnter2D(Collision2D other)
     {
+<<<<<<< HEAD
+=======
+        if (hasHitEnemy)
+        {
+            return;
+        }
+
+>>>>>>> ab26deaa70ba89db85f0ac6b309002c75cba3f36
         other.gameObject.GetComponent<EnemyStats>().DealDamange(damage);
+        hasHitEnemy = true;
+
         Destroy(gameObject);
     }
 
