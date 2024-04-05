@@ -243,7 +243,7 @@ GameObject:
   - component: {fileID: 3090035578576694048}
   - component: {fileID: 351007251992137204}
   m_Layer: 0
-  m_Name: TestTower
+  m_Name: ShootingTower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
