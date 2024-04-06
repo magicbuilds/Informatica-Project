@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7b95c1925b878bc45ba52cd24fc062c6, type: 3}
-  m_Name: Blade 2
+  m_Name: Banana
   m_EditorClassIdentifier: 
-  cardName: SUPER BLADE
-  rarity: 2
-  stats: 
-  baseCost: 200
-  discription: It's a blade
-  icon: {fileID: 21300000, guid: 0ce8d9708e1c496419922529d48570b8, type: 3}
+  cardName: Banana
+  rarity: 1
+  tower: {fileID: 0}
+  baseCost: 100
+  discription: Monkey
+  icon: {fileID: 733408389, guid: 01d99cf87cd31d44cbdcb241727b4862, type: 3}
   weight: 10

@@ -6,7 +6,7 @@ public class CardSO : ScriptableObject
     public string cardName;
 
     public Rarity rarity;
-    public string stats;
+    public TowerSO tower;
 
     public float baseCost;
 

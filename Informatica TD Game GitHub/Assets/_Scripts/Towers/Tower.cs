@@ -1,20 +1,18 @@
-
 using UnityEngine;
 using UnityEditor;
 
 public class Tower : MonoBehaviour
 {
+    [Header("Attribute")]
+    public TowerSO currentTower;
+    [SerializeField] private float rotateSpeed = 200f;
+
     [Header("References")] 
     [SerializeField] private Transform turretRotationPoint;
     [SerializeField] private LayerMask enemyMask;
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private Transform firingPoint;
-    
-    [Header("Attribute")]
-    [SerializeField] private float targetingRange = 5f;
-    [SerializeField] private float rotateSpeed = 200f;
-    [SerializeField] private float bps = 1f; // Kogels per Seconde
-    
+
     private Transform target;
     private float timeUntilFire;
 
@@ -36,29 +34,26 @@ public class Tower : MonoBehaviour
         {
             timeUntilFire += Time.deltaTime;
 
-            if (timeUntilFire >= 1f / bps)
+            if (timeUntilFire >= 1f / currentTower.baseFireRate)
             {
                 Shoot();
                 timeUntilFire = 0f;
             }
         }
-        
-        
     }
 
     private void Shoot()
     {
-        GameObject bulletObj = Instantiate(bulletPrefab, firingPoint.position, Quaternion.identity);
-        BulletScript bulletScript = bulletObj.GetComponent<BulletScript>();
+        GameObject bullet = Instantiate(bulletPrefab, firingPoint.position, Quaternion.identity);
+        BulletScript bulletScript = bullet.GetComponent<BulletScript>();
         bulletScript.SetTarget(target);
 
-        bulletScript.towerPosition = (Vector2)this.transform.position;
-        bulletScript.towerRange = targetingRange;
+        bulletScript.tower = this;
     }
 
     private void FindTarget()
     {
-        RaycastHit2D[] hits = Physics2D.CircleCastAll(transform.position, targetingRange, (Vector2)
+        RaycastHit2D[] hits = Physics2D.CircleCastAll(transform.position, currentTower.baseRange, (Vector2)
             transform.position, 0f, enemyMask);
         if (hits.Length > 0)
         {
@@ -75,8 +70,9 @@ public class Tower : MonoBehaviour
 
     private bool CheckTargetIsInRange()
     {
-        return Vector2.Distance(target.position, transform.position) <= targetingRange;
+        return Vector2.Distance(target.position, transform.position) <= currentTower.baseRange;
     }
+
     private void OnDrawGizmosSelected()
     {
         //Handles.color = Color.cyan;

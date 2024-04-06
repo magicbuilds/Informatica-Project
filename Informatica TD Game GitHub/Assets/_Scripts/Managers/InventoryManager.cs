@@ -1,20 +1,23 @@
-using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class InventoryManager : MonoBehaviour
 {
     public static InventoryManager Instance;
 
-    private Dictionary<CardSO, int> cardsInInventory = new Dictionary<CardSO, int>();
-    private List<CardSO> playedCards = new List<CardSO>();  
+    [Header("Information")]
+    public List<GameObject> deckCardSlots;
+    [SerializeField] private List<GameObject> drawCardSlots;
+    [SerializeField] private List<CardSO> starterCards;
 
+    [Header("All Cards")]
     [SerializeField] private List<CardSO> cards;
 
-    [SerializeField] private List<GameObject> displayCardTemplates;
-    
+    public DeckCard currentSelectedCard = null;
 
-    [SerializeField] private List<CardSO> starterCards;
+    private Dictionary<CardSO, int> cardsInInventory = new Dictionary<CardSO, int>();
+    private List<CardSO> playedCards = new List<CardSO>();
 
     private void Awake()
     {
@@ -34,6 +37,8 @@ public class InventoryManager : MonoBehaviour
                 cardsInInventory[card] = 1;
             }
         }
+
+        SpawnDeck();
     }
 
     public void AddNewCardToInventory(CardSO card, int amount)
@@ -49,21 +54,55 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
-    public void SpawnDrawCards()
+    public void RemoveCardFromInventory(CardSO card)
     {
-        UIManager.Instance.ActivateCardDrawUI();
-
-        foreach (GameObject displayCard in displayCardTemplates)
-        {
-            displayCard.GetComponentInChildren<DrawCard>().CardInitialization(RandomCard());
-        }
+        cardsInInventory[card] -= 1;
     }
 
     public void SpawnDeck()
     {
-        foreach (GameObject deckCard in UIManager.Instance.deckCardTemplates)
+        int totalCardAmount = 0;
+        foreach (int amount in cardsInInventory.Values)
         {
+            totalCardAmount += amount;
+        }
 
+        for (int i = 0; i < deckCardSlots.Count; i++)
+        {
+            int cardIndex = 0;
+            int prossedAmount = 0;
+            int randomAmount = Random.Range(0, totalCardAmount);
+            foreach (int amount in cardsInInventory.Values)
+            {
+                prossedAmount += amount;
+                if (prossedAmount >= randomAmount)
+                {
+                    CardSO card = cardsInInventory.Keys.ToList()[cardIndex];
+
+                    RemoveCardFromInventory(card);
+                    totalCardAmount -= 1;
+
+                    deckCardSlots[i].GetComponentInChildren<DeckCard>().CardInitialization(card);
+
+                    break;
+                }
+                cardIndex++;
+            }
+        }
+    }
+
+    public void SetSelectedCard(DeckCard card)
+    {
+        currentSelectedCard = card;
+    }
+
+    public void SpawnDrawCards()
+    {
+        UIManager.Instance.ActivateCardDrawUI();
+
+        foreach (GameObject displayCard in drawCardSlots)
+        {
+            displayCard.GetComponentInChildren<DrawCard>().CardInitialization(RandomCard());
         }
     }
 

@@ -5,18 +5,11 @@ public class BulletScript : MonoBehaviour
 {
     [Header("References")] [SerializeField]
     private Rigidbody2D rb;
-
-
-    [Header("Attributes")] 
-    [SerializeField] private float bulletSpeed = 5f;
-    [SerializeField] private float damage = 10f;
     
     private Transform target;
     private bool hasHitEnemy = false;
-    
 
-    public Vector2 towerPosition;
-    public float towerRange;
+    public Tower tower;
 
     private void Start()
     {
@@ -29,24 +22,24 @@ public class BulletScript : MonoBehaviour
         if (!target) return;
         Vector2 direction = (target.position - transform.position).normalized;
 
-        rb.velocity = direction * bulletSpeed;
+        rb.velocity = direction * tower.currentTower.baseBulletSpeed;
     }
     public void SetTarget(Transform _target)
     {
         target = _target;
     }
 
-    private void OnCollisionEnter2D(Collision2D other)
+    private void OnCollisionEnter2D(Collision2D enemy)
     {
         if (hasHitEnemy) return;
         else hasHitEnemy = true;
 
-        other.gameObject.GetComponent<EnemyStats>().DealDamange(damage);
+        enemy.gameObject.GetComponent<EnemyStats>().DealDamange(tower.currentTower.baseRange);
         Destroy(gameObject);
     }
 
     private bool IsInRange()
     {
-        return Vector2.Distance(transform.position, towerPosition) < towerRange;
+        return Vector2.Distance(transform.position, tower.transform.position) < tower.currentTower.baseRange;
     }
 }

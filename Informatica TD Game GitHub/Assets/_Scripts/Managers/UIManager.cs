@@ -21,8 +21,6 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI cardDiscription;
     [SerializeField] private Image cardIcon;
 
-    //DeckCards
-    public List<GameObject> deckCardTemplates;
 
 
     private void Awake()
@@ -52,7 +50,7 @@ public class UIManager : MonoBehaviour
         extraCardInformationUI.SetActive(true);
 
         cardNameText.text = card.cardName;
-        cardStatsText.text = card.stats;
+        //cardStatsText.text = card.stats;
         cardDiscription.text = card.discription;
         cardIcon.sprite = card.icon;
     }
@@ -63,19 +61,24 @@ public class UIManager : MonoBehaviour
         cardDrawUI.SetActive(true);
     }
 
-    public void ActivateDeckCardUI()
+    public void RaiseDeckCardUI()
     {
-        foreach (GameObject card in deckCardTemplates)
+        foreach (GameObject slot in InventoryManager.Instance.deckCardSlots)
         {
-            card.SetActive(true);
+            DeckCard deckCard = slot.GetComponentInChildren<DeckCard>();
+            deckCard.transform.position = deckCard.downPosition.position;
         }
     }
 
-    public void DeactivateDeckCardUI()
+    public void LowerDeckCardUI(Transform selectedSlot)
     {
-        foreach (GameObject card in deckCardTemplates)
+        foreach (GameObject slot in InventoryManager.Instance.deckCardSlots)
         {
-            card.SetActive(false);
+            if (slot != selectedSlot.gameObject)
+            {
+                DeckCard deckCard = slot.GetComponentInChildren<DeckCard>();
+                deckCard.transform.position = deckCard.otherCardSelectedPosition.position;
+            }
         }
     }
 }

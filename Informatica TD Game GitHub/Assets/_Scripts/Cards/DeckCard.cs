@@ -1,13 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-
-public class DeckCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class DeckCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
-    private CardSO currentCard;
+    public CardSO currentCard;
 
     [Header("Card")]
     [SerializeField] private TextMeshProUGUI costText;
@@ -19,8 +16,9 @@ public class DeckCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     [SerializeField] private TextMeshProUGUI statsText;
 
     [Header("Positions")]
-    [SerializeField] private Transform downPosition;
-    [SerializeField] private Transform upPosition;
+    [SerializeField] public Transform downPosition;
+    [SerializeField] public Transform otherCardSelectedPosition;
+    [SerializeField] public Transform upPosition;
 
     public void CardInitialization(CardSO spawnedCard)
     {
@@ -30,17 +28,15 @@ public class DeckCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         nameText.text = currentCard.name;
         icon.sprite = currentCard.icon;
 
-        statsText.text = currentCard.stats;
+        //statsText.text = currentCard.stats;
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
         transform.position = upPosition.position;
-        UIManager.Instance.DeactivateDeckCardUI();
-
-
+        UIManager.Instance.LowerDeckCardUI(transform.parent.parent);
+        
         statsScreen.SetActive(true);
-
     }
 
     public void OnPointerExit(PointerEventData eventData)
@@ -48,6 +44,11 @@ public class DeckCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         transform.position = downPosition.position;
         statsScreen.SetActive(false);
 
-        UIManager.Instance.ActivateDeckCardUI();
+        UIManager.Instance.RaiseDeckCardUI();
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        InventoryManager.Instance.SetSelectedCard(this);
     }
 }

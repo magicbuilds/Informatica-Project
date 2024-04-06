@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d968e75eda3bcde43b83bbb4d5adf8ff, type: 3}
   m_Name: Blade
   m_EditorClassIdentifier: 
-  towerName: BladeTower
-  sprite: {fileID: 21300000, guid: 0e725f996c550874b9d796bc1125d2ce, type: 3}
   baseDamage: 5
-  fireRate: 0
+  baseRange: 5
+  baseFireRate: 10
+  baseBulletSpeed: 3

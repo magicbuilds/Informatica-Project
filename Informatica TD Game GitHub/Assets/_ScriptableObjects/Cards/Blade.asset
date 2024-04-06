@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardName: Blade
   rarity: 0
-  stats: 
+  tower: {fileID: 11400000, guid: 8ee63ebd0d8f51c4587a7d9ec26d6f15, type: 2}
   baseCost: 10
   discription: It's a blade
   icon: {fileID: 21300000, guid: 0ce8d9708e1c496419922529d48570b8, type: 3}
