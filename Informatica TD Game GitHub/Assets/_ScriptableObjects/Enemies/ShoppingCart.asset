@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: ShoppingCart
   m_EditorClassIdentifier: 
   enemyName: Shopping Cart
-  speed: 2
   baseHealth: 500
+  damage: 1
+  speed: 2
   baseCoins: 20
   xSprite: {fileID: -872240200, guid: 01d99cf87cd31d44cbdcb241727b4862, type: 3}
   ySprite: {fileID: 581809049, guid: 01d99cf87cd31d44cbdcb241727b4862, type: 3}

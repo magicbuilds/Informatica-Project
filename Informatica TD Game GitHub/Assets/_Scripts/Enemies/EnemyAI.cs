@@ -13,8 +13,6 @@ public class EnemyAI : MonoBehaviour
 
     private SpriteRenderer spriteRenderer;
 
-    
-
     private void Start()
     {
         lastPosition = (Vector2)transform.position;
@@ -34,6 +32,7 @@ public class EnemyAI : MonoBehaviour
         {
             Destroy(gameObject);
 
+            PlayerStatsManager.Instance.AddRemoveHealth(currentEnemy.damage);
             EnemyManager.Instance.ReduceEnemyCount();
 
             return;

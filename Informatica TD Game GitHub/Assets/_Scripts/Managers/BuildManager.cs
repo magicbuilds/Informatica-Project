@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class BuildManager : MonoBehaviour
 {
-    public static BuildManager main;
+    public static BuildManager Instance;
 
     [Header("References")] 
     [SerializeField] private GameObject[] buildingPrefabs;
@@ -13,7 +13,7 @@ public class BuildManager : MonoBehaviour
     private int currentSelectedTower = 0;
     private void Awake()
     {
-        main = this;
+        Instance = this;
     }
 
     public GameObject GetSelectedTower()

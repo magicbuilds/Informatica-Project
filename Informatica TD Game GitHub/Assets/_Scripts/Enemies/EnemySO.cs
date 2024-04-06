@@ -8,8 +8,10 @@ public class EnemySO : ScriptableObject
     public string enemyName;
 
     [Header("Stats")]
-    public float speed;
     public int baseHealth;
+    public float damage;
+
+    public float speed;
     public float baseCoins;
 
     [Header("Sprite(s)")]

@@ -13,11 +13,13 @@ MonoBehaviour:
   m_Name: Truck
   m_EditorClassIdentifier: 
   enemyName: Truck
-  speed: 2
   baseHealth: 500
+  damage: 1
+  speed: 2
   baseCoins: 20
   xSprite: {fileID: 2133948369, guid: 01d99cf87cd31d44cbdcb241727b4862, type: 3}
   ySprite: {fileID: -2143511849, guid: 01d99cf87cd31d44cbdcb241727b4862, type: 3}
   holdingEnemies:
   - {fileID: 11400000, guid: 8d81b8c0784593543a4137dc62581fd6, type: 2}
   correspondingAmounts: 0a000000
+  showHoldingEnemy: 0

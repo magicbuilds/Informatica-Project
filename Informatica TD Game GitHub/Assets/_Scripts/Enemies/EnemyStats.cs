@@ -16,13 +16,6 @@ public class EnemyStats : MonoBehaviour
 
     private bool isDead = false;
 
-    private audioManager AudioManager;
-
-    private void Awake()
-    {
-        AudioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<audioManager>();
-    }
-
 
     private void Start()
     {
@@ -45,10 +38,12 @@ public class EnemyStats : MonoBehaviour
             isDead = true;
 
             if (currentEnemy.holdingEnemies.Count != 0) SummonHoldingEnemies();   
-
+            
             EnemyManager.Instance.ReduceEnemyCount();
+            PlayerStatsManager.Instance.AddRemoveCoins(currentEnemy.baseCoins);
+
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.death);
             Destroy(gameObject);
-            AudioManager.PlaySFX((AudioManager.death));
         }
 
         UpdateEnemyUI();

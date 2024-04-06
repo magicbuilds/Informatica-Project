@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlotScript : MonoBehaviour
+public class TileScript : MonoBehaviour
 {
     [Header("References")] 
     [SerializeField] private SpriteRenderer sr;
@@ -32,7 +32,7 @@ public class PlotScript : MonoBehaviour
     {
         if (tower != null) return;
 
-        GameObject towerToBuild = BuildManager.main.GetSelectedTower();
+        GameObject towerToBuild = BuildManager.Instance.GetSelectedTower();
         tower = Instantiate(towerToBuild, transform.position, Quaternion.identity);
     }
 }

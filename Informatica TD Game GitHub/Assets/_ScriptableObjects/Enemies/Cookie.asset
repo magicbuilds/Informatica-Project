@@ -13,10 +13,12 @@ MonoBehaviour:
   m_Name: Cookie
   m_EditorClassIdentifier: 
   enemyName: Cookie
-  speed: 5
   baseHealth: 10
+  damage: 1
+  speed: 5
   baseCoins: 1
   xSprite: {fileID: 1805303780, guid: 01d99cf87cd31d44cbdcb241727b4862, type: 3}
   ySprite: {fileID: 0}
   holdingEnemies: []
   correspondingAmounts: 
+  showHoldingEnemy: 0
