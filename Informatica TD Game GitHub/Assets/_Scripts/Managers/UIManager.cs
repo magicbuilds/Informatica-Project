@@ -23,11 +23,24 @@ public class UIManager : MonoBehaviour
 
     //DeckCards
     public List<GameObject> deckCardTemplates;
+    
+    //Upgrade
+    private bool isHoveringUI;
 
 
     private void Awake()
     {
         Instance = this;
+    }
+
+    public void SetHoveringState(bool state)
+    {
+        isHoveringUI = state;
+    }
+
+    public bool IsHoveringUI()
+    {
+        return isHoveringUI;
     }
 
     public void UpdateEnemysLeftUI(int enemysLeft)

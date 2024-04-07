@@ -1,6 +1,9 @@
 
+using System;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEditor;
+using UnityEngine.InputSystem.HID;
 
 public class Tower : MonoBehaviour
 {
@@ -14,9 +17,23 @@ public class Tower : MonoBehaviour
     [SerializeField] private float targetingRange = 5f;
     [SerializeField] private float rotateSpeed = 200f;
     [SerializeField] private float bps = 1f; // Kogels per Seconde
+    [SerializeField] private GameObject upgradeUI;
+    [SerializeField] private Button upgradeButton;
+
+    private float bpsBase;
+    private float targetingRangeBase;
     
     private Transform target;
     private float timeUntilFire;
+    private int level = 1;
+
+    private void Start()
+    {
+        bpsBase = bps;
+        targetingRangeBase = targetingRange;
+        
+        upgradeButton.onClick.AddListener(UpgradeTower);
+    }
 
     private void Update()
     {
@@ -77,6 +94,41 @@ public class Tower : MonoBehaviour
     {
         return Vector2.Distance(target.position, transform.position) <= targetingRange;
     }
+
+    public void OpenUpgradeUI()
+    {
+        upgradeUI.SetActive(true);
+    }
+
+    public void CloseUpgradeUI()
+    {
+        upgradeUI.SetActive(false);
+        UIManager.Instance.SetHoveringState(false);
+    }
+
+    public void UpgradeTower()
+    {
+        level++;
+        if (level >= 10)
+        {
+            level = 10;
+        }
+        Debug.Log(level);
+        bps = CalcBPS();
+        targetingRange = CalcRange();
+        CloseUpgradeUI();
+    }
+
+    private float CalcBPS()
+    {
+        return bpsBase * Mathf.Pow(level, 0.7f);
+    }
+
+    private float CalcRange()
+    {
+        return targetingRangeBase * Mathf.Pow(level, 0.4f);
+    }
+    
     private void OnDrawGizmosSelected()
     {
         //Handles.color = Color.cyan;
