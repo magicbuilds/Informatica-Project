@@ -21,11 +21,22 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI cardDiscription;
     [SerializeField] private Image cardIcon;
 
-
+    //Upgrade
+    private bool isHoveringUI;
 
     private void Awake()
     {
         Instance = this;
+    }
+    
+    public void SetHoveringState(bool state)
+    {
+        isHoveringUI = state;
+    }
+
+    public bool IsHoveringUI()
+    {
+        return isHoveringUI;
     }
 
     public void UpdateEnemysLeftUI(int enemysLeft)

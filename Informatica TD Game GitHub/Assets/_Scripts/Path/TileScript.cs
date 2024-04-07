@@ -13,6 +13,7 @@ public class TileScript : MonoBehaviour
     
     private Tower tower;
     private Color startColor;
+    private GameObject towerObj;
 
     private void Start()
     {
@@ -42,6 +43,18 @@ public class TileScript : MonoBehaviour
 
     private void OnMouseDown()
     {
+        if (UIManager.Instance.IsHoveringUI()) return;
+            
+        if (towerObj != null)
+        {
+            tower.OpenUpgradeUI();
+            return;
+        }
+
+        GameObject towerToBuild = BuildManager.Instance.GetSelectedTower();
+        towerObj = Instantiate(towerToBuild, transform.position, Quaternion.identity);
+        tower = towerObj.GetComponent<Tower>();
+        
         if (tower != null)
         {
             float diameter = tower.currentTower.baseRange * 2;

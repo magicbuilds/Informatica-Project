@@ -1,21 +1,36 @@
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEditor;
 
 public class Tower : MonoBehaviour
 {
-    [Header("Attribute")]
-    public TowerSO currentTower;
+    [Header("Attribute")] public TowerSO currentTower;
     [SerializeField] private float rotateSpeed = 200f;
+  
 
     [Header("References")] 
     [SerializeField] private Transform turretRotationPoint;
     [SerializeField] private LayerMask enemyMask;
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private Transform firingPoint;
+    [SerializeField] private GameObject upgradeUI;
+    [SerializeField] private Button upgradeButton;
+
+    private float bpsBase;
+    private int targetingRangeBase;
+
 
     private Transform target;
     private float timeUntilFire;
-
+    private int level = 1;
+    
+    private void Start()
+    {
+        bpsBase = currentTower.baseBulletSpeed;
+        targetingRangeBase = currentTower.baseRange;
+        
+        upgradeButton.onClick.AddListener(UpgradeTower);
+    }
     private void Update()
     {
         if (target == null)
@@ -34,7 +49,7 @@ public class Tower : MonoBehaviour
         {
             timeUntilFire += Time.deltaTime;
 
-            if (timeUntilFire >= 1f / currentTower.baseFireRate)
+            if (timeUntilFire >= 1f / currentTower.baseBulletSpeed)
             {
                 Shoot();
                 timeUntilFire = 0f;
@@ -71,6 +86,41 @@ public class Tower : MonoBehaviour
     private bool CheckTargetIsInRange()
     {
         return Vector2.Distance(target.position, transform.position) <= currentTower.baseRange;
+    }
+    
+    public void OpenUpgradeUI()
+    {
+        upgradeUI.SetActive(true);
+    }
+
+    public void CloseUpgradeUI()
+    {
+        upgradeUI.SetActive(false);
+        UIManager.Instance.SetHoveringState(false);
+    }
+
+    public void UpgradeTower()
+    {
+        level++;
+        if (level >= 10)
+        {
+            level = 10;
+        }
+
+        currentTower.baseBulletSpeed = CalcBPS();
+        currentTower.baseRange = Mathf.RoundToInt(CalcRange());
+        
+        CloseUpgradeUI();
+    }
+
+    private float CalcBPS()
+    {
+        return bpsBase * Mathf.Pow(level, 0.7f);
+    }
+
+    private float CalcRange()
+    {
+        return  Mathf.RoundToInt(targetingRangeBase * Mathf.Pow(level, 0.4f));
     }
 
     private void OnDrawGizmosSelected()
