@@ -6,7 +6,6 @@ public class Tower : MonoBehaviour
 {
     [Header("Attribute")] public TowerSO currentTower;
     [SerializeField] private float rotateSpeed = 200f;
-  
 
     [Header("References")] 
     [SerializeField] private Transform turretRotationPoint;
@@ -16,21 +15,22 @@ public class Tower : MonoBehaviour
     [SerializeField] private GameObject upgradeUI;
     [SerializeField] private Button upgradeButton;
 
-    private float bpsBase;
-    private int targetingRangeBase;
-
+    public TileScript tile;
 
     private Transform target;
     private float timeUntilFire;
-    private int level = 1;
+    private int level = 0;
+
+    public float currentRange;
+    private float currentFireRate;
     
     private void Start()
     {
-        bpsBase = currentTower.baseBulletSpeed;
-        targetingRangeBase = currentTower.baseRange;
-        
+        UpgradeTower();
+
         upgradeButton.onClick.AddListener(UpgradeTower);
     }
+
     private void Update()
     {
         if (target == null)
@@ -49,7 +49,7 @@ public class Tower : MonoBehaviour
         {
             timeUntilFire += Time.deltaTime;
 
-            if (timeUntilFire >= 1f / currentTower.baseBulletSpeed)
+            if (timeUntilFire >= 1f / currentFireRate)
             {
                 Shoot();
                 timeUntilFire = 0f;
@@ -68,7 +68,7 @@ public class Tower : MonoBehaviour
 
     private void FindTarget()
     {
-        RaycastHit2D[] hits = Physics2D.CircleCastAll(transform.position, currentTower.baseRange, (Vector2)
+        RaycastHit2D[] hits = Physics2D.CircleCastAll(transform.position, currentRange, (Vector2)
             transform.position, 0f, enemyMask);
         if (hits.Length > 0)
         {
@@ -85,7 +85,7 @@ public class Tower : MonoBehaviour
 
     private bool CheckTargetIsInRange()
     {
-        return Vector2.Distance(target.position, transform.position) <= currentTower.baseRange;
+        return Vector2.Distance(target.position, transform.position) <= currentRange;
     }
     
     public void OpenUpgradeUI()
@@ -107,20 +107,22 @@ public class Tower : MonoBehaviour
             level = 10;
         }
 
-        currentTower.baseBulletSpeed = CalcBPS();
-        currentTower.baseRange = Mathf.RoundToInt(CalcRange());
-        
+        currentFireRate = CalcBPS();
+        currentRange = Mathf.RoundToInt(CalcRange());
+
+        tile.UpdateRange();
+
         CloseUpgradeUI();
     }
 
     private float CalcBPS()
     {
-        return bpsBase * Mathf.Pow(level, 0.7f);
+        return currentTower.baseFireRate * Mathf.Pow(level, 0.7f);
     }
 
     private float CalcRange()
     {
-        return  Mathf.RoundToInt(targetingRangeBase * Mathf.Pow(level, 0.4f));
+        return  Mathf.RoundToInt(currentTower.baseRange * Mathf.Pow(level, 0.4f));
     }
 
     private void OnDrawGizmosSelected()

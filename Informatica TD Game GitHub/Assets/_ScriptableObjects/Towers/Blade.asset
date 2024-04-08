@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Blade
   m_EditorClassIdentifier: 
   baseDamage: 5
-  baseRange: 5
+  baseRange: 4
   baseFireRate: 10
-  baseBulletSpeed: 3
+  baseBulletSpeed: 10

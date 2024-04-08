@@ -11,6 +11,8 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private List<GameObject> drawCardSlots;
     [SerializeField] private List<CardSO> starterCards;
 
+    [SerializeField] private List<CardSO> cardsInDeck = new List<CardSO>();
+
     [Header("All Cards")]
     [SerializeField] private List<CardSO> cards;
 
@@ -41,34 +43,67 @@ public class InventoryManager : MonoBehaviour
         SpawnDeck();
     }
 
-    public void AddNewCardToInventory(CardSO card, int amount)
+    private void Update()
+    {
+        foreach (CardSO card in cardsInInventory.Keys) 
+        { 
+            Debug.Log("Card: " + card + ", amount" + cardsInInventory[card]);
+        }
+    }
+
+    public void AddCardToInventory(CardSO card, int amount)
     {
         if (cardsInInventory.ContainsKey(card))
         {
-            int totalAmount = cardsInInventory[card] + amount;
-            cardsInInventory[card] = totalAmount;
+            cardsInInventory[card] += amount;
         }
         else
         {
             cardsInInventory[card] = amount;
         }
+
     }
 
     public void RemoveCardFromInventory(CardSO card)
     {
         cardsInInventory[card] -= 1;
+        if (cardsInInventory[card] <= 0)
+        {
+            cardsInInventory.Remove(card);
+        }
     }
 
     public void SpawnDeck()
     {
+        UIManager.Instance.HideDeckCards();
+
+        if (cardsInDeck.Count > 0)
+        {
+            foreach (CardSO card in cardsInDeck)
+            {
+                AddCardToInventory(card, 1);
+            }
+            cardsInDeck.Clear();
+        }
+
         int totalCardAmount = 0;
         foreach (int amount in cardsInInventory.Values)
         {
             totalCardAmount += amount;
         }
 
-        for (int i = 0; i < deckCardSlots.Count; i++)
+        int cardsToSpawn = deckCardSlots.Count;
+        if (totalCardAmount < cardsToSpawn)
         {
+            cardsToSpawn = totalCardAmount;
+        }
+
+        List<int> indexesWithCards = new List<int>();
+
+        for (int i = 0; i < cardsToSpawn; i++)
+        {
+            indexesWithCards.Add(i);
+
             int cardIndex = 0;
             int prossedAmount = 0;
             int randomAmount = Random.Range(0, totalCardAmount);
@@ -78,6 +113,7 @@ public class InventoryManager : MonoBehaviour
                 if (prossedAmount >= randomAmount)
                 {
                     CardSO card = cardsInInventory.Keys.ToList()[cardIndex];
+                    cardsInDeck.Add(card);
 
                     RemoveCardFromInventory(card);
                     totalCardAmount -= 1;
@@ -89,11 +125,21 @@ public class InventoryManager : MonoBehaviour
                 cardIndex++;
             }
         }
+
+        UIManager.Instance.ShowDeckCards(indexesWithCards);
     }
 
     public void SetSelectedCard(DeckCard card)
     {
         currentSelectedCard = card;
+    }
+
+    public void OnTowerPlaced()
+    {
+        cardsInDeck.Remove(currentSelectedCard.currentCard);
+
+        currentSelectedCard.transform.parent.parent.gameObject.SetActive(false);
+        currentSelectedCard = null;
     }
 
     public void SpawnDrawCards()

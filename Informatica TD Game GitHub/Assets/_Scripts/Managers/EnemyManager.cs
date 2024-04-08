@@ -8,8 +8,6 @@ public class EnemyManager : MonoBehaviour
 
     [SerializeField] private GameObject enemyPrefab;
 
-    public int currentWave = 1;
-
     public int currentNumberOfEnemies;
     
     private void Awake()

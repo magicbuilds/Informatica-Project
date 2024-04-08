@@ -55,7 +55,8 @@ public class DrawCard : MonoBehaviour
 
     public void OnCardSelected()
     {
-        InventoryManager.Instance.AddNewCardToInventory(currentCard, amount);
+        InventoryManager.Instance.AddCardToInventory(currentCard, amount);
+        InventoryManager.Instance.SpawnDeck();
         
         UIManager.Instance.DeactivateCardDrawUI();
         GameManager.Instance.SwitchGameState(GameManager.GameState.ChoseNextChunk);

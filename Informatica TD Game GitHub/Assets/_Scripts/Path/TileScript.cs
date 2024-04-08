@@ -13,7 +13,6 @@ public class TileScript : MonoBehaviour
     
     private Tower tower;
     private Color startColor;
-    private GameObject towerObj;
 
     private void Start()
     {
@@ -44,33 +43,28 @@ public class TileScript : MonoBehaviour
     private void OnMouseDown()
     {
         if (UIManager.Instance.IsHoveringUI()) return;
-            
-        if (towerObj != null)
-        {
-            tower.OpenUpgradeUI();
-            return;
-        }
 
-        GameObject towerToBuild = BuildManager.Instance.GetSelectedTower();
-        towerObj = Instantiate(towerToBuild, transform.position, Quaternion.identity);
-        tower = towerObj.GetComponent<Tower>();
-        
         if (tower != null)
         {
-            float diameter = tower.currentTower.baseRange * 2;
-            rangeObject.transform.localScale = new Vector3(diameter, diameter, 1);
-            rangeObject.SetActive(true);
+            tower.OpenUpgradeUI();
+
+            UpdateRange();
         }
         else
         {
             if (InventoryManager.Instance.currentSelectedCard != null)
             {
                 SpawnTower();
-                InventoryManager.Instance.RemoveCardFromInventory(InventoryManager.Instance.currentSelectedCard.currentCard);
-                InventoryManager.Instance.currentSelectedCard.transform.parent.gameObject.SetActive(false);
-                InventoryManager.Instance.currentSelectedCard = null;
+                InventoryManager.Instance.OnTowerPlaced();
             }
         }
+    }
+
+    public void UpdateRange()
+    {
+        float diameter = tower.currentRange * 2;
+        rangeObject.transform.localScale = new Vector3(diameter, diameter, 1);
+        rangeObject.SetActive(true);
     }
 
     private void SpawnTower()
@@ -79,5 +73,6 @@ public class TileScript : MonoBehaviour
         GameObject spawnedTower = Instantiate(towerToSpawn, transform.position, Quaternion.identity);
         tower = spawnedTower.GetComponent<Tower>();
         tower.currentTower = InventoryManager.Instance.currentSelectedCard.currentCard.tower;
+        tower.tile = this;
     }
 }

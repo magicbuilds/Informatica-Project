@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -7,21 +8,20 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager Instance;
 
-    //EnemiesLeft
+    [Header("EnemiesLeftUI")]
     [SerializeField] private TextMeshProUGUI enemiesLeftText;
+    [SerializeField] private Slider enemiesLeftBar ;
 
-    //CardDraw
+    [Header("CardDrawUI")]
     [SerializeField] private GameObject cardDrawUI;
 
-    //ExtraCardInformation
+    [Header("ExtraCardInformationUI")]
     [SerializeField] private GameObject extraCardInformationUI;
-
     [SerializeField] private TextMeshProUGUI cardNameText;
     [SerializeField] private TextMeshProUGUI cardStatsText;
     [SerializeField] private TextMeshProUGUI cardDiscription;
     [SerializeField] private Image cardIcon;
 
-    //Upgrade
     private bool isHoveringUI;
 
     private void Awake()
@@ -39,9 +39,11 @@ public class UIManager : MonoBehaviour
         return isHoveringUI;
     }
 
-    public void UpdateEnemysLeftUI(int enemysLeft)
+    public void UpdateEnemysLeftUI(int enemiesLeft)
     {
-        enemiesLeftText.text = enemysLeft.ToString();
+        enemiesLeftText.text = enemiesLeft + "/" + WaveManager.Instance.enemiesInThisWave;
+        enemiesLeftBar.maxValue = WaveManager.Instance.enemiesInThisWave;
+        enemiesLeftBar.value= enemiesLeft;
     }
 
     public void ActivateCardDrawUI()
@@ -90,6 +92,31 @@ public class UIManager : MonoBehaviour
                 DeckCard deckCard = slot.GetComponentInChildren<DeckCard>();
                 deckCard.transform.position = deckCard.otherCardSelectedPosition.position;
             }
+        }
+    }
+
+    public void ShowDeckCards(List<int> indexes)
+    {
+        int index = 0;
+        foreach (GameObject slot in InventoryManager.Instance.deckCardSlots)
+        {
+            if (indexes.Contains(index))
+            {
+                slot.SetActive(true);
+            }
+            
+            DeckCard deckCard = slot.GetComponentInChildren<DeckCard>();
+            deckCard.transform.position = deckCard.downPosition.position;
+
+            index++;
+        }
+    }
+
+    public void HideDeckCards()
+    {
+        foreach (GameObject slot in InventoryManager.Instance.deckCardSlots)
+        {
+            slot.SetActive(false);
         }
     }
 }

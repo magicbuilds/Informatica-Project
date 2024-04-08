@@ -9,6 +9,7 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private WavesSO wavesToSpawn;
 
     public int waveIndex = 0;
+    public int enemiesInThisWave = 0;
 
     private List<Vector2> spawnPositions = new List<Vector2>();
     private List<int> usedWaypointIndexes = new List<int>();
@@ -23,6 +24,7 @@ public class WaveManager : MonoBehaviour
     {
         WaveSO waveToSpawn = wavesToSpawn.waves[waveIndex];
 
+        enemiesInThisWave = 0;
         int index = 0;
         foreach (int amount in waveToSpawn.correspondingEnemiesAmount)
         {
@@ -30,6 +32,8 @@ public class WaveManager : MonoBehaviour
 
             for (int i = 0; i < amount; i++)
             {
+                enemiesInThisWave++;
+
                 int randomPathIndex = Random.Range(0, spawnPositions.Count);
 
                 Vector2 randomPosition = spawnPositions[randomPathIndex];

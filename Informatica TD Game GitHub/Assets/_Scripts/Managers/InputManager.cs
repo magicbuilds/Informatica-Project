@@ -36,18 +36,6 @@ public class InputManager : MonoBehaviour
         input.Player.Zoom.performed -= cam.OnMovementPerformed;
     }
 
-    public void EnableUIInput()
-    {
-        input.UI.Enable();
-
-        //input.UI.Escape.performed += 
-    }
-
-    public void DisableUIInput()
-    {
-        input.UI.Disable();
-    }
-
     private void OnEnable()
     {
         input.Enable();

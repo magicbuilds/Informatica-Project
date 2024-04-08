@@ -41,7 +41,6 @@ public class GameManager : MonoBehaviour
                 break;
             case GameState.ChoseNextChunk:
                 InputManager.Instance.EnablePlayerInput();
-                InputManager.Instance.DisableUIInput();
                 break;
             case GameState.StartNewWave:
                 WaveManager.Instance.SpawnNewWave();
@@ -49,7 +48,6 @@ public class GameManager : MonoBehaviour
             case GameState.EndOfWave:
                 InventoryManager.Instance.SpawnDrawCards();
                 
-                InputManager.Instance.EnableUIInput();
                 InputManager.Instance.DisablePlayerInput();
 
                 
