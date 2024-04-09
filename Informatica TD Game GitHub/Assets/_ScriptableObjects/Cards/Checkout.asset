@@ -10,12 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7b95c1925b878bc45ba52cd24fc062c6, type: 3}
-  m_Name: Bread
+  m_Name: Checkout
   m_EditorClassIdentifier: 
-  cardName: Bread
-  rarity: 4
-  tower: {fileID: 0}
-  baseCost: 0
-  discription: BREADDD
-  icon: {fileID: -542264958, guid: 01d99cf87cd31d44cbdcb241727b4862, type: 3}
+  cardName: Checkout
+  rarity: 3
+  tower: {fileID: 11400000, guid: fe7944d59dbacb940a5fb3c4087a1178, type: 2}
+  baseCost: 10
+  discription: This tower spawns a customer that will go after a random product to
+    buy it for himself. You won't have to pay for this product
+  icon: {fileID: -66898039, guid: f8297e3cba8d3f34aa0e798b969288d2, type: 3}
   weight: 10

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6665932856092883622}
   - component: {fileID: 8639563438501611714}
   - component: {fileID: 841109195249394626}
-  - component: {fileID: 627091544580466915}
+  - component: {fileID: 742280788384648630}
   m_Layer: 7
   m_Name: Knife
   m_TagString: Untagged
@@ -159,7 +159,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
---- !u!114 &627091544580466915
+--- !u!114 &742280788384648630
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -171,6 +171,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c994f7a565db07b44b940a2591faee51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attribute: {fileID: 0}
   rb: {fileID: 841109195249394626}
   tower: {fileID: 0}

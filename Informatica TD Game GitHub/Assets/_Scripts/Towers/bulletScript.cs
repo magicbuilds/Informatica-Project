@@ -2,11 +2,7 @@ using UnityEngine;
 
 
 public class BulletScript : MonoBehaviour
-{
-
-    [Header("Attributes")] public Tower attribute;
-    
-    
+{ 
     [Header("References")] [SerializeField]
     private Rigidbody2D rb;
     

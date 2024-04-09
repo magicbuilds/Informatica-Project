@@ -11,4 +11,21 @@ public class TowerSO : ScriptableObject
     public float baseFireRate;
 
     public float baseBulletSpeed;
+
+    public towers towerType;
+
+    public GameObject towerPrefab;
+
+    public enum towers
+    {
+        KnifeThrower,
+        DiscountGun,
+        Blade,
+        DustShooter,
+        Railgun,
+        Speaker,
+        Shelf,
+        AirConditioner,
+        Checkout
+    }
 }

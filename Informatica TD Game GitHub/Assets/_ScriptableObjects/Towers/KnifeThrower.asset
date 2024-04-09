@@ -9,13 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b95c1925b878bc45ba52cd24fc062c6, type: 3}
-  m_Name: Banana
+  m_Script: {fileID: 11500000, guid: d968e75eda3bcde43b83bbb4d5adf8ff, type: 3}
+  m_Name: KnifeThrower
   m_EditorClassIdentifier: 
-  cardName: Banana
-  rarity: 1
-  tower: {fileID: 0}
-  baseCost: 100
-  discription: Monkey
-  icon: {fileID: 733408389, guid: 01d99cf87cd31d44cbdcb241727b4862, type: 3}
-  weight: 10
+  baseDamage: 5
+  baseRange: 4
+  baseFireRate: 10
+  baseBulletSpeed: 10
+  towerType: 0
+  towerPrefab: {fileID: 7217467001008108073, guid: bde14f702250d3243b16df15f935056c, type: 3}

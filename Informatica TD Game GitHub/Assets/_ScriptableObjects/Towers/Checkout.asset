@@ -9,13 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b95c1925b878bc45ba52cd24fc062c6, type: 3}
-  m_Name: Milk
+  m_Script: {fileID: 11500000, guid: d968e75eda3bcde43b83bbb4d5adf8ff, type: 3}
+  m_Name: Checkout
   m_EditorClassIdentifier: 
-  cardName: Milk
-  rarity: 2
-  stats: Your dad
-  baseCost: 200
-  discription: Milky
-  icon: {fileID: 712769222, guid: 01d99cf87cd31d44cbdcb241727b4862, type: 3}
-  weight: 10
+  baseDamage: 0
+  baseRange: 30
+  baseFireRate: 0
+  baseBulletSpeed: 30
+  towerType: 8
+  towerPrefab: {fileID: 7217467001008108073, guid: 16315272238e1084599f8d47e4823277, type: 3}
