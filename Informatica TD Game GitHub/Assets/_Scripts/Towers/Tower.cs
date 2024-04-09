@@ -19,7 +19,7 @@ public class Tower : MonoBehaviour
     [SerializeField] private bool hasRandomEnemy;
     [SerializeField] private GameObject knifeBulletPrefab;
     [SerializeField] private GameObject customerPrefab;
-    [SerializeField] private GameObject discountBulletPrefab;
+    [SerializeField] private GameObject discountTicketPrefab;
 
     [Header("Other")]
     private Transform target;
@@ -158,6 +158,7 @@ public class Tower : MonoBehaviour
     private void KnifeThrower()
     {
         RotateTowardsTarget();
+        currentDamage = currentTower.baseDamage;
 
         if (timeUntilFire >= 1f / currentFireRate)
         {
@@ -175,11 +176,12 @@ public class Tower : MonoBehaviour
     private void DiscountGun()
     {
         RotateTowardsTarget();
+        currentDamage = currentTower.baseDamage * currentEnemy.baseHealth;
 
         if (timeUntilFire >= 1f / currentFireRate)
         {
             
-            GameObject bullet = Instantiate(discountBulletPrefab, firingPoint.position, Quaternion.identity);
+            GameObject bullet = Instantiate(discountTicketPrefab, firingPoint.position, Quaternion.identity);
             BulletScript bulletScript = bullet.GetComponent<BulletScript>();
             bulletScript.SetTarget(target);
 

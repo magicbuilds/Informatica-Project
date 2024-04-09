@@ -876,14 +876,14 @@ MonoBehaviour:
   upgradeButton: {fileID: 1079192073333339365}
   tile: {fileID: 0}
   hasRandomEnemy: 0
-  knifeBulletPrefab: {fileID: 3092356959983715415, guid: 41d4629e003665f478dffef20f97514b, type: 3}
+  knifeBulletPrefab: {fileID: 0}
   customerPrefab: {fileID: 0}
-  discountBulletPrefab: {fileID: 0}
+  discountTicketPrefab: {fileID: 3092356959983715415, guid: 41d4629e003665f478dffef20f97514b, type: 3}
   currentEnemy: {fileID: 0}
   currentRange: 0
   currentFireRate: 0
   currentBulletSpeed: 0
-  currentDamage: 0.25
+  currentDamage: 0
 --- !u!212 &-3005790379872064936
 SpriteRenderer:
   m_ObjectHideFlags: 0
