@@ -23,6 +23,8 @@ public class BulletScript : MonoBehaviour
         Vector2 direction = (target.position - transform.position).normalized;
 
         rb.velocity = direction * tower.currentFireRate;
+        
+        
     }
     public void SetTarget(Transform _target)
     {

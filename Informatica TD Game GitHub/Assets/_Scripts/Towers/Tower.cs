@@ -19,15 +19,19 @@ public class Tower : MonoBehaviour
     [SerializeField] private bool hasRandomEnemy;
     [SerializeField] private GameObject knifeBulletPrefab;
     [SerializeField] private GameObject customerPrefab;
+    [SerializeField] private GameObject discountBulletPrefab;
 
     [Header("Other")]
     private Transform target;
     private float timeUntilFire;
     private int level = 0;
 
+    public EnemySO currentEnemy;
+    
     public float currentRange;
     public float currentFireRate;
     public float currentBulletSpeed;
+    public float currentDamage;
 
     private bool hasSpawnedCustomer = false;
     private CustomerAI spawnedCustomerAI;
@@ -42,6 +46,8 @@ public class Tower : MonoBehaviour
     private void Update()
     {
         timeUntilFire += Time.deltaTime;
+
+        currentDamage = currentTower.baseDamage;
 
         if (target == null)
         {
@@ -61,6 +67,7 @@ public class Tower : MonoBehaviour
                 KnifeThrower();
                 break;
             case TowerSO.towers.DiscountGun:
+                DiscountGun();
                 break;
             case TowerSO.towers.Blade:
                 break;
@@ -159,6 +166,25 @@ public class Tower : MonoBehaviour
             bulletScript.SetTarget(target);
 
             bulletScript.tower = this;
+            
+
+            timeUntilFire = 0f;
+        }
+    }
+
+    private void DiscountGun()
+    {
+        RotateTowardsTarget();
+
+        if (timeUntilFire >= 1f / currentFireRate)
+        {
+            
+            GameObject bullet = Instantiate(discountBulletPrefab, firingPoint.position, Quaternion.identity);
+            BulletScript bulletScript = bullet.GetComponent<BulletScript>();
+            bulletScript.SetTarget(target);
+
+            bulletScript.tower = this;
+            
 
             timeUntilFire = 0f;
         }

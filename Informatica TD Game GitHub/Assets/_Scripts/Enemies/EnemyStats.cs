@@ -36,6 +36,7 @@ public class EnemyStats : MonoBehaviour
     public void DealDamange(float damage)
     {
         health -= damage;
+        
 
         if (health <= 0 && !isDead)
         {

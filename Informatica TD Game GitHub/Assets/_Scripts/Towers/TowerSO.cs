@@ -6,7 +6,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Tower", menuName = "ScriptableObjects/TowerSO")]
 public class TowerSO : ScriptableObject
 {
-    public int baseDamage;
+    public float baseDamage;
     public int baseRange;
     public float baseFireRate;
 

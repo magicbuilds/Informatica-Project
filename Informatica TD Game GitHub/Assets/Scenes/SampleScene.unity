@@ -673,11 +673,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 79623443753093f42970b6985d54f39e, type: 2}
   - {fileID: 11400000, guid: 79623443753093f42970b6985d54f39e, type: 2}
   - {fileID: 11400000, guid: 77401c5c725eb4d439855081aac5fbe7, type: 2}
-  - {fileID: 11400000, guid: 77401c5c725eb4d439855081aac5fbe7, type: 2}
+  - {fileID: 11400000, guid: f2fd67957c2e31b459a766c6379d3f0b, type: 2}
   cardsInDeck: []
   cards:
   - {fileID: 11400000, guid: 79623443753093f42970b6985d54f39e, type: 2}
   - {fileID: 11400000, guid: 77401c5c725eb4d439855081aac5fbe7, type: 2}
+  - {fileID: 11400000, guid: f2fd67957c2e31b459a766c6379d3f0b, type: 2}
   currentSelectedCard: {fileID: 0}
 --- !u!1 &190312814
 GameObject:
