@@ -3,6 +3,10 @@ using UnityEngine;
 
 public class BulletScript : MonoBehaviour
 {
+
+    [Header("Attributes")] public Tower attribute;
+    
+    
     [Header("References")] [SerializeField]
     private Rigidbody2D rb;
     
@@ -22,7 +26,7 @@ public class BulletScript : MonoBehaviour
         if (!target) return;
         Vector2 direction = (target.position - transform.position).normalized;
 
-        rb.velocity = direction * tower.currentTower.baseBulletSpeed;
+        rb.velocity = direction * tower.currentFireRate;
     }
     public void SetTarget(Transform _target)
     {
@@ -34,12 +38,12 @@ public class BulletScript : MonoBehaviour
         if (hasHitEnemy) return;
         else hasHitEnemy = true;
 
-        enemy.gameObject.GetComponent<EnemyStats>().DealDamange(tower.currentTower.baseRange);
+        enemy.gameObject.GetComponent<EnemyStats>().DealDamange(tower.currentRange);
         Destroy(gameObject);
     }
 
     private bool IsInRange()
     {
-        return Vector2.Distance(transform.position, tower.transform.position) < tower.currentTower.baseRange;
+        return Vector2.Distance(transform.position, tower.transform.position) < tower.currentRange;
     }
 }

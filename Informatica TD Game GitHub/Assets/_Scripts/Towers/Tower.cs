@@ -22,7 +22,7 @@ public class Tower : MonoBehaviour
     private int level = 0;
 
     public float currentRange;
-    private float currentFireRate;
+    public float currentFireRate;
     
     private void Start()
     {
