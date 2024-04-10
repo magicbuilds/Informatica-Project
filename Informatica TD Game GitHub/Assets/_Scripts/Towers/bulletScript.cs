@@ -22,7 +22,7 @@ public class BulletScript : MonoBehaviour
         if (!target) return;
         Vector2 direction = (target.position - transform.position).normalized;
 
-        rb.velocity = direction * tower.currentFireRate;
+        rb.velocity = direction * tower.currentBulletSpeed;
         
         
     }

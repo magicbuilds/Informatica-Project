@@ -1,3 +1,4 @@
+using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -25,8 +26,6 @@ public class Tower : MonoBehaviour
     private Transform target;
     private float timeUntilFire;
     private int level = 0;
-
-    public EnemySO currentEnemy;
     
     public float currentRange;
     public float currentFireRate;
@@ -176,11 +175,11 @@ public class Tower : MonoBehaviour
     private void DiscountGun()
     {
         RotateTowardsTarget();
-        currentDamage = currentTower.baseDamage * currentEnemy.baseHealth;
+        currentDamage = currentTower.baseDamage * target.GetComponent<EnemyStats>().health;
 
+        Debug.Log(currentDamage);
         if (timeUntilFire >= 1f / currentFireRate)
         {
-            
             GameObject bullet = Instantiate(discountTicketPrefab, firingPoint.position, Quaternion.identity);
             BulletScript bulletScript = bullet.GetComponent<BulletScript>();
             bulletScript.SetTarget(target);

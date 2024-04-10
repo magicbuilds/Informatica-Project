@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseDamage: 0.25
   baseRange: 5
-  baseFireRate: 10
+  baseFireRate: 0.5
   baseBulletSpeed: 10
   towerType: 1
   towerPrefab: {fileID: 7217467001008108073, guid: 28d8734a5a7deb34f8aec3776c2503e9, type: 3}
