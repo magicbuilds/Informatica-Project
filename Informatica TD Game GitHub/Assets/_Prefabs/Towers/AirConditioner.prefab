@@ -1,36 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &834518073164291671
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 661861423334051641}
-  m_Layer: 0
-  m_Name: PositionToSpawnCustomers
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &661861423334051641
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 834518073164291671}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: -0.2, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 3090035578576694048}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1962839557233619148
 GameObject:
   m_ObjectHideFlags: 0
@@ -519,7 +488,7 @@ SpriteRenderer:
   m_SortingLayerID: 1874942891
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: -1522259667, guid: efc2512b9d4d0b04e83e4d3384056416, type: 3}
+  m_Sprite: {fileID: -506632618, guid: efc2512b9d4d0b04e83e4d3384056416, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -658,7 +627,7 @@ GameObject:
   - component: {fileID: 351007251992137204}
   - component: {fileID: -3005790379872064936}
   m_Layer: 0
-  m_Name: Checkout
+  m_Name: AirConditioner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -678,7 +647,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 962945254814093737}
-  - {fileID: 661861423334051641}
   - {fileID: 9175950651064587033}
   - {fileID: 5539681515876059739}
   m_Father: {fileID: 0}
@@ -697,7 +665,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentTower: {fileID: 0}
   rotateSpeed: 200
-  firingPoint: {fileID: 661861423334051641}
+  firingPoint: {fileID: 0}
   turretRotationPoint: {fileID: 0}
   enemyMask:
     serializedVersion: 2
@@ -705,10 +673,10 @@ MonoBehaviour:
   upgradeUI: {fileID: 7152101952404168831}
   upgradeButton: {fileID: 1079192073333339365}
   tile: {fileID: 0}
-  hasRandomEnemy: 1
-  hitsAllEnemiesInRange: 0
+  hasRandomEnemy: 0
+  hitsAllEnemiesInRange: 1
   knifeBulletPrefab: {fileID: 0}
-  customerPrefab: {fileID: 4433180150287172331, guid: 7ba8476b5ed0dcd468d2fc20b7050331, type: 3}
+  customerPrefab: {fileID: 0}
   target: {fileID: 0}
   currentRange: 0
   currentFireRate: 0

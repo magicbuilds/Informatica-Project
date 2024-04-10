@@ -33,7 +33,7 @@ public class EnemyAI : MonoBehaviour
             Destroy(gameObject);
 
             PlayerStatsManager.Instance.AddRemoveHealth(currentEnemy.damage);
-            EnemyManager.Instance.ReduceEnemyCount();
+            EnemyManager.Instance.ReduceEnemyCount(gameObject.GetComponent<EnemyStats>());
 
             return;
         }

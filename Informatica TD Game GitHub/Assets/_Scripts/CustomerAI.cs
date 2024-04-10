@@ -11,48 +11,73 @@ public class CustomerAI : MonoBehaviour
 
     public float customerPickUpRange = 0.5f;
 
-    private EnemyStats holdingEnemy = null;
+    public EnemyStats holdingEnemy = null;
 
-    public bool hasSoldCurrentTarget = false;
+    public float timeWaiting = 0;
+    private float totalWaitTime = 5f;
 
-    public void SetNewTarget(Transform newTarget)
+    private void Start()
     {
-        target = newTarget;
-
-        holdingEnemy = newTarget.GetComponent<EnemyStats>();
-        holdingEnemy.isTarget = true;
-
-        hasSoldCurrentTarget = false;
+        SetNewTarget();
     }
 
     private void Update()
     {
-        if (target == null)
+        if (target == null || target == tower.firingPoint.transform)
         {
-            target = tower.firingPoint;
+            if (target != tower.firingPoint.transform) target = tower.firingPoint.transform;
+            if (timeWaiting >= totalWaitTime)
+            {
+                SetNewTarget();
+                timeWaiting = 0;
+            }
         }
 
         if (Vector2.Distance(transform.position, target.position) < customerPickUpRange)
         {
             if (tower.firingPoint.transform != target)
             {
-                Destroy(holdingEnemy.enemyAI);
-                holdingEnemy.transform.position = holdingEnemyTransform.position;
-                holdingEnemy.transform.parent = transform;
+                TakeCurrentTarget();
                 target = tower.firingPoint.transform;
             }
             else
             {
-                if (!hasSoldCurrentTarget)
-                {
-                    holdingEnemy.DealDamange(holdingEnemy.health + 1);
+                timeWaiting += Time.deltaTime;
 
-                    holdingEnemy = null;
+                if (holdingEnemy != null)
+                {
+                    KillEnemy();
                 }
-                hasSoldCurrentTarget = true;
+
             }
         }
 
         transform.position = Vector2.MoveTowards(transform.position, target.position, tower.currentBulletSpeed * Time.deltaTime);
+    }
+    public void SetNewTarget()
+    {
+        if (tower.hasTarget)
+        {
+            target = tower.target.transform;
+
+            holdingEnemy = target.GetComponent<EnemyStats>();
+            holdingEnemy.isTarget = true;
+
+            timeWaiting = 0;
+        }
+    }
+
+    private void TakeCurrentTarget()
+    {
+        Destroy(holdingEnemy.enemyAI);
+        holdingEnemy.transform.position = holdingEnemyTransform.position;
+        holdingEnemy.transform.parent = transform;
+    }
+
+    private void KillEnemy()
+    {
+        holdingEnemy.DealDamange(holdingEnemy.health + 1);
+
+        holdingEnemy = null;
     }
 }

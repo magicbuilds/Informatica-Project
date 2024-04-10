@@ -17,11 +17,6 @@ public class EnemyStats : MonoBehaviour
     public bool isDead = false;
     public bool isTarget = false;
 
-
-    private void Update()
-    {
-        Debug.Log("IsDead: " + isDead + ", Health: " + health);
-    }
     private void Start()
     {
         health = currentEnemy.baseHealth;
@@ -40,12 +35,11 @@ public class EnemyStats : MonoBehaviour
 
         if (health <= 0 && !isDead)
         {
-            Debug.Log("Dead");
             isDead = true;
 
             if (currentEnemy.holdingEnemies.Count != 0) SummonHoldingEnemies();   
             
-            EnemyManager.Instance.ReduceEnemyCount();
+            EnemyManager.Instance.ReduceEnemyCount(this);
             PlayerStatsManager.Instance.AddRemoveCoins(currentEnemy.baseCoins);
 
             AudioManager.Instance.PlaySFX(AudioManager.Instance.death);

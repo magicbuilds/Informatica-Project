@@ -1,4 +1,5 @@
-using UnityEditor.Rendering;
+
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,12 +19,13 @@ public class Tower : MonoBehaviour
 
     [Header("DifferentTowers")]
     [SerializeField] private bool hasRandomEnemy;
+    [SerializeField] private bool hitsAllEnemiesInRange;
     [SerializeField] private GameObject knifeBulletPrefab;
     [SerializeField] private GameObject customerPrefab;
     [SerializeField] private GameObject discountTicketPrefab;
 
     [Header("Other")]
-    private Transform target;
+    public EnemyStats target;
     private float timeUntilFire;
     private int level = 0;
     
@@ -34,6 +36,9 @@ public class Tower : MonoBehaviour
 
     private bool hasSpawnedCustomer = false;
     private CustomerAI spawnedCustomerAI;
+
+    public bool hasTarget = false;
+
     
     private void Start()
     {
@@ -50,9 +55,12 @@ public class Tower : MonoBehaviour
 
         if (target == null)
         {
+            hasTarget = false;
+
             FindTarget();
             return;
         }
+        else hasTarget = true;
 
         if (!CheckTargetIsInRange())
         {
@@ -93,6 +101,25 @@ public class Tower : MonoBehaviour
     {
         if (hasRandomEnemy)
         {
+            if (EnemyManager.Instance.enemiesLeft.Count <= 0) return;
+
+            if (!hasTarget)
+            {
+                int randomIndex = Random.Range(0, EnemyManager.Instance.enemiesLeft.Count);
+                target = EnemyManager.Instance.enemiesLeft[randomIndex];
+                if (Vector2.Distance(target.transform.position, transform.position) <= currentRange)
+                {
+                    if (target.isTarget || target.isDead)
+                    {
+                        target = null;
+                    }
+                }
+            }
+            return;
+        }
+
+        if (hitsAllEnemiesInRange)
+        {
 
         }
 
@@ -100,20 +127,20 @@ public class Tower : MonoBehaviour
             transform.position, 0f, enemyMask);
         if (hits.Length > 0)
         {
-            target = hits[0].transform;
+            target = hits[0].transform.GetComponent<EnemyStats>();
         }
     }
 
     private void RotateTowardsTarget()
     {
-        float angle = Mathf.Atan2(target.position.y - transform.position.y, target.position.x - transform.position.x) * Mathf.Rad2Deg - 90f;
+        float angle = Mathf.Atan2(target.transform.position.y - transform.position.y, target.transform.position.x - transform.position.x) * Mathf.Rad2Deg - 90f;
         Quaternion targetRotation = Quaternion.Euler(new Vector3(0f, 0f, angle));
         turretRotationPoint.rotation = Quaternion.RotateTowards(turretRotationPoint.rotation, targetRotation, rotateSpeed * Time.deltaTime);
     }
 
     private bool CheckTargetIsInRange()
     {
-        return Vector2.Distance(target.position, transform.position) <= currentRange;
+        return Vector2.Distance(target.transform.position, transform.position) <= currentRange;
     }
     
     public void OpenUpgradeUI()
@@ -151,7 +178,7 @@ public class Tower : MonoBehaviour
 
     private float CalcRange()
     {
-        return  Mathf.RoundToInt(currentTower.baseRange * Mathf.Pow(level, 0.4f));
+        return Mathf.RoundToInt(currentTower.baseRange * Mathf.Pow(level, 0.4f));
     }
 
     private void KnifeThrower()
@@ -163,7 +190,7 @@ public class Tower : MonoBehaviour
         {
             GameObject bullet = Instantiate(knifeBulletPrefab, firingPoint.position, Quaternion.identity);
             BulletScript bulletScript = bullet.GetComponent<BulletScript>();
-            bulletScript.SetTarget(target);
+            bulletScript.SetTarget(target.transform);
 
             bulletScript.tower = this;
             
@@ -182,7 +209,7 @@ public class Tower : MonoBehaviour
         {
             GameObject bullet = Instantiate(discountTicketPrefab, firingPoint.position, Quaternion.identity);
             BulletScript bulletScript = bullet.GetComponent<BulletScript>();
-            bulletScript.SetTarget(target);
+            bulletScript.SetTarget(target.transform);
 
             bulletScript.tower = this;
             
@@ -193,31 +220,13 @@ public class Tower : MonoBehaviour
 
     private void Checkout()
     {
-        if (!hasSpawnedCustomer)
+        if (!hasSpawnedCustomer && target != null)
         {
             GameObject spawnedCustomer = Instantiate(customerPrefab, firingPoint.position, Quaternion.identity);
             spawnedCustomerAI = spawnedCustomer.GetComponent<CustomerAI>();
             spawnedCustomerAI.tower = this;
 
-            EnemyStats targetEnemyStats = target.GetComponent<EnemyStats>();
-            if (!targetEnemyStats.isTarget)
-            {
-                spawnedCustomerAI.SetNewTarget(target);
-            }
-
             hasSpawnedCustomer = true;
-        }
-
-        if (Vector2.Distance(firingPoint.position, spawnedCustomerAI.transform.position) < 0.25f)
-        {
-            if (spawnedCustomerAI.target != target)
-            {
-                EnemyStats targetEnemyStats = target.GetComponent<EnemyStats>();
-                if (!targetEnemyStats.isTarget)
-                {
-                    spawnedCustomerAI.SetNewTarget(target);
-                }
-            }
         }
     }
 }

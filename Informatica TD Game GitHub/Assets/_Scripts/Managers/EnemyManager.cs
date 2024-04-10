@@ -8,6 +8,8 @@ public class EnemyManager : MonoBehaviour
 
     [SerializeField] private GameObject enemyPrefab;
 
+    public List<EnemyStats> enemiesLeft = new List<EnemyStats>();
+
     public int currentNumberOfEnemies;
     
     private void Awake()
@@ -28,13 +30,17 @@ public class EnemyManager : MonoBehaviour
         spawnedEnemyStatsScript.enemyAI = spawnedEnemyAIScript;
         spawnedEnemyStatsScript.currentEnemy = enemy;
 
+        enemiesLeft.Add(spawnedEnemyStatsScript);
+
         currentNumberOfEnemies++;
         UIManager.Instance.UpdateEnemysLeftUI(currentNumberOfEnemies);
     }
 
-    public void ReduceEnemyCount()
+    public void ReduceEnemyCount(EnemyStats killedEnemy)
     {
         currentNumberOfEnemies--;
+
+        enemiesLeft.Remove(killedEnemy);
 
         if (currentNumberOfEnemies <= 0) 
         {
