@@ -23,6 +23,7 @@ public class Tower : MonoBehaviour
     [SerializeField] private GameObject knifeBulletPrefab;
     [SerializeField] private GameObject customerPrefab;
     [SerializeField] private GameObject discountTicketPrefab;
+    [SerializeField] private GameObject railgunAmmoPrefab;
 
     [Header("Other")]
     public EnemyStats target;
@@ -81,6 +82,7 @@ public class Tower : MonoBehaviour
             case TowerSO.towers.DustShooter:
                 break;
             case TowerSO.towers.Railgun:
+                Railgun();
                 break;
             case TowerSO.towers.Speaker:
                 break;
@@ -217,6 +219,25 @@ public class Tower : MonoBehaviour
             timeUntilFire = 0f;
         }
     }
+    
+    private void Railgun()
+    {
+        RotateTowardsTarget();
+        currentDamage = currentTower.baseDamage;
+
+        if (timeUntilFire >= 1f / currentFireRate)
+        {
+            GameObject bullet = Instantiate(railgunAmmoPrefab, firingPoint.position, Quaternion.identity);
+            BulletScript bulletScript = bullet.GetComponent<BulletScript>();
+            bulletScript.SetTarget(target.transform);
+
+            bulletScript.tower = this;
+            
+
+            timeUntilFire = 0f;
+        }
+    }
+
 
     private void Checkout()
     {

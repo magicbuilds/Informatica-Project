@@ -3,8 +3,10 @@ using UnityEngine;
 
 public class BulletScript : MonoBehaviour
 { 
-    [Header("References")] [SerializeField]
-    private Rigidbody2D rb;
+    [Header("References")] 
+    [SerializeField] private Rigidbody2D rb;
+    [SerializeField] private Transform bulletRotationPoint;
+    [SerializeField] private float rotateSpeed = 200f;
     
     private Transform target;
     private bool hasHitEnemy = false;
@@ -23,7 +25,12 @@ public class BulletScript : MonoBehaviour
         Vector2 direction = (target.position - transform.position).normalized;
 
         rb.velocity = direction * tower.currentBulletSpeed;
-        
+        if (Vector2.Distance(transform.position, tower.transform.position) < tower.currentRange &&
+            Vector2.Distance(transform.position, tower.transform.position) > 0.1f)
+        {
+            RotateTowardsTarget();
+        }
+       
         
     }
     public void SetTarget(Transform _target)
@@ -43,5 +50,13 @@ public class BulletScript : MonoBehaviour
     private bool IsInRange()
     {
         return Vector2.Distance(transform.position, tower.transform.position) < tower.currentRange;
+        
+    }
+    
+    private void RotateTowardsTarget()
+    {
+        float angle = Mathf.Atan2(target.transform.position.y - transform.position.y, target.transform.position.x - transform.position.x) * Mathf.Rad2Deg - 90f;
+        Quaternion targetRotation = Quaternion.Euler(new Vector3(0f, 0f, angle));
+        bulletRotationPoint.rotation = Quaternion.RotateTowards(bulletRotationPoint.rotation, targetRotation, rotateSpeed * Time.deltaTime);
     }
 }
