@@ -12,6 +12,10 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI enemiesLeftText;
     [SerializeField] private Slider enemiesLeftBar ;
 
+    [Header("Health")] 
+    [SerializeField] private TextMeshProUGUI healthText;
+    [SerializeField] private Slider healthBar;
+
     [Header("CardDrawUI")]
     [SerializeField] private GameObject cardDrawUI;
 
@@ -44,6 +48,15 @@ public class UIManager : MonoBehaviour
         enemiesLeftText.text = enemiesLeft + "/" + WaveManager.Instance.enemiesInThisWave;
         enemiesLeftBar.maxValue = WaveManager.Instance.enemiesInThisWave;
         enemiesLeftBar.value= enemiesLeft;
+    }
+
+    public void UpdateHealthUI()
+    {
+        
+        healthText.text = PlayerStatsManager.Instance.health.ToString() + "/" + PlayerStatsManager.Instance.maxHealth;
+        healthBar.maxValue = PlayerStatsManager.Instance.maxHealth;
+        healthBar.value = PlayerStatsManager.Instance.health;
+
     }
 
     public void ActivateCardDrawUI()
