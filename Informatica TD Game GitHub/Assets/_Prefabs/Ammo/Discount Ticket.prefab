@@ -237,5 +237,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 841109195249394626}
   bulletRotationPoint: {fileID: 5001794348489751251}
-  rotateSpeed: 200
+  rotateSpeed: 20000
   tower: {fileID: 0}

@@ -9,10 +9,15 @@ public class MainMenu : MonoBehaviour
     {
         SceneManager.LoadSceneAsync(1);
     }
-
-    public void Quitgame()
+    public void Update()
     {
-        Debug.Log("quit");
-        Application.Quit();
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Debug.Log("Quit");
+            Application.Quit();
+        }
     }
+
+
+    
 }
