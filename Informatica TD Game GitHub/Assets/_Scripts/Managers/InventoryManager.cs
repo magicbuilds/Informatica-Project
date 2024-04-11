@@ -134,7 +134,7 @@ public class InventoryManager : MonoBehaviour
         currentSelectedCard = card;
     }
 
-    public void OnTowerPlaced()
+    public void OnCardPlayed()
     {
         cardsInDeck.Remove(currentSelectedCard.currentCard);
 

@@ -23,11 +23,15 @@ public class TileScript : MonoBehaviour
     {
         if (InventoryManager.Instance.currentSelectedCard != null)
         {
-            TowerSO selectedTower = InventoryManager.Instance.currentSelectedCard.currentCard.tower;
+            if (InventoryManager.Instance.currentSelectedCard.currentCard.cardType == CardSO.CardType.Tower)
+            {
+                TowerSO selectedTower = InventoryManager.Instance.currentSelectedCard.currentCard.tower;
 
-            float diameter = selectedTower.baseRange * 2;
-            rangeObject.transform.localScale = new Vector3(diameter, diameter, 1);
-            rangeObject.SetActive(true);
+                float diameter = selectedTower.baseRange * 2;
+                rangeObject.transform.localScale = new Vector3(diameter, diameter, 1);
+                rangeObject.SetActive(true);
+            }
+
         }
 
         spriteRenderer.color = hoverColor;
@@ -54,8 +58,11 @@ public class TileScript : MonoBehaviour
         {
             if (InventoryManager.Instance.currentSelectedCard != null)
             {
-                SpawnTower();
-                InventoryManager.Instance.OnTowerPlaced();
+                if (InventoryManager.Instance.currentSelectedCard.currentCard.cardType == CardSO.CardType.Tower)
+                {
+                    SpawnTower();
+                    InventoryManager.Instance.OnCardPlayed();
+                }
             }
         }
     }
@@ -74,5 +81,7 @@ public class TileScript : MonoBehaviour
         tower = spawnedTower.GetComponent<Tower>();
         tower.currentTower = InventoryManager.Instance.currentSelectedCard.currentCard.tower;
         tower.tile = this;
+
+        UpgradeManager.Instance.placedTowers.Add(tower);
     }
 }

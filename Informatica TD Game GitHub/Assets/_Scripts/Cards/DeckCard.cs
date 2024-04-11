@@ -49,6 +49,17 @@ public class DeckCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        InventoryManager.Instance.SetSelectedCard(this);
+        if (currentCard.cardType == CardSO.CardType.Tower)
+        {
+            InventoryManager.Instance.SetSelectedCard(this);
+        }
+        if (currentCard.cardType == CardSO.CardType.Upgrade)
+        {
+            UpgradeManager.Instance.UpgradeMain(currentCard.upgrade);
+            InventoryManager.Instance.SetSelectedCard(this);
+            InventoryManager.Instance.OnCardPlayed();
+        }
+
+
     }
 }

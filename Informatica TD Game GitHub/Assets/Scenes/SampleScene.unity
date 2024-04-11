@@ -670,8 +670,8 @@ MonoBehaviour:
   - {fileID: 1599292998}
   - {fileID: 420988395}
   starterCards:
-  - {fileID: 11400000, guid: 79623443753093f42970b6985d54f39e, type: 2}
-  - {fileID: 11400000, guid: e859303462416514e9498373911e3127, type: 2}
+  - {fileID: 11400000, guid: 448e75b96a8707b44980fe2b7309b594, type: 2}
+  - {fileID: 11400000, guid: 448e75b96a8707b44980fe2b7309b594, type: 2}
   - {fileID: 11400000, guid: 77401c5c725eb4d439855081aac5fbe7, type: 2}
   - {fileID: 11400000, guid: 86f56c6053f7dcc4db05a246b887cd3e, type: 2}
   cardsInDeck: []
@@ -684,6 +684,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4cd2e723daef37c4b91369666447c7c6, type: 2}
   - {fileID: 11400000, guid: 86f56c6053f7dcc4db05a246b887cd3e, type: 2}
   - {fileID: 11400000, guid: e859303462416514e9498373911e3127, type: 2}
+  - {fileID: 11400000, guid: a3c334ed4054cd94eb6504df0e8fb779, type: 2}
+  - {fileID: 11400000, guid: 5a8e7977f41c71a42a8507f0ae644895, type: 2}
   currentSelectedCard: {fileID: 0}
 --- !u!1 &172472390
 GameObject:
@@ -3535,6 +3537,7 @@ Transform:
   m_Children:
   - {fileID: 1912800453}
   - {fileID: 2014320927}
+  - {fileID: 1954464929}
   - {fileID: 136846271}
   - {fileID: 1143991088}
   - {fileID: 1347649971}
@@ -8355,6 +8358,53 @@ MonoBehaviour:
   maxHealth: 50
   health: 50
   coins: 50
+--- !u!1 &1954464928
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1954464929}
+  - component: {fileID: 1954464930}
+  m_Layer: 0
+  m_Name: UpgradeManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1954464929
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1954464928}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 624674513}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1954464930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1954464928}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ec64269da2dc6e4996436461b8235e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  placedTowers: []
+  baseShelfBombTargetingRange: 1.5
+  maxPeopleAtCheckout: 0
 --- !u!1 &1972238316
 GameObject:
   m_ObjectHideFlags: 0

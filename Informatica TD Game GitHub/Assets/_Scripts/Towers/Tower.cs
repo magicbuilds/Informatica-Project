@@ -17,7 +17,7 @@ public class Tower : MonoBehaviour
 
     [Header("Checkout")]
     public float waitTimeAtCheckout;
-    private bool hasSpawnedCustomer = false;
+    public float peopleAtCheckout = 1;
 
     [Header("Shelf")]
     public float bombTargetingRange;
@@ -47,6 +47,13 @@ public class Tower : MonoBehaviour
         UpgradeTower();
 
         upgradeButton.onClick.AddListener(UpgradeTower);
+
+        switch (currentTower.towerType)
+        {
+            case TowerSO.towers.Shelf:
+                bombTargetingRange = UpgradeManager.Instance.baseShelfBombTargetingRange;
+                break;
+        }
     }
 
     private void Update()
@@ -267,13 +274,13 @@ public class Tower : MonoBehaviour
 
     private void Checkout()
     {
-        if (!hasSpawnedCustomer && target != null)
+        if (peopleAtCheckout <= UpgradeManager.Instance.maxPeopleAtCheckout && target != null)
         {
             GameObject spawnedCustomer = Instantiate(ammoPrefab, firingPoints[0].position, Quaternion.identity);
             CustomerAI spawnedCustomerAI = spawnedCustomer.GetComponent<CustomerAI>();
             spawnedCustomerAI.tower = this;
 
-            hasSpawnedCustomer = true;
+            peopleAtCheckout++;
         }
     }
 }
