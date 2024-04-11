@@ -14,19 +14,21 @@ public class CustomerAI : MonoBehaviour
     public EnemyStats holdingEnemy = null;
 
     public float timeWaiting = 0;
-    private float totalWaitTime = 5f;
+
+    private Transform stopPosition;
 
     private void Start()
     {
         SetNewTarget();
+        stopPosition = tower.firingPoints[0].transform;
     }
 
     private void Update()
     {
-        if (target == null || target == tower.firingPoint.transform)
+        if (target == null || target == stopPosition.transform)
         {
-            if (target != tower.firingPoint.transform) target = tower.firingPoint.transform;
-            if (timeWaiting >= totalWaitTime)
+            if (target != stopPosition.transform) target = stopPosition.transform;
+            if (timeWaiting >= tower.waitTimeAtCheckout)
             {
                 SetNewTarget();
                 timeWaiting = 0;
@@ -35,10 +37,10 @@ public class CustomerAI : MonoBehaviour
 
         if (Vector2.Distance(transform.position, target.position) < customerPickUpRange)
         {
-            if (tower.firingPoint.transform != target)
+            if (stopPosition.transform != target)
             {
                 TakeCurrentTarget();
-                target = tower.firingPoint.transform;
+                target = stopPosition.transform;
             }
             else
             {
@@ -53,10 +55,11 @@ public class CustomerAI : MonoBehaviour
         }
 
         transform.position = Vector2.MoveTowards(transform.position, target.position, tower.currentBulletSpeed * Time.deltaTime);
+        RotateTowardsTarget();
     }
     public void SetNewTarget()
     {
-        if (tower.hasTarget)
+        if (tower.target != null)
         {
             target = tower.target.transform;
 
@@ -79,5 +82,12 @@ public class CustomerAI : MonoBehaviour
         holdingEnemy.DealDamange(holdingEnemy.health + 1);
 
         holdingEnemy = null;
+    }
+
+    private void RotateTowardsTarget()
+    {
+        float angle = Mathf.Atan2(target.transform.position.y - transform.position.y, target.transform.position.x - transform.position.x) * Mathf.Rad2Deg - 90f;
+        Quaternion targetRotation = Quaternion.Euler(new Vector3(0f, 0f, angle));
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 360f);
     }
 }

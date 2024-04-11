@@ -865,20 +865,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdb8ba15162eea24fb19f2cdf854f196, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentTower: {fileID: 0}
+  ammoPrefab: {fileID: 3092356959983715415, guid: 41d4629e003665f478dffef20f97514b, type: 3}
   rotateSpeed: 200
-  firingPoint: {fileID: 3006563116786836484}
-  turretRotationPoint: {fileID: 7514626868131247096}
+  firingPoints:
+  - {fileID: 3006563116786836484}
+  rotationPoint: {fileID: 7514626868131247096}
+  hasRandomEnemy: 0
+  hitsAllEnemiesInRange: 0
+  waitTimeAtCheckout: 0
+  bombTargetingRange: 0
+  upgradeUI: {fileID: 7152101952404168831}
+  upgradeButton: {fileID: 1079192073333339365}
+  currentTower: {fileID: 0}
+  tile: {fileID: 0}
   enemyMask:
     serializedVersion: 2
     m_Bits: 64
-  upgradeUI: {fileID: 7152101952404168831}
-  upgradeButton: {fileID: 1079192073333339365}
-  tile: {fileID: 0}
-  hasRandomEnemy: 0
-  knifeBulletPrefab: {fileID: 0}
-  customerPrefab: {fileID: 0}
-  discountTicketPrefab: {fileID: 3092356959983715415, guid: 41d4629e003665f478dffef20f97514b, type: 3}
+  target: {fileID: 0}
   currentRange: 0
   currentFireRate: 0
   currentBulletSpeed: 0

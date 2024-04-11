@@ -1,32 +1,39 @@
-
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Tower : MonoBehaviour
 {
-    [Header("Attribute")] public TowerSO currentTower;
+    [Header("AllTowers")]
+    [SerializeField] private GameObject ammoPrefab;
     [SerializeField] private float rotateSpeed = 200f;
+    [SerializeField] public List<Transform> firingPoints;
 
-    [Header("References")]
-    [SerializeField] public Transform firingPoint;
-    [SerializeField] private Transform turretRotationPoint;
-    [SerializeField] private LayerMask enemyMask;
+    [Header("DifferentTowers")]
+    [SerializeField] private Transform rotationPoint;
+
+    [SerializeField] private bool hasRandomEnemy;
+    [SerializeField] private bool hitsAllEnemiesInRange;
+
+    [Header("Checkout")]
+    public float waitTimeAtCheckout;
+    private bool hasSpawnedCustomer = false;
+
+    [Header("Shelf")]
+    public float bombTargetingRange;
+
+    [Header("UpgradeUI")]
     [SerializeField] private GameObject upgradeUI;
     [SerializeField] private Button upgradeButton;
 
-    public TileScript tile;
-
-    [Header("DifferentTowers")]
-    [SerializeField] private bool hasRandomEnemy;
-    [SerializeField] private bool hitsAllEnemiesInRange;
-    [SerializeField] private GameObject knifeBulletPrefab;
-    [SerializeField] private GameObject customerPrefab;
-    [SerializeField] private GameObject discountTicketPrefab;
-    [SerializeField] private GameObject railgunAmmoPrefab;
-
     [Header("Other")]
+    public TowerSO currentTower;
+    public TileScript tile;
+    [SerializeField] private LayerMask enemyMask;
+
+    public List<EnemyStats> targets;
     public EnemyStats target;
+
     private float timeUntilFire;
     private int level = 0;
     
@@ -34,12 +41,6 @@ public class Tower : MonoBehaviour
     public float currentFireRate;
     public float currentBulletSpeed;
     public float currentDamage;
-
-    private bool hasSpawnedCustomer = false;
-    private CustomerAI spawnedCustomerAI;
-
-    public bool hasTarget = false;
-
     
     private void Start()
     {
@@ -52,16 +53,11 @@ public class Tower : MonoBehaviour
     {
         timeUntilFire += Time.deltaTime;
 
-        currentDamage = currentTower.baseDamage;
-
         if (target == null)
         {
-            hasTarget = false;
-
             FindTarget();
             return;
         }
-        else hasTarget = true;
 
         if (!CheckTargetIsInRange())
         {
@@ -69,26 +65,36 @@ public class Tower : MonoBehaviour
             return;
         }
 
+        if (rotationPoint != null)
+        {
+            RotateTowardsTarget();
+        }
+
         switch (currentTower.towerType)
         {
             case TowerSO.towers.KnifeThrower:
-                KnifeThrower();
+                ShootingTower();
                 break;
             case TowerSO.towers.DiscountGun:
-                DiscountGun();
+                currentDamage = currentTower.baseDamage * target.health;
+                ShootingTower();
                 break;
             case TowerSO.towers.Blade:
                 break;
             case TowerSO.towers.DustShooter:
+                ShootingTower();
                 break;
             case TowerSO.towers.Railgun:
-                Railgun();
+                ShootingTower();
                 break;
             case TowerSO.towers.Speaker:
+                SpamTower();
                 break;
             case TowerSO.towers.Shelf:
+                BombingTower();
                 break;
             case TowerSO.towers.AirConditioner:
+                SlowTower();
                 break;
             case TowerSO.towers.Checkout:
                 Checkout();
@@ -105,12 +111,17 @@ public class Tower : MonoBehaviour
         {
             if (EnemyManager.Instance.enemiesLeft.Count <= 0) return;
 
-            if (!hasTarget)
+            if (target == null)
             {
                 int randomIndex = Random.Range(0, EnemyManager.Instance.enemiesLeft.Count);
                 target = EnemyManager.Instance.enemiesLeft[randomIndex];
                 if (Vector2.Distance(target.transform.position, transform.position) <= currentRange)
                 {
+                    if (currentTower.towerType == TowerSO.towers.Checkout && target.currentEnemy.isBoss == true)
+                    {
+                        target = null;
+                    }
+
                     if (target.isTarget || target.isDead)
                     {
                         target = null;
@@ -120,16 +131,21 @@ public class Tower : MonoBehaviour
             return;
         }
 
-        if (hitsAllEnemiesInRange)
-        {
-
-        }
-
         RaycastHit2D[] hits = Physics2D.CircleCastAll(transform.position, currentRange, (Vector2)
             transform.position, 0f, enemyMask);
         if (hits.Length > 0)
         {
             target = hits[0].transform.GetComponent<EnemyStats>();
+
+            if (hitsAllEnemiesInRange)
+            {
+                targets.Clear();
+
+                foreach (RaycastHit2D hit in hits)
+                {
+                    targets.Add(hit.transform.GetComponent<EnemyStats>());
+                }
+            }
         }
     }
 
@@ -137,7 +153,7 @@ public class Tower : MonoBehaviour
     {
         float angle = Mathf.Atan2(target.transform.position.y - transform.position.y, target.transform.position.x - transform.position.x) * Mathf.Rad2Deg - 90f;
         Quaternion targetRotation = Quaternion.Euler(new Vector3(0f, 0f, angle));
-        turretRotationPoint.rotation = Quaternion.RotateTowards(turretRotationPoint.rotation, targetRotation, rotateSpeed * Time.deltaTime);
+        rotationPoint.rotation = Quaternion.RotateTowards(rotationPoint.rotation, targetRotation, rotateSpeed * Time.deltaTime);
     }
 
     private bool CheckTargetIsInRange()
@@ -156,6 +172,71 @@ public class Tower : MonoBehaviour
         UIManager.Instance.SetHoveringState(false);
     }
 
+    private void ShootingTower()
+    {
+        if (timeUntilFire >= 1f / currentFireRate)
+        {
+            ShootBullet();
+
+            timeUntilFire = 0f;
+        }
+    }
+
+    private void BombingTower()
+    {
+        if (timeUntilFire >= 1f / currentFireRate)
+        {
+            ShootBomb();
+
+            timeUntilFire = 0f;
+        }
+    }
+
+    private void SpamTower()
+    {
+        if (timeUntilFire >= 1f / currentFireRate)
+        {
+            ShootMultipleBullets();
+
+            timeUntilFire = 0f;
+        }
+    }
+
+    private void SlowTower()
+    {
+        foreach (EnemyStats enemy in targets)
+        {
+            enemy.SlowEnemy(currentDamage);
+        }
+    }
+
+    private void ShootBullet()
+    {
+        GameObject bullet = Instantiate(ammoPrefab, firingPoints[0].position, Quaternion.identity);
+        BulletScript bulletScript = bullet.GetComponent<BulletScript>();
+
+        bulletScript.tower = this;
+    }
+
+    private void ShootBomb()
+    {
+        GameObject bomb = Instantiate(ammoPrefab, firingPoints[0].position, Quaternion.identity);
+        BombScript bombScript = bomb.GetComponent<BombScript>();
+
+        bombScript.tower = this;
+    }
+
+    private void ShootMultipleBullets()
+    {
+        foreach (Transform firingPoint in firingPoints)
+        {
+            GameObject bullet = Instantiate(ammoPrefab, firingPoint.position, firingPoint.rotation);
+            SpamBulletScript bulletScript = bullet.GetComponent<SpamBulletScript>();
+
+            bulletScript.tower = this;
+        }
+    }
+
     public void UpgradeTower()
     {
         level++;
@@ -167,6 +248,7 @@ public class Tower : MonoBehaviour
         currentFireRate = CalcFireRate();
         currentRange = Mathf.RoundToInt(CalcRange());
         currentBulletSpeed = currentTower.baseBulletSpeed;
+        currentDamage = currentTower.baseDamage;
 
         tile.UpdateRange();
 
@@ -183,68 +265,12 @@ public class Tower : MonoBehaviour
         return Mathf.RoundToInt(currentTower.baseRange * Mathf.Pow(level, 0.4f));
     }
 
-    private void KnifeThrower()
-    {
-        RotateTowardsTarget();
-        currentDamage = currentTower.baseDamage;
-
-        if (timeUntilFire >= 1f / currentFireRate)
-        {
-            GameObject bullet = Instantiate(knifeBulletPrefab, firingPoint.position, Quaternion.identity);
-            BulletScript bulletScript = bullet.GetComponent<BulletScript>();
-            bulletScript.SetTarget(target.transform);
-
-            bulletScript.tower = this;
-            
-
-            timeUntilFire = 0f;
-        }
-    }
-
-    private void DiscountGun()
-    {
-        RotateTowardsTarget();
-        currentDamage = currentTower.baseDamage * target.GetComponent<EnemyStats>().health;
-
-        Debug.Log(currentDamage);
-        if (timeUntilFire >= 1f / currentFireRate)
-        {
-            GameObject bullet = Instantiate(discountTicketPrefab, firingPoint.position, Quaternion.identity);
-            BulletScript bulletScript = bullet.GetComponent<BulletScript>();
-            bulletScript.SetTarget(target.transform);
-
-            bulletScript.tower = this;
-            
-
-            timeUntilFire = 0f;
-        }
-    }
-    
-    private void Railgun()
-    {
-        RotateTowardsTarget();
-        currentDamage = currentTower.baseDamage;
-
-        if (timeUntilFire >= 1f / currentFireRate)
-        {
-            GameObject bullet = Instantiate(railgunAmmoPrefab, firingPoint.position, Quaternion.identity);
-            BulletScript bulletScript = bullet.GetComponent<BulletScript>();
-            bulletScript.SetTarget(target.transform);
-
-            bulletScript.tower = this;
-            
-
-            timeUntilFire = 0f;
-        }
-    }
-
-
     private void Checkout()
     {
         if (!hasSpawnedCustomer && target != null)
         {
-            GameObject spawnedCustomer = Instantiate(customerPrefab, firingPoint.position, Quaternion.identity);
-            spawnedCustomerAI = spawnedCustomer.GetComponent<CustomerAI>();
+            GameObject spawnedCustomer = Instantiate(ammoPrefab, firingPoints[0].position, Quaternion.identity);
+            CustomerAI spawnedCustomerAI = spawnedCustomer.GetComponent<CustomerAI>();
             spawnedCustomerAI.tower = this;
 
             hasSpawnedCustomer = true;

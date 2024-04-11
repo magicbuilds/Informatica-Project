@@ -19,4 +19,4 @@ MonoBehaviour:
   discription: This tower spawns a customer that will go after a random product to
     buy it for himself. You won't have to pay for this product
   icon: {fileID: -66898039, guid: f8297e3cba8d3f34aa0e798b969288d2, type: 3}
-  weight: 100
+  weight: 10

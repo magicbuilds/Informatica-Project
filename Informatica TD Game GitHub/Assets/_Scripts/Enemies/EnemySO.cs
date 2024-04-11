@@ -22,4 +22,7 @@ public class EnemySO : ScriptableObject
     public List<EnemySO> holdingEnemies;
     public List<int> correspondingAmounts;
     public bool showHoldingEnemy;
+
+    [Header("Other")]
+    public bool isBoss;
 }

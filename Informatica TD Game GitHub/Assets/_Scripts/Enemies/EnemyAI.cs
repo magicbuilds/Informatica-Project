@@ -3,6 +3,8 @@ using UnityEngine;
 public class EnemyAI : MonoBehaviour
 {
     public EnemySO currentEnemy;
+    public EnemyStats enemyStats;
+
     public int targetPathIndex;
 
     public Vector2 positionOffset = Vector2.zero;
@@ -12,6 +14,7 @@ public class EnemyAI : MonoBehaviour
     private Vector2 lastPosition;
 
     private SpriteRenderer spriteRenderer;
+
 
     private void Start()
     {
@@ -32,14 +35,14 @@ public class EnemyAI : MonoBehaviour
         {
             Destroy(gameObject);
 
-            PlayerStatsManager.Instance.AddRemoveHealth(currentEnemy.damage);
+            PlayerStatsManager.Instance.AddRemoveHealth(-currentEnemy.damage);
             EnemyManager.Instance.ReduceEnemyCount(gameObject.GetComponent<EnemyStats>());
 
             return;
         }
 
         Vector2 targetVector = (Vector2)target.transform.position + positionOffset;
-        transform.position = Vector2.MoveTowards(transform.position, targetVector, currentEnemy.speed * Time.deltaTime);
+        transform.position = Vector2.MoveTowards(transform.position, targetVector, enemyStats.currentSpeed * Time.deltaTime);
 
         float deltaX = (transform.position.x - lastPosition.x);
         spriteRenderer.flipX = false;
@@ -47,18 +50,18 @@ public class EnemyAI : MonoBehaviour
         if (currentEnemy.ySprite != null)
         {
             float deltaY = transform.position.y - lastPosition.y;
-            if (Mathf.Abs(deltaY) > 0.01f)
+            if (Mathf.Abs(deltaY) > 0.005f)
             {
                 spriteRenderer.sprite = currentEnemy.ySprite;
                 spriteRenderer.flipY = false;
-                if (deltaY < 0.01f) spriteRenderer.flipY = true;
+                if (deltaY < 0.005f) spriteRenderer.flipY = true;
             }
             else
             {
                 spriteRenderer.sprite = currentEnemy.xSprite;
             }
         }
-        if (deltaX < -0.01f) spriteRenderer.flipX = true;
+        if (deltaX < -0.05f) spriteRenderer.flipX = true;
 
         if (Vector2.Distance(transform.position, targetVector) < 0.1f)
         {
@@ -66,5 +69,10 @@ public class EnemyAI : MonoBehaviour
         }
 
         lastPosition = (Vector2)transform.position;
+    }
+
+    public void SlowEnemy()
+    {
+
     }
 }

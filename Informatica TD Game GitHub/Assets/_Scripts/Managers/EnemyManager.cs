@@ -30,6 +30,8 @@ public class EnemyManager : MonoBehaviour
         spawnedEnemyStatsScript.enemyAI = spawnedEnemyAIScript;
         spawnedEnemyStatsScript.currentEnemy = enemy;
 
+        spawnedEnemyAIScript.enemyStats = spawnedEnemyStatsScript;
+
         enemiesLeft.Add(spawnedEnemyStatsScript);
 
         currentNumberOfEnemies++;

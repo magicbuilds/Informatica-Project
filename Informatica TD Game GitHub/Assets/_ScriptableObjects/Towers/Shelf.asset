@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d968e75eda3bcde43b83bbb4d5adf8ff, type: 3}
-  m_Name: Checkout
+  m_Name: Shelf
   m_EditorClassIdentifier: 
-  baseDamage: 0
-  baseRange: 30
-  baseFireRate: 0
-  baseBulletSpeed: 6
-  towerType: 8
-  towerPrefab: {fileID: 7217467001008108073, guid: 16315272238e1084599f8d47e4823277, type: 3}
+  baseDamage: 15
+  baseRange: 4
+  baseFireRate: 3
+  baseBulletSpeed: 15
+  towerType: 6
+  towerPrefab: {fileID: 7217467001008108073, guid: 098abc2e26526464c82a89f1164e283c, type: 3}

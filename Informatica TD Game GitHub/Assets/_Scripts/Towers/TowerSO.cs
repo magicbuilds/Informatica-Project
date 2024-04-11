@@ -7,7 +7,7 @@ using UnityEngine;
 public class TowerSO : ScriptableObject
 {
     public float baseDamage;
-    public int baseRange;
+    public float baseRange;
     public float baseFireRate;
 
     public float baseBulletSpeed;

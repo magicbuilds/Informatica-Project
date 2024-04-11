@@ -671,15 +671,19 @@ MonoBehaviour:
   - {fileID: 420988395}
   starterCards:
   - {fileID: 11400000, guid: 79623443753093f42970b6985d54f39e, type: 2}
-  - {fileID: 11400000, guid: b7515800cebf08b48b78b9a40ef75f3c, type: 2}
+  - {fileID: 11400000, guid: e859303462416514e9498373911e3127, type: 2}
   - {fileID: 11400000, guid: 77401c5c725eb4d439855081aac5fbe7, type: 2}
-  - {fileID: 11400000, guid: f2fd67957c2e31b459a766c6379d3f0b, type: 2}
+  - {fileID: 11400000, guid: 86f56c6053f7dcc4db05a246b887cd3e, type: 2}
   cardsInDeck: []
   cards:
   - {fileID: 11400000, guid: 79623443753093f42970b6985d54f39e, type: 2}
   - {fileID: 11400000, guid: 77401c5c725eb4d439855081aac5fbe7, type: 2}
   - {fileID: 11400000, guid: f2fd67957c2e31b459a766c6379d3f0b, type: 2}
   - {fileID: 11400000, guid: b7515800cebf08b48b78b9a40ef75f3c, type: 2}
+  - {fileID: 11400000, guid: 448e75b96a8707b44980fe2b7309b594, type: 2}
+  - {fileID: 11400000, guid: 4cd2e723daef37c4b91369666447c7c6, type: 2}
+  - {fileID: 11400000, guid: 86f56c6053f7dcc4db05a246b887cd3e, type: 2}
+  - {fileID: 11400000, guid: e859303462416514e9498373911e3127, type: 2}
   currentSelectedCard: {fileID: 0}
 --- !u!1 &190312814
 GameObject:

@@ -17,14 +17,37 @@ public class EnemyStats : MonoBehaviour
     public bool isDead = false;
     public bool isTarget = false;
 
+    public float currentSpeed;
+
+    private float timeSlowed = 0;
+    private bool isSlowed = false;
+
     private void Start()
     {
+        currentSpeed = currentEnemy.speed;
+
         health = currentEnemy.baseHealth;
         UpdateEnemyUI();
 
         if (currentEnemy.showHoldingEnemy)
         {
             currentlyHoldingSprite.sprite = currentEnemy.holdingEnemies[Random.Range(0, currentEnemy.holdingEnemies.Count)].xSprite;
+        }
+    }
+
+    private void Update()
+    {
+        if (isSlowed)
+        {
+            timeSlowed += Time.deltaTime;
+
+            if (timeSlowed >= 0.5f)
+            {
+                currentSpeed = currentEnemy.speed;
+
+                isSlowed = false;
+                timeSlowed = 0;
+            }
         }
     }
 
@@ -47,6 +70,14 @@ public class EnemyStats : MonoBehaviour
         }
 
         UpdateEnemyUI();
+    }
+
+    public void SlowEnemy(float slowPercentage)
+    {
+        currentSpeed = currentEnemy.speed * (100 - slowPercentage) / 100;
+
+        isSlowed = true;
+        timeSlowed = 0;
     }
 
     private void UpdateEnemyUI()

@@ -10,12 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7b95c1925b878bc45ba52cd24fc062c6, type: 3}
-  m_Name: Railgun
+  m_Name: Shelf
   m_EditorClassIdentifier: 
-  cardName: Railgun
+  cardName: Shelf
   rarity: 0
-  tower: {fileID: 11400000, guid: e01ac81632ca14a43a10f8bfe2d64d01, type: 2}
+  tower: {fileID: 11400000, guid: b6de478ab06950c40a0170284870b93e, type: 2}
   baseCost: 10
-  discription: Basic sniper, long range, a lot of damage, slow shooting.
-  icon: {fileID: 1966186572, guid: f8297e3cba8d3f34aa0e798b969288d2, type: 3}
+  discription: 'This tower throws cardboard boxes filled with bombs at the enemies.
+    Every enemy inside the explosion range gets damaged. '
+  icon: {fileID: 270494299, guid: f8297e3cba8d3f34aa0e798b969288d2, type: 3}
   weight: 10
