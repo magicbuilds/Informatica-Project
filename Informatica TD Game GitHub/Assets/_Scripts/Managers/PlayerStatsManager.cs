@@ -1,11 +1,16 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerStatsManager : MonoBehaviour
 {
+
     public static PlayerStatsManager Instance;
+
+
 
     public float maxHealth = 50f;
     public float health;
@@ -32,4 +37,5 @@ public class PlayerStatsManager : MonoBehaviour
         coins += coinsToAdd;
     }
     
+
 }

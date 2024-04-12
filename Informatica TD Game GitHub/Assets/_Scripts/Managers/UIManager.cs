@@ -19,6 +19,11 @@ public class UIManager : MonoBehaviour
     [Header("CardDrawUI")]
     [SerializeField] private GameObject cardDrawUI;
 
+    [Header("cardStats")]
+    public TextMeshProUGUI range;
+    public TextMeshProUGUI damage;
+    public TextMeshProUGUI fireRate;
+
     [Header("ExtraCardInformationUI")]
     [SerializeField] private GameObject extraCardInformationUI;
     [SerializeField] private TextMeshProUGUI cardNameText;
@@ -57,6 +62,11 @@ public class UIManager : MonoBehaviour
         healthBar.maxValue = PlayerStatsManager.Instance.maxHealth;
         healthBar.value = PlayerStatsManager.Instance.health;
 
+    }
+
+    public void rangeText()
+    {
+        
     }
 
     public void ActivateCardDrawUI()
