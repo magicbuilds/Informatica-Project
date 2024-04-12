@@ -20,7 +20,7 @@ public class BombScript : MonoBehaviour
 
         if (target != null)
         {
-            bombCollider.radius = tower.bombTargetingRange;
+            bombCollider.radius = tower.currentSpecial;
         }
     }
 

@@ -79,7 +79,7 @@ public class TileScript : MonoBehaviour
         GameObject towerToSpawn = InventoryManager.Instance.currentSelectedCard.currentCard.tower.towerPrefab;
         GameObject spawnedTower = Instantiate(towerToSpawn, transform.position, Quaternion.identity);
         tower = spawnedTower.GetComponent<Tower>();
-        tower.currentTower = InventoryManager.Instance.currentSelectedCard.currentCard.tower;
+        tower.towerType = InventoryManager.Instance.currentSelectedCard.currentCard.tower.towerType;
         tower.tile = this;
 
         UpgradeManager.Instance.placedTowers.Add(tower);

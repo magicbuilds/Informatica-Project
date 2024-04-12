@@ -6,319 +6,92 @@ public class UpgradeManager : MonoBehaviour
 {
     public static UpgradeManager Instance;
 
+    [Header("PlacedTowers")]
     public List<Tower> placedTowers = new List<Tower>();
 
-    [Header("Checkout")]
-    public float maxPeopleAtCheckout = 1;
+    [Header("Towers + Stats")]
+    public List<TowerSO.towerTypes> towerTypes = new List<TowerSO.towerTypes>();
 
-    [Header("Shelf")]
-    public float baseShelfBombTargetingRange;
-    public float baseShelfTargetingRange;
-    public float baseShelfFireRate;
-    public float baseShelfDamage;
-
-    [Header("DiscountGun")]
-    public float baseDiscountGunTargetingRange;
-    public float baseDiscountGunFireRate;
-    public float baseDiscountGunDamage;
-
-    [Header("KnifeThrower")]
-    public float baseKnifeThrowerTargetingRange;
-    public float baseKnifeThrowerFireRate;
-    public float baseKnifeThrowerDamage;
-
-    [Header("DustShooter")]
-    public float baseDustShooterTargetingRange;
-    public float baseDustShooterFireRate;
-    public float baseDustShooterDamage;
-
-    [Header("AirConditioner")]
-    public float baseAirConditionerTargetingRange;
-    public float baseAirConditionerFireRate;
-    public float baseAirConditionerDamage;
-
-    [Header("Speaker")]
-    public float baseSpeakerTargetingRange;
-    public float baseSpeakerFireRate;
-    public float baseSpeakerDamage;
+    public List<float> baseSpecialStats = new List<float>();
+    public List<float> baseRangeStats = new List<float>();
+    public List<float> baseFireRateStats = new List<float>();
+    public List<float> baseDamageStats = new List<float>();
+    public List<float> baseBulletSpeed = new List<float>();
 
     private void Awake()
     {
         Instance = this;
     }
 
-    public void UpgradeMain(UpgradeSO upgradeStats)
+    private void Start()
     {
-        switch (upgradeStats.correspondigTower) 
+        foreach (CardSO card in InventoryManager.Instance.cards)
         {
-            case TowerSO.towers.Checkout:
-                UpgradeCheckout(upgradeStats);
-                break;
-            case TowerSO.towers.Shelf:
-                UpgradeShelf(upgradeStats);
-                break;
-            case TowerSO.towers.DiscountGun:
-                UpgradeDiscountGun(upgradeStats);
-                break;
-            case TowerSO.towers.KnifeThrower:
-                UpgradeKnifeThrower(upgradeStats);
-                break;
-            case TowerSO.towers.DustShooter:
-                UpgradeDustShooter(upgradeStats);
-                break;
-            case TowerSO.towers.AirConditioner:
-                UpgradeAirConditioner(upgradeStats);
-                break;
-            case TowerSO.towers.Railgun:
-                UpgradeRailGun(upgradeStats);
-                break;
-            case TowerSO.towers.Speaker:
-                UpgradeSpeaker(upgradeStats);
-                break;
-        
-        } 
-    }
-
-    private void UpgradeCheckout(UpgradeSO upgradeStats)
-    {
-        switch (upgradeStats.upgradeType)
-        {
-            case UpgradeSO.UpgradeType.Special:
-                maxPeopleAtCheckout += upgradeStats.upgradePower;
-                break;
-        }
-    }
-
-    private void UpgradeShelf(UpgradeSO upgradeStats)
-    {
-        switch (upgradeStats.upgradeType)
-        {
-            case UpgradeSO.UpgradeType.Special:
-                baseShelfBombTargetingRange += upgradeStats.upgradePower;
-                break;
-            case UpgradeSO.UpgradeType.Range:
-                break;
-            case UpgradeSO.UpgradeType.FireRate:
-                break;
-            case UpgradeSO.UpgradeType.Damage:
-                break;
-        }
-
-        foreach (Tower tower in placedTowers)
-        {
-            if (tower.currentTower.towerType == upgradeStats.correspondigTower)
+            if (card.cardType == CardSO.CardType.Tower)
             {
-                switch (upgradeStats.upgradeType)
-                {
-                    case UpgradeSO.UpgradeType.Special:
-                        tower.bombTargetingRange += upgradeStats.upgradePower;
-                        break;
-                    case UpgradeSO.UpgradeType.Range:
-                        break;
-                    case UpgradeSO.UpgradeType.FireRate:
-                        break;
-                    case UpgradeSO.UpgradeType.Damage:
-                        break;
-                }
+                towerTypes.Add(card.tower.towerType);
+                baseSpecialStats.Add(card.tower.baseSpecial);
+                baseFireRateStats.Add(card.tower.baseFireRate);
+                baseRangeStats.Add(card.tower.baseRange);
+                baseDamageStats.Add(card.tower.baseDamage);
+                baseBulletSpeed.Add(card.tower.baseBulletSpeed);
             }
         }
     }
 
-    private void UpgradeDiscountGun(UpgradeSO upgradeStats)
+    public void Upgrade(UpgradeSO upgradeStats)
     {
+        int index = FindIndexOfTower(upgradeStats.correspondigTower);
+
         switch (upgradeStats.upgradeType)
         {
             case UpgradeSO.UpgradeType.Special:
+                baseSpecialStats[index] += upgradeStats.upgradePower;
                 break;
             case UpgradeSO.UpgradeType.Range:
+                baseFireRateStats[index] += upgradeStats.upgradePower;
                 break;
             case UpgradeSO.UpgradeType.FireRate:
+                baseRangeStats[index] += upgradeStats.upgradePower;
                 break;
             case UpgradeSO.UpgradeType.Damage:
+                baseDamageStats[index] += upgradeStats.upgradePower;
                 break;
-        }
-
-        foreach (Tower tower in placedTowers)
-        {
-            if (tower.currentTower.towerType == upgradeStats.correspondigTower)
-            {
-                switch (upgradeStats.upgradeType)
-                {
-                    case UpgradeSO.UpgradeType.Special:
-                        break;
-                    case UpgradeSO.UpgradeType.Range:
-                        break;
-                    case UpgradeSO.UpgradeType.FireRate:
-                        break;
-                    case UpgradeSO.UpgradeType.Damage:
-                        break;
-                }
-            }
+            case UpgradeSO.UpgradeType.BulletSpeed:
+                baseBulletSpeed[index] += upgradeStats.upgradePower;
+                break;
         }
     }
 
-    private void UpgradeKnifeThrower(UpgradeSO upgradeStats)
+    private int FindIndexOfTower(TowerSO.towerTypes towerType)
     {
-        switch (upgradeStats.upgradeType)
+        int index = 0;
+        foreach (TowerSO.towerTypes type in towerTypes)
         {
-            case UpgradeSO.UpgradeType.Special:
-                break;
-            case UpgradeSO.UpgradeType.Range:
-                break;
-            case UpgradeSO.UpgradeType.FireRate:
-                break;
-            case UpgradeSO.UpgradeType.Damage:
-                break;
-        }
+            if (type == towerType) return index;
 
-        foreach (Tower tower in placedTowers)
-        {
-            if (tower.currentTower.towerType == upgradeStats.correspondigTower)
-            {
-                switch (upgradeStats.upgradeType)
-                {
-                    case UpgradeSO.UpgradeType.Special:
-                        break;
-                    case UpgradeSO.UpgradeType.Range:
-                        break;
-                    case UpgradeSO.UpgradeType.FireRate:
-                        break;
-                    case UpgradeSO.UpgradeType.Damage:
-                        break;
-                }
-            }
+            index++;
         }
+        return -1;
     }
 
-    private void UpgradeDustShooter(UpgradeSO upgradeStats)
+    public float ReturnValueOf(TowerSO.towerTypes towerType, UpgradeSO.UpgradeType upgradeType)
     {
-        switch (upgradeStats.upgradeType)
+        int index = FindIndexOfTower(towerType);
+
+        switch (upgradeType)
         {
             case UpgradeSO.UpgradeType.Special:
-                break;
+                return baseSpecialStats[index];
             case UpgradeSO.UpgradeType.Range:
-                break;
+                return baseRangeStats[index];
             case UpgradeSO.UpgradeType.FireRate:
-                break;
+                return baseFireRateStats[index];
             case UpgradeSO.UpgradeType.Damage:
-                break;
+                return baseDamageStats[index];
+            case UpgradeSO.UpgradeType.BulletSpeed:
+                return baseBulletSpeed[index];
         }
-
-        foreach (Tower tower in placedTowers)
-        {
-            if (tower.currentTower.towerType == upgradeStats.correspondigTower)
-            {
-                switch (upgradeStats.upgradeType)
-                {
-                    case UpgradeSO.UpgradeType.Special:
-                        break;
-                    case UpgradeSO.UpgradeType.Range:
-                        break;
-                    case UpgradeSO.UpgradeType.FireRate:
-                        break;
-                    case UpgradeSO.UpgradeType.Damage:
-                        break;
-                }
-            }
-        }
-    }
-
-    private void UpgradeAirConditioner(UpgradeSO upgradeStats)
-    {
-        switch (upgradeStats.upgradeType)
-        {
-            case UpgradeSO.UpgradeType.Special:
-                break;
-            case UpgradeSO.UpgradeType.Range:
-                break;
-            case UpgradeSO.UpgradeType.FireRate:
-                break;
-            case UpgradeSO.UpgradeType.Damage:
-                break;
-        }
-
-        foreach (Tower tower in placedTowers)
-        {
-            if (tower.currentTower.towerType == upgradeStats.correspondigTower)
-            {
-                switch (upgradeStats.upgradeType)
-                {
-                    case UpgradeSO.UpgradeType.Special:
-                        break;
-                    case UpgradeSO.UpgradeType.Range:
-                        break;
-                    case UpgradeSO.UpgradeType.FireRate:
-                        break;
-                    case UpgradeSO.UpgradeType.Damage:
-                        break;
-                }
-            }
-        }
-    }
-
-    private void UpgradeRailGun(UpgradeSO upgradeStats)
-    {
-        switch (upgradeStats.upgradeType)
-        {
-            case UpgradeSO.UpgradeType.Special:
-                break;
-            case UpgradeSO.UpgradeType.Range:
-                break;
-            case UpgradeSO.UpgradeType.FireRate:
-                break;
-            case UpgradeSO.UpgradeType.Damage:
-                break;
-        }
-
-        foreach (Tower tower in placedTowers)
-        {
-            if (tower.currentTower.towerType == upgradeStats.correspondigTower)
-            {
-                switch (upgradeStats.upgradeType)
-                {
-                    case UpgradeSO.UpgradeType.Special:
-                        break;
-                    case UpgradeSO.UpgradeType.Range:
-                        break;
-                    case UpgradeSO.UpgradeType.FireRate:
-                        break;
-                    case UpgradeSO.UpgradeType.Damage:
-                        break;
-                }
-            }
-        }
-    }
-
-    private void UpgradeSpeaker(UpgradeSO upgradeStats)
-    {
-        switch (upgradeStats.upgradeType)
-        {
-            case UpgradeSO.UpgradeType.Special:
-                break;
-            case UpgradeSO.UpgradeType.Range:
-                break;
-            case UpgradeSO.UpgradeType.FireRate:
-                break;
-            case UpgradeSO.UpgradeType.Damage:
-                break;
-        }
-
-        foreach (Tower tower in placedTowers)
-        {
-            if (tower.currentTower.towerType == upgradeStats.correspondigTower)
-            {
-                switch (upgradeStats.upgradeType)
-                {
-                    case UpgradeSO.UpgradeType.Special:
-                        break;
-                    case UpgradeSO.UpgradeType.Range:
-                        break;
-                    case UpgradeSO.UpgradeType.FireRate:
-                        break;
-                    case UpgradeSO.UpgradeType.Damage:
-                        break;
-                }
-            }
-        }
+        return 0;
     }
 }

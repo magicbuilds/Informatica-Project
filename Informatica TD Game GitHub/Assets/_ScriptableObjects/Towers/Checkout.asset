@@ -15,6 +15,7 @@ MonoBehaviour:
   baseDamage: 0
   baseRange: 30
   baseFireRate: 0
+  baseSpecial: 1
   baseBulletSpeed: 6
   towerType: 8
   towerPrefab: {fileID: 7217467001008108073, guid: 16315272238e1084599f8d47e4823277, type: 3}

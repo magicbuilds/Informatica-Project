@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: Air Conditioner
   m_EditorClassIdentifier: 
   baseDamage: 45
-  baseRange: 2
+  baseRange: 0.75
   baseFireRate: 0
+  baseSpecial: 0
   baseBulletSpeed: 0
   towerType: 7
   towerPrefab: {fileID: 7217467001008108073, guid: 3c00482175366824cb93557af817607b, type: 3}

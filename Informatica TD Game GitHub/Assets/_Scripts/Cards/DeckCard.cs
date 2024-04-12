@@ -55,7 +55,7 @@ public class DeckCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         }
         if (currentCard.cardType == CardSO.CardType.Upgrade)
         {
-            UpgradeManager.Instance.UpgradeMain(currentCard.upgrade);
+            UpgradeManager.Instance.Upgrade(currentCard.upgrade);
             InventoryManager.Instance.SetSelectedCard(this);
             InventoryManager.Instance.OnCardPlayed();
         }

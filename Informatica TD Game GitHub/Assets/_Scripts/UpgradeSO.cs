@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Upgrade", menuName = "ScriptableObjects/UpgradeSO")]
 public class UpgradeSO : ScriptableObject
 {
-    public TowerSO.towers correspondigTower;
+    public TowerSO.towerTypes correspondigTower;
     public UpgradeType upgradeType;
 
     public float upgradePower;
@@ -15,6 +15,7 @@ public class UpgradeSO : ScriptableObject
         Range,
         Damage,
         FireRate,
-        Special
+        Special,
+        BulletSpeed
     }
 }

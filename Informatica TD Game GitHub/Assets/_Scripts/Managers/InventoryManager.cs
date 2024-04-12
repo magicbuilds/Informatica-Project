@@ -14,7 +14,7 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private List<CardSO> cardsInDeck = new List<CardSO>();
 
     [Header("All Cards")]
-    [SerializeField] private List<CardSO> cards;
+    public List<CardSO> cards;
 
     public DeckCard currentSelectedCard = null;
 

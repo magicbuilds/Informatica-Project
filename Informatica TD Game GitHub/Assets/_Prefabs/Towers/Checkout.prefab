@@ -780,6 +780,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdb8ba15162eea24fb19f2cdf854f196, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  towerType: 8
   ammoPrefab: {fileID: 4433180150287172331, guid: 7ba8476b5ed0dcd468d2fc20b7050331, type: 3}
   rotateSpeed: 200
   firingPoints:
@@ -788,19 +789,20 @@ MonoBehaviour:
   hasRandomEnemy: 1
   hitsAllEnemiesInRange: 0
   waitTimeAtCheckout: 3
-  bombTargetingRange: 0
+  peopleAtCheckout: 0
   upgradeUI: {fileID: 7152101952404168831}
   upgradeButton: {fileID: 1079192073333339365}
-  currentTower: {fileID: 0}
   tile: {fileID: 0}
   enemyMask:
     serializedVersion: 2
     m_Bits: 64
+  targets: []
   target: {fileID: 0}
+  currentSpecial: 0
   currentRange: 0
   currentFireRate: 0
-  currentBulletSpeed: 0
   currentDamage: 0
+  currentBulletSpeed: 0
 --- !u!212 &-3005790379872064936
 SpriteRenderer:
   m_ObjectHideFlags: 0

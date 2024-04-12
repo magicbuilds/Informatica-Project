@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class Tower : MonoBehaviour
 {
     [Header("AllTowers")]
+    public TowerSO.towerTypes towerType;
     [SerializeField] private GameObject ammoPrefab;
     [SerializeField] private float rotateSpeed = 200f;
     [SerializeField] public List<Transform> firingPoints;
@@ -17,17 +18,13 @@ public class Tower : MonoBehaviour
 
     [Header("Checkout")]
     public float waitTimeAtCheckout;
-    public float peopleAtCheckout = 1;
-
-    [Header("Shelf")]
-    public float bombTargetingRange;
+    public float peopleAtCheckout = 0;
 
     [Header("UpgradeUI")]
     [SerializeField] private GameObject upgradeUI;
     [SerializeField] private Button upgradeButton;
 
     [Header("Other")]
-    public TowerSO currentTower;
     public TileScript tile;
     [SerializeField] private LayerMask enemyMask;
 
@@ -36,24 +33,42 @@ public class Tower : MonoBehaviour
 
     private float timeUntilFire;
     private int level = 0;
-    
+
+    public float currentSpecial;
     public float currentRange;
     public float currentFireRate;
-    public float currentBulletSpeed;
     public float currentDamage;
+    public float currentBulletSpeed;
     
     private void Start()
     {
+        currentSpecial = UpgradeManager.Instance.ReturnValueOf(towerType, UpgradeSO.UpgradeType.Special);
+        currentRange = UpgradeManager.Instance.ReturnValueOf(towerType, UpgradeSO.UpgradeType.Range);
+        currentFireRate = UpgradeManager.Instance.ReturnValueOf(towerType, UpgradeSO.UpgradeType.FireRate);
+        currentDamage = UpgradeManager.Instance.ReturnValueOf(towerType, UpgradeSO.UpgradeType.Damage);
+        currentBulletSpeed = UpgradeManager.Instance.ReturnValueOf(towerType, UpgradeSO.UpgradeType.BulletSpeed);
+
         UpgradeTower();
 
         upgradeButton.onClick.AddListener(UpgradeTower);
+    }
 
-        switch (currentTower.towerType)
+    public void UpgradeTower()
+    {
+        level++;
+        if (level >= 10)
         {
-            case TowerSO.towers.Shelf:
-                bombTargetingRange = UpgradeManager.Instance.baseShelfBombTargetingRange;
-                break;
+            level = 10;
         }
+
+        //currentFireRate = CalcFireRate();
+        //currentRange = Mathf.RoundToInt(CalcRange());
+        //currentBulletSpeed = currentTower.baseBulletSpeed;
+        //currentDamage = currentTower.baseDamage;
+
+        tile.UpdateRange();
+
+        CloseUpgradeUI();
     }
 
     private void Update()
@@ -77,33 +92,33 @@ public class Tower : MonoBehaviour
             RotateTowardsTarget();
         }
 
-        switch (currentTower.towerType)
+        switch (towerType)
         {
-            case TowerSO.towers.KnifeThrower:
+            case TowerSO.towerTypes.KnifeThrower:
                 ShootingTower();
                 break;
-            case TowerSO.towers.DiscountGun:
-                currentDamage = currentTower.baseDamage * target.health;
+            case TowerSO.towerTypes.DiscountGun:
+                currentDamage = currentDamage * target.health;
                 ShootingTower();
                 break;
-            case TowerSO.towers.Blade:
+            case TowerSO.towerTypes.Blade:
                 break;
-            case TowerSO.towers.DustShooter:
+            case TowerSO.towerTypes.DustShooter:
                 ShootingTower();
                 break;
-            case TowerSO.towers.Railgun:
+            case TowerSO.towerTypes.Railgun:
                 ShootingTower();
                 break;
-            case TowerSO.towers.Speaker:
+            case TowerSO.towerTypes.Speaker:
                 SpamTower();
                 break;
-            case TowerSO.towers.Shelf:
+            case TowerSO.towerTypes.Shelf:
                 BombingTower();
                 break;
-            case TowerSO.towers.AirConditioner:
+            case TowerSO.towerTypes.AirConditioner:
                 SlowTower();
                 break;
-            case TowerSO.towers.Checkout:
+            case TowerSO.towerTypes.Checkout:
                 Checkout();
                 break;
             default:
@@ -124,7 +139,7 @@ public class Tower : MonoBehaviour
                 target = EnemyManager.Instance.enemiesLeft[randomIndex];
                 if (Vector2.Distance(target.transform.position, transform.position) <= currentRange)
                 {
-                    if (currentTower.towerType == TowerSO.towers.Checkout && target.currentEnemy.isBoss == true)
+                    if (towerType == TowerSO.towerTypes.Checkout && target.currentEnemy.isBoss == true)
                     {
                         target = null;
                     }
@@ -244,25 +259,7 @@ public class Tower : MonoBehaviour
         }
     }
 
-    public void UpgradeTower()
-    {
-        level++;
-        if (level >= 10)
-        {
-            level = 10;
-        }
-
-        currentFireRate = CalcFireRate();
-        currentRange = Mathf.RoundToInt(CalcRange());
-        currentBulletSpeed = currentTower.baseBulletSpeed;
-        currentDamage = currentTower.baseDamage;
-
-        tile.UpdateRange();
-
-        CloseUpgradeUI();
-    }
-
-    private float CalcFireRate()
+    /*private float CalcFireRate()
     {
         return currentTower.baseFireRate * Mathf.Pow(level, 0.7f);
     }
@@ -270,11 +267,11 @@ public class Tower : MonoBehaviour
     private float CalcRange()
     {
         return Mathf.RoundToInt(currentTower.baseRange * Mathf.Pow(level, 0.4f));
-    }
+    }*/
 
     private void Checkout()
     {
-        if (peopleAtCheckout <= UpgradeManager.Instance.maxPeopleAtCheckout && target != null)
+        if (peopleAtCheckout <= currentSpecial && target != null)
         {
             GameObject spawnedCustomer = Instantiate(ammoPrefab, firingPoints[0].position, Quaternion.identity);
             CustomerAI spawnedCustomerAI = spawnedCustomer.GetComponent<CustomerAI>();
