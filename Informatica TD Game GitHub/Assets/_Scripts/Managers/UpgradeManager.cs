@@ -51,10 +51,10 @@ public class UpgradeManager : MonoBehaviour
                 baseSpecialStats[index] += upgradeStats.upgradePower;
                 break;
             case UpgradeSO.UpgradeType.Range:
-                baseFireRateStats[index] += upgradeStats.upgradePower;
+                baseRangeStats[index] += upgradeStats.upgradePower;
                 break;
             case UpgradeSO.UpgradeType.FireRate:
-                baseRangeStats[index] += upgradeStats.upgradePower;
+                baseFireRateStats[index] += upgradeStats.upgradePower;
                 break;
             case UpgradeSO.UpgradeType.Damage:
                 baseDamageStats[index] += upgradeStats.upgradePower;
