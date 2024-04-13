@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class TowerInformationUI : MonoBehaviour
@@ -9,9 +10,16 @@ public class TowerInformationUI : MonoBehaviour
     public CardSO selectedTowerCard;
     public GameObject selecterTowerObject;
 
+    public List<Transform> upgradeSlots;
+
     private void Awake()
     {
         Instance = this;
+    }
+
+    public void UpdateUpgradeButtons()
+    {
+
     }
 
     public void SetSelectedTower(GameObject tower)

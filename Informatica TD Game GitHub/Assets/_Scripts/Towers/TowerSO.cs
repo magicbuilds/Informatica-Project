@@ -17,6 +17,11 @@ public class TowerSO : ScriptableObject
 
     public GameObject towerPrefab;
 
+    public List<UpgradeSO.UpgradeType> upgradeTypesToBuy;
+    public List<float> correspondingUpgradePowers;
+    public List<float> correspondigCosts;
+
+
     public enum towerTypes
     {
         KnifeThrower,

@@ -69,7 +69,6 @@ public class UIManager : MonoBehaviour
 
         else if (currentUI == null) ActivateESCMenu();
     }
-    
     public void SetHoveringState(bool state)
     {
         isHoveringUI = state;
@@ -77,7 +76,6 @@ public class UIManager : MonoBehaviour
 
     public bool IsHoveringUI()
     {
-        
         return isHoveringUI;
     }
 

@@ -16,7 +16,6 @@ public class ESCMenu : MonoBehaviour
         Debug.Log("ACtivatedESC");
         Time.timeScale = 0f;
         UIManager.Instance.SetHoveringState(true);
-
     }
 
     public void DeactivateESCMenu()

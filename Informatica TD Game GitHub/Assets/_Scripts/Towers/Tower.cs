@@ -39,7 +39,6 @@ public class Tower : MonoBehaviour
     public EnemyStats target;
 
     private float timeUntilFire;
-    private int level = 0;
     
     private void Start()
     {
@@ -48,28 +47,6 @@ public class Tower : MonoBehaviour
         currentFireRate = UpgradeManager.Instance.ReturnValueOf(towerCard.tower.towerType, UpgradeSO.UpgradeType.FireRate);
         currentDamage = UpgradeManager.Instance.ReturnValueOf(towerCard.tower.towerType, UpgradeSO.UpgradeType.Damage);
         currentBulletSpeed = UpgradeManager.Instance.ReturnValueOf(towerCard.tower.towerType, UpgradeSO.UpgradeType.BulletSpeed);
-
-        UpgradeTower();
-
-        upgradeButton.onClick.AddListener(UpgradeTower);
-    }
-
-    public void UpgradeTower()
-    {
-        level++;
-        if (level >= 10)
-        {
-            level = 10;
-        }
-
-        //currentFireRate = CalcFireRate();
-        //currentRange = Mathf.RoundToInt(CalcRange());
-        //currentBulletSpeed = currentTower.baseBulletSpeed;
-        //currentDamage = currentTower.baseDamage;
-
-        tile.UpdateRange();
-
-        CloseUpgradeUI();
     }
 
     private void Update()
@@ -184,17 +161,6 @@ public class Tower : MonoBehaviour
         return Vector2.Distance(target.transform.position, transform.position) <= currentRange;
     }
     
-    public void OpenUpgradeUI()
-    {
-        upgradeUI.SetActive(true);
-    }
-
-    public void CloseUpgradeUI()
-    {
-        upgradeUI.SetActive(false);
-        UIManager.Instance.SetHoveringState(false);
-    }
-
     private void ShootingTower()
     {
         if (timeUntilFire >= 1f / currentFireRate)

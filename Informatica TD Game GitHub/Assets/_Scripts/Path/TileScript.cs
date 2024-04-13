@@ -47,15 +47,9 @@ public class TileScript : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (UIManager.Instance.IsHoveringUI()) return;
-
         if (tower != null)
         {
-            
             UIManager.Instance.ActivateTowerInformationUI(tower);
-            
-            
-            tower.OpenUpgradeUI();
             
             UpdateRange();
         }
@@ -73,7 +67,6 @@ public class TileScript : MonoBehaviour
                 }
             }
             UIManager.Instance.DeactivateTowerInformationUI();
-            UIManager.Instance.SetHoveringState(false);
         }
     }
 

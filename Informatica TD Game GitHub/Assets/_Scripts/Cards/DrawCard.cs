@@ -24,11 +24,11 @@ public class DrawCard : MonoBehaviour
                 nameText.color = Color.white;
                 break;
             case CardSO.Rarity.uncommon:
-                amount = Random.Range(2, 4);
+                amount = Random.Range(1, 5);
                 nameText.color = Color.green;
                 break;
             case CardSO.Rarity.rare:
-                amount = Random.Range(1, 3);
+                amount = Random.Range(1, 4);
                 nameText.color = Color.cyan;
                 break;
             case CardSO.Rarity.epic:
