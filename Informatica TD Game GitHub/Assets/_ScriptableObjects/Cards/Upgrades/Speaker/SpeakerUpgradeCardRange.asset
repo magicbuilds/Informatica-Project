@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b95c1925b878bc45ba52cd24fc062c6, type: 3}
+  m_Name: SpeakerUpgradeCardRange
+  m_EditorClassIdentifier: 
+  cardName: Soeaker Damage Upgrade
+  rarity: 0
+  cardType: 1
+  tower: {fileID: 0}
+  upgrade: {fileID: 11400000, guid: 6833f743434064b46bd3030b8f922535, type: 2}
+  baseCost: 10
+  discription: Speaker does more damage
+  icon: {fileID: -1389556792, guid: f8297e3cba8d3f34aa0e798b969288d2, type: 3}
+  weight: 10
