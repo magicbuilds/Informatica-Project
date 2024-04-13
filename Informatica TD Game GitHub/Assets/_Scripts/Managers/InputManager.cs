@@ -24,6 +24,8 @@ public class InputManager : MonoBehaviour
         input.Player.Movement.canceled += cam.OnMovementCancelled;
 
         input.Player.Zoom.performed += cam.OnZoomPerformed;
+
+        input.Player.ESC.performed += UIManager.Instance.OnESCPressed;
     }
 
     public void DisablePlayerInput()
@@ -34,6 +36,8 @@ public class InputManager : MonoBehaviour
         input.Player.Movement.canceled -= cam.OnMovementPerformed;
 
         input.Player.Zoom.performed -= cam.OnMovementPerformed;
+
+        input.Player.ESC.performed -= UIManager.Instance.OnESCPressed;
     }
 
     private void OnEnable()

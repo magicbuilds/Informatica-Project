@@ -6,8 +6,6 @@ public class ESCMenu : MonoBehaviour
 {
     public static ESCMenu Instance;
 
-    [SerializeField] private GameObject escMenu;
-
     private void Awake()
     {
         Instance = this;
@@ -15,17 +13,39 @@ public class ESCMenu : MonoBehaviour
 
     public void ActivateESCMenu()
     {
+        Debug.Log("ACtivatedESC");
         Time.timeScale = 0f;
-        escMenu.SetActive(true);
 
-        InputManager.Instance.DisablePlayerInput();
     }
 
     public void DeactivateESCMenu()
     {
+        Debug.Log("deACtivatedESC");
         Time.timeScale = 1f;
-        escMenu.SetActive(false);
+    }
 
-        InputManager.Instance.EnablePlayerInput();
+    public void QuitGame()
+    {
+        Debug.Log("Quit");
+        Application.Quit();
+    }
+
+    public void ResumeGame()
+    {
+        UIManager.Instance.DeactivateESCMenu();
+    }
+
+    public void ShowStatsScreen()
+    {
+        UIManager.Instance.ActivateStatsScreen();
+    }
+
+    public void ShowOptionsMenu()
+    {
+        UIManager.Instance.ActivateOptionsMenu();
+    }
+    public void HideOptionsScreen()
+    {
+        UIManager.Instance.DeactivateOptionsMenu();
     }
 }

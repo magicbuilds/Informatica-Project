@@ -1,12 +1,16 @@
 using System;
 using System.Collections.Generic;
 using TMPro;
+using Unity.PlasticSCM.Editor.WebApi;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
     public static UIManager Instance;
+
+    [SerializeField] private GameObject currentUI;
 
     [Header("EnemiesLeftUI")]
     [SerializeField] private TextMeshProUGUI enemiesLeftText;
@@ -23,7 +27,6 @@ public class UIManager : MonoBehaviour
     [Header("CardDrawUI")]
     [SerializeField] private GameObject cardDrawUI;
     
-    
     [Header("ExtraCardInformationUI")]
     [SerializeField] private GameObject extraCardInformationUI;
     [SerializeField] private TextMeshProUGUI cardNameTextExtraInformationUI;
@@ -37,17 +40,34 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI cardStatsTowerInformationUI;
     [SerializeField] private Image cardIconTowerInformationUI;
 
+    [Header("ESCMenu")]
+    [SerializeField] private GameObject escMenu;
+
+    [Header("StatsScreen")]
+    [SerializeField] private GameObject statsScreen;
+
+    [Header("OptionsMenu")]
+    [SerializeField] private GameObject optionsMenu;
+
     private bool isHoveringUI;
-    private GameObject currentUI;
 
     private void Awake()
     {
         Instance = this;
     }
 
-    public void OnESCPressed()
+    public void OnESCPressed(InputAction.CallbackContext context)
     {
+        if (currentUI == cardDrawUI) return;
 
+        else if (currentUI == escMenu) DeactivateESCMenu();
+        else if (currentUI == towerInformationUI) DeactivateTowerInformationUI();
+        else if (currentUI == extraCardInformationUI) DeactivateExtraInformationUI();
+
+        else if (currentUI == statsScreen) DeactivateStatsScreen();
+        else if (currentUI == optionsMenu) DeactivateOptionsMenu();
+
+        else if (currentUI == null) ActivateESCMenu();
     }
     
     public void SetHoveringState(bool state)
@@ -148,12 +168,55 @@ public class UIManager : MonoBehaviour
 
     public void ActivateESCMenu()
     {
-
+        ESCMenu.Instance.ActivateESCMenu();
+        escMenu.SetActive(true);
+        currentUI = escMenu;
     }
 
     public void DeactivateESCMenu()
     {
+        ESCMenu.Instance.DeactivateESCMenu();
+        escMenu.SetActive(false);
+        currentUI = null;
+    }
 
+    public void DeactivateESCMenuObject()
+    {
+        escMenu.SetActive(false);
+    }
+
+    public void ActivateStatsScreen()
+    {
+        DeactivateESCMenuObject();
+
+        statsScreen.SetActive(true);
+
+        currentUI = statsScreen;
+    }
+
+    public void DeactivateStatsScreen()
+    {
+        ActivateESCMenu();
+        statsScreen.SetActive(false);
+
+        currentUI = null;
+    }
+
+    public void ActivateOptionsMenu()
+    {
+        DeactivateESCMenuObject();
+
+        optionsMenu.SetActive(true);
+
+        currentUI = optionsMenu;
+    }
+
+    public void DeactivateOptionsMenu()
+    {
+        ActivateESCMenu();
+        optionsMenu.SetActive(false);
+
+        currentUI = null;
     }
 
     public void RaiseDeckCardUI()
