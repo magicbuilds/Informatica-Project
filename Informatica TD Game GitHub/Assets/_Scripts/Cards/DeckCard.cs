@@ -61,6 +61,7 @@ public class DeckCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             InventoryManager.Instance.SetSelectedCard(this);
             InventoryManager.Instance.OnCardPlayed();
         }
+        
 
 
     }

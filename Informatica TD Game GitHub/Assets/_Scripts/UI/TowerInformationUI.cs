@@ -16,16 +16,21 @@ public class TowerInformationUI : MonoBehaviour
 
     public void SetSelectedTower(GameObject tower)
     {
+        
         selecterTowerObject = tower;
+        
     }
 
     public void RemoveSelectedTower()
     {
+        
         selecterTowerObject = null;
+        
     }
 
     public void SellTower()
     {
+        UIManager.Instance.SetHoveringState(false);
         if (selectedTowerCard != null) 
         {
             PlayerStatsManager.Instance.AddRemoveCoins(selectedTowerCard.baseCost / 2);
@@ -33,6 +38,7 @@ public class TowerInformationUI : MonoBehaviour
             Destroy(selecterTowerObject);
             UIManager.Instance.DeactivateTowerInformationUI();
         }
+        
 
     }
 }

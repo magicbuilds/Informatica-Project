@@ -43,6 +43,7 @@ public class PlayerStatsManager : MonoBehaviour
 
     public void AddRemoveCoins(float coinsToAdd)
     {
+        
         coins += coinsToAdd;
 
         if (coins > maxCoins)

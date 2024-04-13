@@ -121,6 +121,7 @@ public class UIManager : MonoBehaviour
 
     public void ActivateExtraInformationUI(CardSO card)
     {
+       
         cardDrawUI.SetActive(false);
 
         extraCardInformationUI.SetActive(true);

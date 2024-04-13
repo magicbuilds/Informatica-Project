@@ -12,7 +12,7 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private List<CardSO> starterCards;
 
     [SerializeField] private List<CardSO> cardsInDeck = new List<CardSO>();
-
+ 
     [Header("All Cards")]
     public List<CardSO> cards;
 

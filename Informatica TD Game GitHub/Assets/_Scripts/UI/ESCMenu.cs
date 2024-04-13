@@ -15,6 +15,7 @@ public class ESCMenu : MonoBehaviour
     {
         Debug.Log("ACtivatedESC");
         Time.timeScale = 0f;
+        UIManager.Instance.SetHoveringState(true);
 
     }
 
@@ -22,6 +23,7 @@ public class ESCMenu : MonoBehaviour
     {
         Debug.Log("deACtivatedESC");
         Time.timeScale = 1f;
+        UIManager.Instance.SetHoveringState(false);
     }
 
     public void QuitGame()

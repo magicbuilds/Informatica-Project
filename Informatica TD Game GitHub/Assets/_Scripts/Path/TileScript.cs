@@ -12,6 +12,7 @@ public class TileScript : MonoBehaviour
     [SerializeField] private GameObject rangeObject;
     
     private Tower tower;
+    private CardSO currentCard;
     private Color startColor;
 
     private void Start()
@@ -50,10 +51,12 @@ public class TileScript : MonoBehaviour
 
         if (tower != null)
         {
+            
             UIManager.Instance.ActivateTowerInformationUI(tower);
-
+            
+            
             tower.OpenUpgradeUI();
-
+            
             UpdateRange();
         }
         else
@@ -62,11 +65,15 @@ public class TileScript : MonoBehaviour
             {
                 if (InventoryManager.Instance.currentSelectedCard.currentCard.cardType == CardSO.CardType.Tower)
                 {
+                    PlayerStatsManager.Instance.AddRemoveCoins(-InventoryManager.Instance.currentSelectedCard.currentCard.baseCost);
                     SpawnTower();
                     InventoryManager.Instance.OnCardPlayed();
+                    
+                    
                 }
             }
             UIManager.Instance.DeactivateTowerInformationUI();
+            UIManager.Instance.SetHoveringState(false);
         }
     }
 
