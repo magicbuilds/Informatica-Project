@@ -13,10 +13,12 @@ MonoBehaviour:
   m_Name: Speaker
   m_EditorClassIdentifier: 
   cardName: Speaker
-  rarity: 0
+  rarity: 1
+  cardType: 0
   tower: {fileID: 11400000, guid: e2ae993c6bd27f24aaf71fe8db8eb2d2, type: 2}
-  baseCost: 10
+  upgrade: {fileID: 0}
+  baseCost: 35
   discription: This tower reduces the enemies cost within it's range by playing annoying
     ads.
   icon: {fileID: 1142619237, guid: f8297e3cba8d3f34aa0e798b969288d2, type: 3}
-  weight: 10
+  weight: 80

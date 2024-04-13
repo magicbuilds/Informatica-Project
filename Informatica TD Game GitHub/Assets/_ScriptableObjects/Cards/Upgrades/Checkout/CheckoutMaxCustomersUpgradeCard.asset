@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: CheckoutMaxCustomersUpgradeCard
   m_EditorClassIdentifier: 
   cardName: Max Customers Checkout Upgrade
-  rarity: 0
+  rarity: 5
   cardType: 1
   tower: {fileID: 0}
   upgrade: {fileID: 11400000, guid: 4ff3b3caead03684a9b890c3433deecd, type: 2}
-  baseCost: 10
+  baseCost: 400
   discription: This increases the maximum customers at the checout
   icon: {fileID: -967010129, guid: f8297e3cba8d3f34aa0e798b969288d2, type: 3}
-  weight: 10
+  weight: 15

@@ -12,9 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d968e75eda3bcde43b83bbb4d5adf8ff, type: 3}
   m_Name: KnifeThrower
   m_EditorClassIdentifier: 
-  baseDamage: 5
-  baseRange: 4
-  baseFireRate: 10
+  baseDamage: 3.5
+  baseRange: 3.5
+  baseFireRate: 2
+  baseSpecial: 0
   baseBulletSpeed: 10
   towerType: 0
   towerPrefab: {fileID: 7217467001008108073, guid: bde14f702250d3243b16df15f935056c, type: 3}
+  upgradeTypesToBuy: 
+  correspondingUpgradePowers: []
+  correspondigCosts: []

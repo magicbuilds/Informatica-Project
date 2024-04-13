@@ -17,7 +17,7 @@ MonoBehaviour:
   cardType: 1
   tower: {fileID: 0}
   upgrade: {fileID: 11400000, guid: d616e748612e595478727f8bdadbf154, type: 2}
-  baseCost: 10
+  baseCost: 200
   discription: Discount Gun shoots faster
   icon: {fileID: 21300000, guid: 9848f6e945a3c4b43b0f10008cb7e360, type: 3}
-  weight: 10
+  weight: 20

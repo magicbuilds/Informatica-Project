@@ -14,8 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardName: Knife Thrower
   rarity: 0
+  cardType: 0
   tower: {fileID: 11400000, guid: 8ee63ebd0d8f51c4587a7d9ec26d6f15, type: 2}
-  baseCost: 10
+  upgrade: {fileID: 0}
+  baseCost: 6
   discription: Basic tower that throws knifes at enemies.
   icon: {fileID: 54266234, guid: f8297e3cba8d3f34aa0e798b969288d2, type: 3}
-  weight: 10
+  weight: 90

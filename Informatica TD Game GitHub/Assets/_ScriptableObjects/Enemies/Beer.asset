@@ -13,12 +13,13 @@ MonoBehaviour:
   m_Name: Beer
   m_EditorClassIdentifier: 
   enemyName: Beer
-  baseHealth: 500
+  baseHealth: 35
   damage: 1
-  speed: 2
-  baseCoins: 20
+  speed: 15
+  baseCoins: 4
   xSprite: {fileID: 181881767, guid: 01d99cf87cd31d44cbdcb241727b4862, type: 3}
   ySprite: {fileID: 0}
   holdingEnemies: []
   correspondingAmounts: 
   showHoldingEnemy: 0
+  isBoss: 0

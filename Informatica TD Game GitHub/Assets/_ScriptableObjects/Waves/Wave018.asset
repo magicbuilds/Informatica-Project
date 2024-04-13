@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87ca6cbd97cc7ef4180b0568b1979530, type: 3}
+  m_Name: Wave018
+  m_EditorClassIdentifier: 
+  baseHealthMultiplier: 1
+  baseCoinsMultiplier: 1
+  enemies:
+  - {fileID: 11400000, guid: 9c0f31c5347b3d146885a3f0c0ccf28d, type: 2}
+  - {fileID: 11400000, guid: 3c7ca3a00513e2545bb82dd0ce7c555c, type: 2}
+  - {fileID: 11400000, guid: a7ca15da869ccde40b94e24c302880c0, type: 2}
+  - {fileID: 11400000, guid: a7ca15da869ccde40b94e24c302880c0, type: 2}
+  - {fileID: 11400000, guid: a7ca15da869ccde40b94e24c302880c0, type: 2}
+  - {fileID: 11400000, guid: a7ca15da869ccde40b94e24c302880c0, type: 2}
+  - {fileID: 11400000, guid: a7ca15da869ccde40b94e24c302880c0, type: 2}
+  - {fileID: 11400000, guid: bbbf38d4aecfceb4f9f4803490910a2d, type: 2}
+  correspondingEnemiesAmount: 0a0000000300000003000000030000000300000003000000030000000a000000
+  correspondingWaitTime:
+  - 0
+  - 1
+  - 10
+  - 10
+  - 10
+  - 10
+  - 10
+  - 10

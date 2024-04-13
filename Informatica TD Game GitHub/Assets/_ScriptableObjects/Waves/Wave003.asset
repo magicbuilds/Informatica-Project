@@ -16,6 +16,10 @@ MonoBehaviour:
   baseCoinsMultiplier: 1
   enemies:
   - {fileID: 11400000, guid: 7a2911f7e7d95bd41b3b544aeeaaed8d, type: 2}
-  - {fileID: 11400000, guid: bbbf38d4aecfceb4f9f4803490910a2d, type: 2}
-  - {fileID: 11400000, guid: 48fccb0c5ab16c2458fb618d62923fe1, type: 2}
-  correspondingEnemiesAmount: 0a000000140000000a000000
+  - {fileID: 11400000, guid: b8f6a851ee0ee9240a51410f86418e54, type: 2}
+  - {fileID: 11400000, guid: a7ca15da869ccde40b94e24c302880c0, type: 2}
+  correspondingEnemiesAmount: 070000000a0000000a000000
+  correspondingWaitTime:
+  - 0
+  - 1.5
+  - 4

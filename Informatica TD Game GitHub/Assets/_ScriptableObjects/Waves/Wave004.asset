@@ -15,5 +15,9 @@ MonoBehaviour:
   baseHealthMultiplier: 1
   baseCoinsMultiplier: 1
   enemies:
-  - {fileID: 11400000, guid: ffd1fb5c42309e34fb99dac3c131a74f, type: 2}
-  correspondingEnemiesAmount: 02000000
+  - {fileID: 11400000, guid: bbbf38d4aecfceb4f9f4803490910a2d, type: 2}
+  - {fileID: 11400000, guid: bbbf38d4aecfceb4f9f4803490910a2d, type: 2}
+  correspondingEnemiesAmount: 050000000a000000
+  correspondingWaitTime:
+  - 0
+  - 1

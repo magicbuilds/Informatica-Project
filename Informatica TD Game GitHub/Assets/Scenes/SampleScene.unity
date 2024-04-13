@@ -803,10 +803,13 @@ MonoBehaviour:
   - {fileID: 420988395}
   starterCards:
   - {fileID: 11400000, guid: 4cd2e723daef37c4b91369666447c7c6, type: 2}
+  - {fileID: 11400000, guid: c619e6ca486cf284e899d0f703f79db3, type: 2}
   - {fileID: 11400000, guid: 4cd2e723daef37c4b91369666447c7c6, type: 2}
   - {fileID: 11400000, guid: 4cd2e723daef37c4b91369666447c7c6, type: 2}
   - {fileID: 11400000, guid: 4cd2e723daef37c4b91369666447c7c6, type: 2}
   - {fileID: 11400000, guid: 4cd2e723daef37c4b91369666447c7c6, type: 2}
+  - {fileID: 11400000, guid: 79623443753093f42970b6985d54f39e, type: 2}
+  - {fileID: 11400000, guid: 79623443753093f42970b6985d54f39e, type: 2}
   cardsInDeck: []
   cards:
   - {fileID: 11400000, guid: 79623443753093f42970b6985d54f39e, type: 2}
@@ -8947,6 +8950,7 @@ MonoBehaviour:
   wavesToSpawn: {fileID: 11400000, guid: 971abe866870b404a8fcde52dde47a4b, type: 2}
   waveIndex: 0
   enemiesInThisWave: 0
+  enemiesLeftInThisWave: 0
 --- !u!1 &1400685529
 GameObject:
   m_ObjectHideFlags: 0
@@ -10371,7 +10375,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 2960077048477578210, guid: d428a1ec536af2d469f3eeccfd5fc542, type: 3}
   enemiesLeft: []
-  currentNumberOfEnemies: 0
 --- !u!1 &1599292998
 GameObject:
   m_ObjectHideFlags: 0
@@ -12031,8 +12034,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 50
   health: 50
-  maxCoins: 200
-  coins: 50
+  maxCoins: 500
+  coins: 20
 --- !u!1 &1916008587
 GameObject:
   m_ObjectHideFlags: 0
@@ -13023,7 +13026,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2111293924
 Transform:
   m_ObjectHideFlags: 0

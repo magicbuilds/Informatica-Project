@@ -76,8 +76,7 @@ public class Tower : MonoBehaviour
                 ShootingTower();
                 break;
             case TowerSO.towerTypes.DiscountGun:
-                currentDamage = currentDamage * target.health;
-                ShootingTower();
+                DiscountGun();
                 break;
             case TowerSO.towerTypes.Blade:
                 break;
@@ -199,6 +198,16 @@ public class Tower : MonoBehaviour
         }
     }
 
+    private void DiscountGun()
+    {
+        if (timeUntilFire >= 1f / currentFireRate)
+        {
+            ShootTicket();
+
+            timeUntilFire = 0f;
+        }
+    }
+
     private void ShootBullet()
     {
         GameObject bullet = Instantiate(ammoPrefab, firingPoints[0].position, Quaternion.identity);
@@ -226,15 +235,13 @@ public class Tower : MonoBehaviour
         }
     }
 
-    /*private float CalcFireRate()
+    private void ShootTicket()
     {
-        return currentTower.baseFireRate * Mathf.Pow(level, 0.7f);
-    }
+        GameObject bullet = Instantiate(ammoPrefab, firingPoints[0].position, Quaternion.identity);
+        TicketScript bulletScript = bullet.GetComponent<TicketScript>();
 
-    private float CalcRange()
-    {
-        return Mathf.RoundToInt(currentTower.baseRange * Mathf.Pow(level, 0.4f));
-    }*/
+        bulletScript.tower = this;
+    }
 
     private void Checkout()
     {

@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7b95c1925b878bc45ba52cd24fc062c6, type: 3}
-  m_Name: ShelfBombFireRateUpgradeCard 3
+  m_Name: ShelfBombDamageUpgradeCard
   m_EditorClassIdentifier: 
-  cardName: Shelf Bomb Fire Rate
+  cardName: Shelf Bomb Damage
   rarity: 0
   cardType: 1
   tower: {fileID: 0}
-  upgrade: {fileID: 11400000, guid: 4f17889aa13b9664f89e34f14857f1b3, type: 2}
-  baseCost: 10
-  discription: Shelf shoots faster
+  upgrade: {fileID: 11400000, guid: d7823d0b823a37c4b9f0dc88c3ce219a, type: 2}
+  baseCost: 150
+  discription: Shelf does more damage
   icon: {fileID: -1389556792, guid: f8297e3cba8d3f34aa0e798b969288d2, type: 3}
-  weight: 10
+  weight: 20

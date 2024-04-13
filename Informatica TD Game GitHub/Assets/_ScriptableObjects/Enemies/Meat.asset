@@ -13,12 +13,13 @@ MonoBehaviour:
   m_Name: Meat
   m_EditorClassIdentifier: 
   enemyName: Meat
-  baseHealth: 500
-  damage: 1
-  speed: 2
-  baseCoins: 20
+  baseHealth: 250
+  damage: 5
+  speed: 1
+  baseCoins: 4
   xSprite: {fileID: -1664351538, guid: 01d99cf87cd31d44cbdcb241727b4862, type: 3}
   ySprite: {fileID: 0}
   holdingEnemies: []
   correspondingAmounts: 
   showHoldingEnemy: 0
+  isBoss: 0

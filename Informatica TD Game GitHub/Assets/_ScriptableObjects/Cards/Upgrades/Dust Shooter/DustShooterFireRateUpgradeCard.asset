@@ -17,7 +17,7 @@ MonoBehaviour:
   cardType: 1
   tower: {fileID: 0}
   upgrade: {fileID: 11400000, guid: bd60acbf768e5b24398acb1d21d8d479, type: 2}
-  baseCost: 10
+  baseCost: 30
   discription: Shoots dust faster
   icon: {fileID: -1094376119, guid: f8297e3cba8d3f34aa0e798b969288d2, type: 3}
-  weight: 10
+  weight: 20

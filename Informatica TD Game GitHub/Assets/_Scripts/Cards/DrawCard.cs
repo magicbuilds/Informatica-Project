@@ -20,19 +20,19 @@ public class DrawCard : MonoBehaviour
         switch (spawnedCard.rarity)
         {
             case CardSO.Rarity.common:
-                amount = Random.Range(2, 6);
+                amount = Random.Range(2, 4);
                 nameText.color = Color.white;
                 break;
             case CardSO.Rarity.uncommon:
-                amount = Random.Range(1, 5);
+                amount = Random.Range(1, 3);
                 nameText.color = Color.green;
                 break;
             case CardSO.Rarity.rare:
-                amount = Random.Range(1, 4);
+                amount = 1;
                 nameText.color = Color.cyan;
                 break;
             case CardSO.Rarity.epic:
-                amount = Random.Range(1, 3);
+                amount = 1;
                 nameText.color = Color.blue;
                 break;
             case CardSO.Rarity.legendary:
@@ -47,12 +47,15 @@ public class DrawCard : MonoBehaviour
                 Debug.Log("Rarity " + spawnedCard.rarity + " not found");
                 break;
         }
+
+        if (currentCard.cardType == CardSO.CardType.Upgrade)
+        {
+            amount = 1;
+        }
      
         nameText.text = currentCard.cardName;
         amountText.text = amount + "X";
         icon.sprite = currentCard.icon;
-
-        Debug.Log(currentCard);
         cardStatsText.text = currentCard.GetStats();
         
     }

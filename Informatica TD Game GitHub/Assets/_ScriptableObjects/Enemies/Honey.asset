@@ -13,12 +13,13 @@ MonoBehaviour:
   m_Name: Honey
   m_EditorClassIdentifier: 
   enemyName: Honey
-  baseHealth: 40
-  damage: 1
-  speed: 3
-  baseCoins: 2
+  baseHealth: 70
+  damage: 3
+  speed: 10
+  baseCoins: 3
   xSprite: {fileID: -44572868, guid: 01d99cf87cd31d44cbdcb241727b4862, type: 3}
   ySprite: {fileID: 0}
   holdingEnemies: []
   correspondingAmounts: 
   showHoldingEnemy: 0
+  isBoss: 0

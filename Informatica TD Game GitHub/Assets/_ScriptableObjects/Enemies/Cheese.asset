@@ -13,12 +13,13 @@ MonoBehaviour:
   m_Name: Cheese
   m_EditorClassIdentifier: 
   enemyName: Cheese
-  baseHealth: 40
-  damage: 1
-  speed: 3
-  baseCoins: 2
+  baseHealth: 500
+  damage: 10
+  speed: 1.5
+  baseCoins: 5
   xSprite: {fileID: 314960016, guid: 01d99cf87cd31d44cbdcb241727b4862, type: 3}
   ySprite: {fileID: 0}
   holdingEnemies: []
   correspondingAmounts: 
   showHoldingEnemy: 0
+  isBoss: 0

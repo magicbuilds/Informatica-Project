@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7b95c1925b878bc45ba52cd24fc062c6, type: 3}
-  m_Name: RailgunUPgradeCardDamage
+  m_Name: RailgunUpgradeCardDamage
   m_EditorClassIdentifier: 
   cardName: Railgun Damage Upgrade
   rarity: 0
   cardType: 1
   tower: {fileID: 0}
   upgrade: {fileID: 11400000, guid: e677d1edb965b8049be1adc472f533a8, type: 2}
-  baseCost: 10
+  baseCost: 150
   discription: Railgun does more damage
   icon: {fileID: -1932013238, guid: f8297e3cba8d3f34aa0e798b969288d2, type: 3}
-  weight: 10
+  weight: 20

@@ -13,8 +13,12 @@ MonoBehaviour:
   m_Name: DustShooter
   m_EditorClassIdentifier: 
   baseDamage: 1
-  baseRange: 5
-  baseFireRate: 10
+  baseRange: 3
+  baseFireRate: 5
+  baseSpecial: 0
   baseBulletSpeed: 15
   towerType: 3
   towerPrefab: {fileID: 7217467001008108073, guid: 49c35bdcc366d594c9a3adc4cb848220, type: 3}
+  upgradeTypesToBuy: 
+  correspondingUpgradePowers: []
+  correspondigCosts: []

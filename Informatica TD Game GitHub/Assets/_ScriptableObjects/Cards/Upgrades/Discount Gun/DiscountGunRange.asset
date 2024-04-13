@@ -17,7 +17,7 @@ MonoBehaviour:
   cardType: 1
   tower: {fileID: 0}
   upgrade: {fileID: 11400000, guid: f29d43a2b7d753f4998f76ecdecbfb35, type: 2}
-  baseCost: 10
+  baseCost: 150
   discription: Discount Gun has a bigger range
   icon: {fileID: 21300000, guid: 9848f6e945a3c4b43b0f10008cb7e360, type: 3}
-  weight: 10
+  weight: 20

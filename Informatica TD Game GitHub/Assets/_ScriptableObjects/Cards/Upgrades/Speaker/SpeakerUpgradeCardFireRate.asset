@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b95c1925b878bc45ba52cd24fc062c6, type: 3}
   m_Name: SpeakerUpgradeCardFireRate
   m_EditorClassIdentifier: 
-  cardName: Soeaker Fire Rate Upgrade
+  cardName: Speaker Fire Rate Upgrade
   rarity: 0
   cardType: 1
   tower: {fileID: 0}
   upgrade: {fileID: 11400000, guid: d50dfe33c466fb245a52cf1d7b3aad1f, type: 2}
-  baseCost: 10
+  baseCost: 60
   discription: Speaker shoots faster
   icon: {fileID: -185366766, guid: f8297e3cba8d3f34aa0e798b969288d2, type: 3}
-  weight: 10
+  weight: 20

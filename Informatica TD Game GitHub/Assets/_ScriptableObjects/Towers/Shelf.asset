@@ -12,10 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d968e75eda3bcde43b83bbb4d5adf8ff, type: 3}
   m_Name: Shelf
   m_EditorClassIdentifier: 
-  baseDamage: 15
+  baseDamage: 2
   baseRange: 4
-  baseFireRate: 3
-  baseSpecial: 1.5
+  baseFireRate: 1
+  baseSpecial: 0.25
   baseBulletSpeed: 15
   towerType: 6
   towerPrefab: {fileID: 7217467001008108073, guid: 098abc2e26526464c82a89f1164e283c, type: 3}
+  upgradeTypesToBuy: 
+  correspondingUpgradePowers: []
+  correspondigCosts: []

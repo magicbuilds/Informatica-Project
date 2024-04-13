@@ -13,10 +13,12 @@ MonoBehaviour:
   m_Name: Shelf
   m_EditorClassIdentifier: 
   cardName: Shelf
-  rarity: 0
+  rarity: 2
+  cardType: 0
   tower: {fileID: 11400000, guid: b6de478ab06950c40a0170284870b93e, type: 2}
-  baseCost: 10
+  upgrade: {fileID: 0}
+  baseCost: 85
   discription: 'This tower throws cardboard boxes filled with bombs at the enemies.
     Every enemy inside the explosion range gets damaged. '
   icon: {fileID: 270494299, guid: f8297e3cba8d3f34aa0e798b969288d2, type: 3}
-  weight: 10
+  weight: 65

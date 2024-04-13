@@ -15,7 +15,7 @@ MonoBehaviour:
   enemyName: Cookie
   baseHealth: 10
   damage: 1
-  speed: 5
+  speed: 1
   baseCoins: 1
   xSprite: {fileID: 1805303780, guid: 01d99cf87cd31d44cbdcb241727b4862, type: 3}
   ySprite: {fileID: 0}

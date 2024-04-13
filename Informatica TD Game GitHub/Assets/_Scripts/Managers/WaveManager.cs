@@ -1,5 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class WaveManager : MonoBehaviour
@@ -10,29 +10,44 @@ public class WaveManager : MonoBehaviour
 
     public int waveIndex = 0;
     public int enemiesInThisWave = 0;
+    public int enemiesLeftInThisWave = 0;
 
     private List<Vector2> spawnPositions = new List<Vector2>();
     private List<int> usedWaypointIndexes = new List<int>();
     private List<Waypoint> correspondingWaypoints = new List<Waypoint>();
+
+    private bool waveHasSpawned = true;
+    private bool hasWaitedBetweenEnemies = true;
+
+    private WaveSO waveToSpawn = null;
+    private int currentIndexAtWave = 0;
+    private int currentEnemiesSpawnedAtIndex = 0;
+
+    private float timeWaited;
+    private float baseWaitTime = 0.15f;
 
     private void Awake()
     {
         Instance = this;
     }
 
-    public void SpawnNewWave()
+    private void Update()
     {
-        WaveSO waveToSpawn = wavesToSpawn.waves[waveIndex];
+        if (waveHasSpawned) return;
 
-        enemiesInThisWave = 0;
-        int index = 0;
-        foreach (int amount in waveToSpawn.correspondingEnemiesAmount)
+        timeWaited += Time.deltaTime;
+
+        if (!hasWaitedBetweenEnemies)
         {
-            EnemySO enemyToSpawn = waveToSpawn.enemies[index];
+            if (timeWaited < waveToSpawn.correspondingWaitTime[currentIndexAtWave]) return;
+            else hasWaitedBetweenEnemies = true;
+        }
 
-            for (int i = 0; i < amount; i++)
+        if (timeWaited > baseWaitTime)
+        {
+            if (currentEnemiesSpawnedAtIndex < waveToSpawn.correspondingEnemiesAmount[currentIndexAtWave])
             {
-                enemiesInThisWave++;
+                EnemySO enemyToSpawn = waveToSpawn.enemies[currentIndexAtWave];
 
                 int randomPathIndex = Random.Range(0, spawnPositions.Count);
 
@@ -40,10 +55,51 @@ public class WaveManager : MonoBehaviour
                 Waypoint waypoint = correspondingWaypoints[randomPathIndex];
 
                 EnemyManager.Instance.SpawnEnemy(enemyToSpawn, randomPosition, waypoint);
+
+                currentEnemiesSpawnedAtIndex++;
+            }
+            else
+            {
+                if (currentIndexAtWave + 1 == waveToSpawn.enemies.Count)
+                {
+                    waveHasSpawned = true;
+                }
+                else
+                {
+                    currentIndexAtWave++;
+                    currentEnemiesSpawnedAtIndex = 0;
+                    hasWaitedBetweenEnemies = false;
+                }
             }
 
+            timeWaited = Random.Range(0, 0.05f);
+        }
+    }
+
+    public void SpawnNewWave()
+    {
+        waveToSpawn = wavesToSpawn.waves[waveIndex];
+
+        currentIndexAtWave = 0;
+        currentEnemiesSpawnedAtIndex = 0;
+        waveHasSpawned = false;
+
+        enemiesInThisWave = 0;
+        int index = 0;
+        foreach (int amount in waveToSpawn.correspondingEnemiesAmount)
+        {
+            enemiesInThisWave += amount;
+
+            foreach (int holdingAmount in waveToSpawn.enemies[index].correspondingAmounts)
+            {
+                enemiesInThisWave += amount * holdingAmount;
+            }
             index++;
         }
+
+        enemiesLeftInThisWave = enemiesInThisWave;
+
+        UIManager.Instance.UpdateEnemysLeftUI(enemiesLeftInThisWave);
 
         waveIndex++;
     }

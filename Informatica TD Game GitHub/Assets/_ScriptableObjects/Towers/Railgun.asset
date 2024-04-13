@@ -12,9 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d968e75eda3bcde43b83bbb4d5adf8ff, type: 3}
   m_Name: Railgun
   m_EditorClassIdentifier: 
-  baseDamage: 15
-  baseRange: 20
-  baseFireRate: 1
-  baseBulletSpeed: 15
+  baseDamage: 25
+  baseRange: 15
+  baseFireRate: 0.5
+  baseSpecial: 0
+  baseBulletSpeed: 25
   towerType: 4
   towerPrefab: {fileID: 7217467001008108073, guid: 6527eb67754e9b54f83e48560955ff79, type: 3}
+  upgradeTypesToBuy: 
+  correspondingUpgradePowers: []
+  correspondigCosts: []

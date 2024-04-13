@@ -55,12 +55,11 @@ public class DeckCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         }
         if (currentCard.cardType == CardSO.CardType.Upgrade)
         {
+            PlayerStatsManager.Instance.AddRemoveCoins(-currentCard.baseCost);
+
             UpgradeManager.Instance.Upgrade(currentCard.upgrade);
             InventoryManager.Instance.SetSelectedCard(this);
             InventoryManager.Instance.OnCardPlayed();
         }
-        
-
-
     }
 }

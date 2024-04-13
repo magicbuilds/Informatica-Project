@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e8a856075bfaa4f47a581847cdb55960, type: 3}
-  m_Name: DiscountGunUPgradeRange
+  m_Name: DiscountGunUpgradeRange
   m_EditorClassIdentifier: 
   correspondigTower: 1
   upgradeType: 0
-  upgradePower: 10
+  upgradePower: 2

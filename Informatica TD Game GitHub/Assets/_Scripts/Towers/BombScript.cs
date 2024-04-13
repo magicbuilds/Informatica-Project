@@ -38,6 +38,7 @@ public class BombScript : MonoBehaviour
         if (Vector2.Distance(transform.position, target.transform.position) <= 0.1f)
         {
             Explode();
+            Destroy(gameObject);
         }
     }
 
@@ -63,7 +64,10 @@ public class BombScript : MonoBehaviour
 
         if (enemy.gameObject.TryGetComponent<EnemyStats>(out EnemyStats enemyStats))
         {
-            enemiesInRange.Add(enemyStats);
+            if (!enemiesInRange.Contains(enemyStats))
+            {
+                enemiesInRange.Add(enemyStats);
+            }
         }
     }
 

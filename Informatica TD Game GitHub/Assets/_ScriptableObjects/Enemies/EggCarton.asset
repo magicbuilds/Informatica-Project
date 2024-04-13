@@ -13,13 +13,14 @@ MonoBehaviour:
   m_Name: EggCarton
   m_EditorClassIdentifier: 
   enemyName: Egg Carton
-  baseHealth: 500
-  damage: 2
-  speed: 2
-  baseCoins: 20
+  baseHealth: 100
+  damage: 25
+  speed: 0.75
+  baseCoins: 5
   xSprite: {fileID: -521476395, guid: 01d99cf87cd31d44cbdcb241727b4862, type: 3}
   ySprite: {fileID: 0}
   holdingEnemies:
   - {fileID: 11400000, guid: a7ca15da869ccde40b94e24c302880c0, type: 2}
   correspondingAmounts: 0c000000
   showHoldingEnemy: 0
+  isBoss: 1

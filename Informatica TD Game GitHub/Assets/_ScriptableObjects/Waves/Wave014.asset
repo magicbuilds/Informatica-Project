@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87ca6cbd97cc7ef4180b0568b1979530, type: 3}
+  m_Name: Wave014
+  m_EditorClassIdentifier: 
+  baseHealthMultiplier: 1
+  baseCoinsMultiplier: 1
+  enemies:
+  - {fileID: 11400000, guid: ffd1fb5c42309e34fb99dac3c131a74f, type: 2}
+  - {fileID: 11400000, guid: 7a2911f7e7d95bd41b3b544aeeaaed8d, type: 2}
+  - {fileID: 11400000, guid: 9c0f31c5347b3d146885a3f0c0ccf28d, type: 2}
+  - {fileID: 11400000, guid: ffd1fb5c42309e34fb99dac3c131a74f, type: 2}
+  correspondingEnemiesAmount: 020000000a0000000500000003000000
+  correspondingWaitTime:
+  - 0.5
+  - 2
+  - 3
+  - 0.5

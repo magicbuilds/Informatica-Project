@@ -12,4 +12,5 @@ public class WaveSO : ScriptableObject
     [Header("Enemies")]
     public List<EnemySO> enemies;
     public List<int> correspondingEnemiesAmount;
+    public List<float> correspondingWaitTime;
 }

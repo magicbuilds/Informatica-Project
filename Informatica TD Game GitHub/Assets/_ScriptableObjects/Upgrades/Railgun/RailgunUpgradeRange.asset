@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   correspondigTower: 4
   upgradeType: 0
-  upgradePower: 10
+  upgradePower: 5

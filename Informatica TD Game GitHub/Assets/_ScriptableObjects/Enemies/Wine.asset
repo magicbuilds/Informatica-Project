@@ -13,12 +13,13 @@ MonoBehaviour:
   m_Name: Wine
   m_EditorClassIdentifier: 
   enemyName: Wine
-  baseHealth: 500
-  damage: 1
-  speed: 2
-  baseCoins: 20
+  baseHealth: 100
+  damage: 6
+  speed: 6
+  baseCoins: 6
   xSprite: {fileID: -411306098, guid: 01d99cf87cd31d44cbdcb241727b4862, type: 3}
   ySprite: {fileID: 0}
   holdingEnemies: []
   correspondingAmounts: 
   showHoldingEnemy: 0
+  isBoss: 0

@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b95c1925b878bc45ba52cd24fc062c6, type: 3}
   m_Name: SpeakerUpgradeCardRange
   m_EditorClassIdentifier: 
-  cardName: Soeaker Range Upgrade
+  cardName: Speaker Range Upgrade
   rarity: 0
   cardType: 1
   tower: {fileID: 0}
   upgrade: {fileID: 11400000, guid: bde509a980fdc414bbe79dcc956b6fe6, type: 2}
-  baseCost: 10
+  baseCost: 90
   discription: Speaker has a bigger range
   icon: {fileID: -185366766, guid: f8297e3cba8d3f34aa0e798b969288d2, type: 3}
-  weight: 10
+  weight: 20

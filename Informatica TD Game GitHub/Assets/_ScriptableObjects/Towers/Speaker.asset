@@ -12,9 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d968e75eda3bcde43b83bbb4d5adf8ff, type: 3}
   m_Name: Speaker
   m_EditorClassIdentifier: 
-  baseDamage: 20
-  baseRange: 1.5
-  baseFireRate: 10
+  baseDamage: 0.5
+  baseRange: 1.25
+  baseFireRate: 7.5
+  baseSpecial: 0
   baseBulletSpeed: 15
   towerType: 5
   towerPrefab: {fileID: 7217467001008108073, guid: dd32d6aa1b789f84a87511fca27de1f9, type: 3}
+  upgradeTypesToBuy: 
+  correspondingUpgradePowers: []
+  correspondigCosts: []
