@@ -19,5 +19,5 @@ MonoBehaviour:
   upgrade: {fileID: 11400000, guid: 6833f743434064b46bd3030b8f922535, type: 2}
   baseCost: 10
   discription: Speaker does more damage
-  icon: {fileID: -1389556792, guid: f8297e3cba8d3f34aa0e798b969288d2, type: 3}
+  icon: {fileID: -185366766, guid: f8297e3cba8d3f34aa0e798b969288d2, type: 3}
   weight: 10

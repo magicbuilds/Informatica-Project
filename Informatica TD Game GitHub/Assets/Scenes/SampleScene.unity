@@ -807,15 +807,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4cd2e723daef37c4b91369666447c7c6, type: 2}
   - {fileID: 11400000, guid: 4cd2e723daef37c4b91369666447c7c6, type: 2}
   - {fileID: 11400000, guid: 4cd2e723daef37c4b91369666447c7c6, type: 2}
-  - {fileID: 11400000, guid: 4cd2e723daef37c4b91369666447c7c6, type: 2}
-  - {fileID: 11400000, guid: 4cd2e723daef37c4b91369666447c7c6, type: 2}
-  - {fileID: 11400000, guid: 4cd2e723daef37c4b91369666447c7c6, type: 2}
-  - {fileID: 11400000, guid: 4cd2e723daef37c4b91369666447c7c6, type: 2}
-  - {fileID: 11400000, guid: 4cd2e723daef37c4b91369666447c7c6, type: 2}
-  - {fileID: 11400000, guid: 4cd2e723daef37c4b91369666447c7c6, type: 2}
-  - {fileID: 11400000, guid: 4cd2e723daef37c4b91369666447c7c6, type: 2}
-  - {fileID: 11400000, guid: 4cd2e723daef37c4b91369666447c7c6, type: 2}
-  - {fileID: 11400000, guid: 4cd2e723daef37c4b91369666447c7c6, type: 2}
   cardsInDeck: []
   cards:
   - {fileID: 11400000, guid: 79623443753093f42970b6985d54f39e, type: 2}
@@ -829,6 +820,24 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a3c334ed4054cd94eb6504df0e8fb779, type: 2}
   - {fileID: 11400000, guid: 5a8e7977f41c71a42a8507f0ae644895, type: 2}
   - {fileID: 11400000, guid: c619e6ca486cf284e899d0f703f79db3, type: 2}
+  - {fileID: 11400000, guid: b4c32e1228ad52f438b417e7702ea5ba, type: 2}
+  - {fileID: 11400000, guid: f5a47c0ea2a52ff478086d14296b203c, type: 2}
+  - {fileID: 11400000, guid: 5af44116f2fda1842b2ed5124368f8ae, type: 2}
+  - {fileID: 11400000, guid: d4d8edaaac0236447abaf4505995dedc, type: 2}
+  - {fileID: 11400000, guid: 7025574ee2492ad4abbca7b8849303af, type: 2}
+  - {fileID: 11400000, guid: db5d25b34aa91fc4aa2e00fd311e1344, type: 2}
+  - {fileID: 11400000, guid: 04ab8c648e8a3df4aa40037bca361b98, type: 2}
+  - {fileID: 11400000, guid: 09bac42beacd70e46ad4379f4a5afdf6, type: 2}
+  - {fileID: 11400000, guid: 80f740c407d082049a0c85087a6138aa, type: 2}
+  - {fileID: 11400000, guid: 6ea73ebe115eefd4ea80f83e8403dfaa, type: 2}
+  - {fileID: 11400000, guid: cfa98bbe96b92584bb881b23f86ae886, type: 2}
+  - {fileID: 11400000, guid: deb0bfd793b248a4bb279af89a07f72a, type: 2}
+  - {fileID: 11400000, guid: d9bce59a11e8b6e44941d81b93033401, type: 2}
+  - {fileID: 11400000, guid: 87f50538ab80ec74ebce0381c42c6658, type: 2}
+  - {fileID: 11400000, guid: d4f037c44f00dcb4aaf3e003ac0780ba, type: 2}
+  - {fileID: 11400000, guid: 4b70f21c25a69d6459eb4dd7201e57b7, type: 2}
+  - {fileID: 11400000, guid: 98e8c6171a86ec14d9d050221a1c2d31, type: 2}
+  - {fileID: 11400000, guid: 4e30bd62e7e94394aa3f8e4e11bc5abf, type: 2}
   currentSelectedCard: {fileID: 0}
 --- !u!1 &144970045
 GameObject:

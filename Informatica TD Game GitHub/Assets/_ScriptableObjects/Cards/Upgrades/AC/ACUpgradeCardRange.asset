@@ -19,5 +19,5 @@ MonoBehaviour:
   upgrade: {fileID: 11400000, guid: 56ba3c5c878c7934f9e7614feb719848, type: 2}
   baseCost: 10
   discription: Increases the range of the Air Conditionner
-  icon: {fileID: -1389556792, guid: f8297e3cba8d3f34aa0e798b969288d2, type: 3}
+  icon: {fileID: 1718886931, guid: f8297e3cba8d3f34aa0e798b969288d2, type: 3}
   weight: 10

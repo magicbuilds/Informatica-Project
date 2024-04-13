@@ -19,5 +19,5 @@ MonoBehaviour:
   upgrade: {fileID: 11400000, guid: e677d1edb965b8049be1adc472f533a8, type: 2}
   baseCost: 10
   discription: Railgun does more damage
-  icon: {fileID: -538161270, guid: f8297e3cba8d3f34aa0e798b969288d2, type: 3}
+  icon: {fileID: -1932013238, guid: f8297e3cba8d3f34aa0e798b969288d2, type: 3}
   weight: 10
