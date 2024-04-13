@@ -35,7 +35,7 @@ public class DeckCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         transform.position = upPosition.position;
         UIManager.Instance.LowerDeckCardUI(transform.parent.parent);
-        
+        UIManager.Instance.SetHoveringState(true);
         statsScreen.SetActive(true);
     }
 
@@ -43,12 +43,14 @@ public class DeckCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         transform.position = downPosition.position;
         statsScreen.SetActive(false);
-
+        UIManager.Instance.SetHoveringState(false);
         UIManager.Instance.RaiseDeckCardUI();
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        
+        
         if (currentCard.cardType == CardSO.CardType.Tower)
         {
             InventoryManager.Instance.SetSelectedCard(this);
