@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Checkout
   m_EditorClassIdentifier: 
   baseDamage: 0
-  baseRange: 17.5
+  baseRange: 800
   baseFireRate: 0
   baseSpecial: 1
   baseBulletSpeed: 6

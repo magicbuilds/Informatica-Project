@@ -94,6 +94,16 @@ public class WaveManager : MonoBehaviour
             {
                 enemiesInThisWave += amount * holdingAmount;
             }
+
+            int i = 0;
+            foreach (EnemySO enemy in waveToSpawn.enemies[index].holdingEnemies)
+            {
+                foreach (int holdingAmount in enemy.correspondingAmounts)
+                {
+                    enemiesInThisWave += amount * holdingAmount * waveToSpawn.enemies[index].correspondingAmounts[i];
+                    i++;
+                }
+            }
             index++;
         }
 

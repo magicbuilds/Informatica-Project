@@ -14,6 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseHealthMultiplier: 1
   baseCoinsMultiplier: 1
-  enemies: []
-  correspondingEnemiesAmount: 
-  correspondingWaitTime: []
+  enemies:
+  - {fileID: 11400000, guid: 1c80a099f672a244b9fb362ad65d95f9, type: 2}
+  - {fileID: 11400000, guid: 92a6665266b76fb4e808f18aba0ee0c2, type: 2}
+  - {fileID: 11400000, guid: 9c0f31c5347b3d146885a3f0c0ccf28d, type: 2}
+  correspondingEnemiesAmount: 320000000100000032000000
+  correspondingWaitTime:
+  - 0
+  - 15
+  - 15

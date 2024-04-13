@@ -10,16 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3aa5f09c49376b14baaa61acc3c2deb8, type: 3}
-  m_Name: Wine
+  m_Name: BeerBox
   m_EditorClassIdentifier: 
-  enemyName: Wine
-  baseHealth: 250
-  damage: 10
-  speed: 7.5
-  baseCoins: 7
-  xSprite: {fileID: -411306098, guid: 01d99cf87cd31d44cbdcb241727b4862, type: 3}
+  enemyName: Cardboard Box
+  baseHealth: 750
+  damage: 100
+  speed: 0.625
+  baseCoins: 20
+  xSprite: {fileID: 1976337319, guid: 01d99cf87cd31d44cbdcb241727b4862, type: 3}
   ySprite: {fileID: 0}
-  holdingEnemies: []
-  correspondingAmounts: 
-  showHoldingEnemy: 0
-  isBoss: 0
+  holdingEnemies:
+  - {fileID: 11400000, guid: c0252b045bcbe1d40a5cf45d83b56f14, type: 2}
+  correspondingAmounts: 18000000
+  showHoldingEnemy: 1
+  isBoss: 1

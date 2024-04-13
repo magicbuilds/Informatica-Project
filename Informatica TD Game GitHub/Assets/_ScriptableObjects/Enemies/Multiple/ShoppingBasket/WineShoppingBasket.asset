@@ -10,16 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3aa5f09c49376b14baaa61acc3c2deb8, type: 3}
-  m_Name: ShoppingBasket
+  m_Name: WineShoppingBasket
   m_EditorClassIdentifier: 
   enemyName: Shopping Basket
-  baseHealth: 500
+  baseHealth: 1250
   damage: 1
   speed: 2
   baseCoins: 20
   xSprite: {fileID: 1826922026, guid: 01d99cf87cd31d44cbdcb241727b4862, type: 3}
   ySprite: {fileID: 0}
   holdingEnemies:
-  - {fileID: 11400000, guid: 8a14206d7422ca94f8f5c2f56e2f9f3a, type: 2}
-  correspondingAmounts: 14000000
+  - {fileID: 11400000, guid: 59fc63403a5d9014e9c1fd385bf10276, type: 2}
+  - {fileID: 11400000, guid: 48fccb0c5ab16c2458fb618d62923fe1, type: 2}
+  - {fileID: 11400000, guid: 31bd0ff8fe0722d4298392cf1c70c4b1, type: 2}
+  correspondingAmounts: 050000000300000005000000
   showHoldingEnemy: 1
+  isBoss: 1
