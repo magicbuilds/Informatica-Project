@@ -24,6 +24,7 @@ public class PlayerStatsManager : MonoBehaviour
     private void Start()
     {
         UIManager.Instance.UpdateHealthUI();
+        
     }
 
     public void AddRemoveHealth(float healthToAdd)
@@ -36,6 +37,8 @@ public class PlayerStatsManager : MonoBehaviour
     {
         coins += coinsToAdd;
     }
+    
+    
     
 
 }

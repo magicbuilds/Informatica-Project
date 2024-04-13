@@ -23,12 +23,13 @@ public class DeckCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public void CardInitialization(CardSO spawnedCard)
     {
         currentCard = spawnedCard;
-
+        
         costText.text = currentCard.baseCost.ToString();
         nameText.text = currentCard.name;
         icon.sprite = currentCard.icon;
 
-        //statsText.text = currentCard.stats;
+
+
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -37,6 +38,9 @@ public class DeckCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         UIManager.Instance.LowerDeckCardUI(transform.parent.parent);
         
         statsScreen.SetActive(true);
+        statsText.text = "Range: " + currentCard.tower.baseRange + "\n" + "Damage: " +
+                         currentCard.tower.baseDamage + "\n" + "Fire Rate: " +
+                         currentCard.tower.baseFireRate;
     }
 
     public void OnPointerExit(PointerEventData eventData)

@@ -7,7 +7,10 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     public static UIManager Instance;
+    public UpgradeSO.UpgradeType upgradeType;
+    public CardSO currentCard;
 
+    public TowerSO.towerTypes towerType;
     [Header("EnemiesLeftUI")]
     [SerializeField] private TextMeshProUGUI enemiesLeftText;
     [SerializeField] private Slider enemiesLeftBar ;
@@ -19,11 +22,19 @@ public class UIManager : MonoBehaviour
     [Header("CardDrawUI")]
     [SerializeField] private GameObject cardDrawUI;
 
-    [Header("cardStats")]
-    public TextMeshProUGUI range;
-    public TextMeshProUGUI damage;
-    public TextMeshProUGUI fireRate;
+    [Header("cardStats")] 
+    public TextMeshProUGUI cardStats1;
+    public TextMeshProUGUI cardStats2;
+    public TextMeshProUGUI cardStats3;
+    public TextMeshProUGUI cardStats4;
 
+    [Header("DeckCard")]
+    public TextMeshProUGUI deckCard1;
+    public TextMeshProUGUI deckCard2;
+    public TextMeshProUGUI deckCard3;
+    public TextMeshProUGUI deckCard4;
+    
+    
     [Header("ExtraCardInformationUI")]
     [SerializeField] private GameObject extraCardInformationUI;
     [SerializeField] private TextMeshProUGUI cardNameText;
@@ -45,6 +56,7 @@ public class UIManager : MonoBehaviour
 
     public bool IsHoveringUI()
     {
+        
         return isHoveringUI;
     }
 
@@ -64,14 +76,30 @@ public class UIManager : MonoBehaviour
 
     }
 
-    public void rangeText()
+    /*public void textDrawCardUpdate()
     {
+        cardStats1.text = "Range: " + UpgradeManager.Instance.ReturnValueOf(towerType, UpgradeSO.UpgradeType.Range)+ "\n" + "Damage: " +
+                             UpgradeManager.Instance.ReturnValueOf(towerType, UpgradeSO.UpgradeType.Damage) + "\n" + "Fire Rate: " +
+                             UpgradeManager.Instance.ReturnValueOf(towerType, UpgradeSO.UpgradeType.FireRate);
+        cardStats2.text = "Range: " + UpgradeManager.Instance.ReturnValueOf(towerType, UpgradeSO.UpgradeType.Range)+ "\n" + "Damage: " +
+                          UpgradeManager.Instance.ReturnValueOf(towerType, UpgradeSO.UpgradeType.Damage) + "\n" + "Fire Rate: " +
+                          UpgradeManager.Instance.ReturnValueOf(towerType, UpgradeSO.UpgradeType.FireRate);
+        cardStats3.text = "Range: " + UpgradeManager.Instance.ReturnValueOf(towerType, UpgradeSO.UpgradeType.Range)+ "\n" + "Damage: " +
+                          UpgradeManager.Instance.ReturnValueOf(towerType, UpgradeSO.UpgradeType.Damage) + "\n" + "Fire Rate: " +
+                          UpgradeManager.Instance.ReturnValueOf(towerType, UpgradeSO.UpgradeType.FireRate);
+        cardStats4.text = "Range: " + UpgradeManager.Instance.ReturnValueOf(towerType, UpgradeSO.UpgradeType.Range)+ "\n" + "Damage: " +
+                          UpgradeManager.Instance.ReturnValueOf(towerType, UpgradeSO.UpgradeType.Damage) + "\n" + "Fire Rate: " +
+                          UpgradeManager.Instance.ReturnValueOf(towerType, UpgradeSO.UpgradeType.FireRate);
         
-    }
+
+    }*/
+
 
     public void ActivateCardDrawUI()
     {
         cardDrawUI.SetActive(true);
+        //textDrawCardUpdate();
+        
     }
     
     public void DeactivateCardDrawUI()
@@ -86,7 +114,9 @@ public class UIManager : MonoBehaviour
         extraCardInformationUI.SetActive(true);
 
         cardNameText.text = card.cardName;
-        //cardStatsText.text = card.stats;
+        cardStatsText.text = "Range: " + UpgradeManager.Instance.ReturnValueOf(towerType, UpgradeSO.UpgradeType.Range)+ "\n" + "Damage: " +
+                             UpgradeManager.Instance.ReturnValueOf(towerType, UpgradeSO.UpgradeType.Damage) + "\n" + "Fire Rate: " +
+                             UpgradeManager.Instance.ReturnValueOf(towerType, UpgradeSO.UpgradeType.FireRate);
         cardDiscription.text = card.discription;
         cardIcon.sprite = card.icon;
     }

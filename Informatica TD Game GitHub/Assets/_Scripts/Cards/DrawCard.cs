@@ -10,6 +10,7 @@ public class DrawCard : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI nameText;
     [SerializeField] private TextMeshProUGUI amountText;
+    [SerializeField] private TextMeshProUGUI cardStatsText;
     [SerializeField] private Image icon;
 
     public void CardInitialization(CardSO spawnedCard)
@@ -49,8 +50,11 @@ public class DrawCard : MonoBehaviour
      
         nameText.text = currentCard.cardName;
         amountText.text = amount + "X";
-
         icon.sprite = currentCard.icon;
+        cardStatsText.text = "Range: " + currentCard.tower.baseRange + "\n" + "Damage: " +
+                         currentCard.tower.baseDamage + "\n" + "Fire Rate: " +
+                         currentCard.tower.baseFireRate;
+        
     }
 
     public void OnCardSelected()
