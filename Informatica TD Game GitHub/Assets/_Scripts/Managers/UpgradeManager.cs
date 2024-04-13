@@ -21,10 +21,7 @@ public class UpgradeManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-    }
 
-    private void Start()
-    {
         foreach (CardSO card in InventoryManager.Instance.cards)
         {
             if (card.cardType == CardSO.CardType.Tower)
@@ -37,6 +34,11 @@ public class UpgradeManager : MonoBehaviour
                 baseBulletSpeed.Add(card.tower.baseBulletSpeed);
             }
         }
+    }
+
+    private void Start()
+    {
+
     }
 
     public void Upgrade(UpgradeSO upgradeStats)
@@ -61,6 +63,31 @@ public class UpgradeManager : MonoBehaviour
                 baseBulletSpeed[index] += upgradeStats.upgradePower;
                 break;
         }
+
+        foreach (Tower tower in placedTowers)
+        {
+            if (tower.towerCard.tower.towerType == upgradeStats.correspondigTower)
+            {
+                switch (upgradeStats.upgradeType)
+                {
+                    case UpgradeSO.UpgradeType.Special:
+                        tower.currentSpecial += upgradeStats.upgradePower;
+                        break;
+                    case UpgradeSO.UpgradeType.Range:
+                        tower.currentRange += upgradeStats.upgradePower;
+                        break;
+                    case UpgradeSO.UpgradeType.FireRate:
+                        tower.currentFireRate += upgradeStats.upgradePower;
+                        break;
+                    case UpgradeSO.UpgradeType.Damage:
+                        tower.currentDamage += upgradeStats.upgradePower;
+                        break;
+                    case UpgradeSO.UpgradeType.BulletSpeed:
+                        tower.currentBulletSpeed += upgradeStats.upgradePower;
+                        break;
+                }
+            }
+        }
     }
 
     private int FindIndexOfTower(TowerSO.towerTypes towerType)
@@ -72,6 +99,7 @@ public class UpgradeManager : MonoBehaviour
 
             index++;
         }
+        Debug.Log("TowerType Not Found: " + towerType);
         return -1;
     }
 

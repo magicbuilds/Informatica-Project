@@ -27,4 +27,15 @@ public class CardSO : ScriptableObject
         Tower,
         Upgrade
     }
+
+    public string GetStats()
+    {
+        if (cardType == CardType.Tower)
+        {
+            return "Range: " + UpgradeManager.Instance.ReturnValueOf(tower.towerType, UpgradeSO.UpgradeType.Range) + "\n" + "Damage: " +
+                 UpgradeManager.Instance.ReturnValueOf(tower.towerType, UpgradeSO.UpgradeType.Damage) + "\n" + "Fire Rate: " +
+                 UpgradeManager.Instance.ReturnValueOf(tower.towerType, UpgradeSO.UpgradeType.FireRate);
+        }
+        else return "Upgrade";
+    }
 }

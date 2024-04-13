@@ -43,14 +43,6 @@ public class InventoryManager : MonoBehaviour
         SpawnDeck();
     }
 
-    private void Update()
-    {
-        foreach (CardSO card in cardsInInventory.Keys) 
-        { 
-            Debug.Log("Card: " + card + ", amount" + cardsInInventory[card]);
-        }
-    }
-
     public void AddCardToInventory(CardSO card, int amount)
     {
         if (cardsInInventory.ContainsKey(card))
@@ -137,6 +129,8 @@ public class InventoryManager : MonoBehaviour
     public void OnCardPlayed()
     {
         cardsInDeck.Remove(currentSelectedCard.currentCard);
+
+        playedCards.Add(currentSelectedCard.currentCard);
 
         currentSelectedCard.transform.parent.parent.gameObject.SetActive(false);
         currentSelectedCard = null;

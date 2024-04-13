@@ -16,7 +16,8 @@ public class GameManager : MonoBehaviour
         StartUp,
         ChoseNextChunk,
         StartNewWave,
-        EndOfWave
+        EndOfWave,
+        EndOfGame
     }
 
     private void Awake()
@@ -49,8 +50,8 @@ public class GameManager : MonoBehaviour
                 InventoryManager.Instance.SpawnDrawCards();
                 
                 InputManager.Instance.DisablePlayerInput();
-
-                
+                break;
+            case GameState.EndOfGame:
                 break;
             default:
                 Debug.Log("Gamestate not found");

@@ -742,6 +742,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameText: {fileID: 1625181462711431980}
   amountText: {fileID: 246750937167764164}
+  cardStatsText: {fileID: 4235248795677040246}
   icon: {fileID: 1432186209597422987}
 --- !u!114 &5504520735219725651
 MonoBehaviour:

@@ -51,9 +51,9 @@ public class DrawCard : MonoBehaviour
         nameText.text = currentCard.cardName;
         amountText.text = amount + "X";
         icon.sprite = currentCard.icon;
-        cardStatsText.text = "Range: " + currentCard.tower.baseRange + "\n" + "Damage: " +
-                         currentCard.tower.baseDamage + "\n" + "Fire Rate: " +
-                         currentCard.tower.baseFireRate;
+
+        Debug.Log(currentCard);
+        cardStatsText.text = currentCard.GetStats();
         
     }
 

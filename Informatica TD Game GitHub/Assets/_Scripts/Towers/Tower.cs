@@ -4,8 +4,15 @@ using UnityEngine.UI;
 
 public class Tower : MonoBehaviour
 {
+    [Header("TowerStats")]
+    public float currentSpecial;
+    public float currentRange;
+    public float currentFireRate;
+    public float currentDamage;
+    public float currentBulletSpeed;
+
     [Header("AllTowers")]
-    public TowerSO.towerTypes towerType;
+    public CardSO towerCard;
     [SerializeField] private GameObject ammoPrefab;
     [SerializeField] private float rotateSpeed = 200f;
     [SerializeField] public List<Transform> firingPoints;
@@ -33,20 +40,14 @@ public class Tower : MonoBehaviour
 
     private float timeUntilFire;
     private int level = 0;
-
-    public float currentSpecial;
-    public float currentRange;
-    public float currentFireRate;
-    public float currentDamage;
-    public float currentBulletSpeed;
     
     private void Start()
     {
-        currentSpecial = UpgradeManager.Instance.ReturnValueOf(towerType, UpgradeSO.UpgradeType.Special);
-        currentRange = UpgradeManager.Instance.ReturnValueOf(towerType, UpgradeSO.UpgradeType.Range);
-        currentFireRate = UpgradeManager.Instance.ReturnValueOf(towerType, UpgradeSO.UpgradeType.FireRate);
-        currentDamage = UpgradeManager.Instance.ReturnValueOf(towerType, UpgradeSO.UpgradeType.Damage);
-        currentBulletSpeed = UpgradeManager.Instance.ReturnValueOf(towerType, UpgradeSO.UpgradeType.BulletSpeed);
+        currentSpecial = UpgradeManager.Instance.ReturnValueOf(towerCard.tower.towerType, UpgradeSO.UpgradeType.Special);
+        currentRange = UpgradeManager.Instance.ReturnValueOf(towerCard.tower.towerType, UpgradeSO.UpgradeType.Range);
+        currentFireRate = UpgradeManager.Instance.ReturnValueOf(towerCard.tower.towerType, UpgradeSO.UpgradeType.FireRate);
+        currentDamage = UpgradeManager.Instance.ReturnValueOf(towerCard.tower.towerType, UpgradeSO.UpgradeType.Damage);
+        currentBulletSpeed = UpgradeManager.Instance.ReturnValueOf(towerCard.tower.towerType, UpgradeSO.UpgradeType.BulletSpeed);
 
         UpgradeTower();
 
@@ -92,7 +93,7 @@ public class Tower : MonoBehaviour
             RotateTowardsTarget();
         }
 
-        switch (towerType)
+        switch (towerCard.tower.towerType)
         {
             case TowerSO.towerTypes.KnifeThrower:
                 ShootingTower();
@@ -139,7 +140,7 @@ public class Tower : MonoBehaviour
                 target = EnemyManager.Instance.enemiesLeft[randomIndex];
                 if (Vector2.Distance(target.transform.position, transform.position) <= currentRange)
                 {
-                    if (towerType == TowerSO.towerTypes.Checkout && target.currentEnemy.isBoss == true)
+                    if (towerCard.tower.towerType == TowerSO.towerTypes.Checkout && target.currentEnemy.isBoss == true)
                     {
                         target = null;
                     }

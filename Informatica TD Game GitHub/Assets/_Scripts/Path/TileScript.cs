@@ -50,6 +50,8 @@ public class TileScript : MonoBehaviour
 
         if (tower != null)
         {
+            UIManager.Instance.ActivateTowerInformationUI(tower);
+
             tower.OpenUpgradeUI();
 
             UpdateRange();
@@ -64,6 +66,7 @@ public class TileScript : MonoBehaviour
                     InventoryManager.Instance.OnCardPlayed();
                 }
             }
+            UIManager.Instance.DeactivateTowerInformationUI();
         }
     }
 
@@ -79,7 +82,7 @@ public class TileScript : MonoBehaviour
         GameObject towerToSpawn = InventoryManager.Instance.currentSelectedCard.currentCard.tower.towerPrefab;
         GameObject spawnedTower = Instantiate(towerToSpawn, transform.position, Quaternion.identity);
         tower = spawnedTower.GetComponent<Tower>();
-        tower.towerType = InventoryManager.Instance.currentSelectedCard.currentCard.tower.towerType;
+        tower.towerCard = InventoryManager.Instance.currentSelectedCard.currentCard;
         tower.tile = this;
 
         UpgradeManager.Instance.placedTowers.Add(tower);

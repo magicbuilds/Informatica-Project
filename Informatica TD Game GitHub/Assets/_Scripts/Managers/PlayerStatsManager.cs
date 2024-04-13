@@ -1,19 +1,14 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
+
 
 public class PlayerStatsManager : MonoBehaviour
 {
-
     public static PlayerStatsManager Instance;
-
-
 
     public float maxHealth = 50f;
     public float health;
+
+    public float maxCoins = 200f;
     public float coins;
 
     private void Awake()
@@ -23,19 +18,40 @@ public class PlayerStatsManager : MonoBehaviour
 
     private void Start()
     {
+        health = maxHealth;
         UIManager.Instance.UpdateHealthUI();
-        
+
+
+        UIManager.Instance.UpdateCoinsUI();
     }
 
     public void AddRemoveHealth(float healthToAdd)
     {
         health += healthToAdd;
+
+        if (health > maxHealth)
+        {
+            health = maxHealth;
+        }
+        if (health < 0)
+        {
+            GameManager.Instance.SwitchGameState(GameManager.GameState.EndOfGame);
+        }
+
         UIManager.Instance.UpdateHealthUI();
     }
 
     public void AddRemoveCoins(float coinsToAdd)
     {
         coins += coinsToAdd;
+
+        if (coins > maxCoins)
+        {
+
+            coins = maxCoins;
+        }
+
+        UIManager.Instance.UpdateCoinsUI();
     }
     
     

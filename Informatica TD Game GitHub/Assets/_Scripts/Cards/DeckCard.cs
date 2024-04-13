@@ -28,8 +28,7 @@ public class DeckCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         nameText.text = currentCard.name;
         icon.sprite = currentCard.icon;
 
-
-
+        statsText.text = currentCard.GetStats();
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -38,9 +37,6 @@ public class DeckCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         UIManager.Instance.LowerDeckCardUI(transform.parent.parent);
         
         statsScreen.SetActive(true);
-        statsText.text = "Range: " + currentCard.tower.baseRange + "\n" + "Damage: " +
-                         currentCard.tower.baseDamage + "\n" + "Fire Rate: " +
-                         currentCard.tower.baseFireRate;
     }
 
     public void OnPointerExit(PointerEventData eventData)
