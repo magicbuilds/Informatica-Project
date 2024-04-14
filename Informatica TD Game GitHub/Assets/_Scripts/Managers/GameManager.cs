@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class GameManager : MonoBehaviour
     public GameState gameState;
 
     public float waveNum;
+
+    public GameObject gameOverUI;
 
     public enum GameState
     {
@@ -23,13 +26,14 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-        
+
     }
+
     private void Start()
     {
         SwitchGameState(GameState.StartUp);
         SwitchGameState(GameState.ChoseNextChunk);
-        
+
     }
 
     public void SwitchGameState(GameState state)
@@ -48,10 +52,11 @@ public class GameManager : MonoBehaviour
                 break;
             case GameState.EndOfWave:
                 InventoryManager.Instance.SpawnDrawCards();
-                
+
                 InputManager.Instance.DisablePlayerInput();
                 break;
             case GameState.EndOfGame:
+                gameOverUI.SetActive(true);
                 break;
             default:
                 Debug.Log("Gamestate not found");
@@ -60,5 +65,11 @@ public class GameManager : MonoBehaviour
 
         gameState = state;
     }
-    
+
+
+
+    public void restart()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
 }

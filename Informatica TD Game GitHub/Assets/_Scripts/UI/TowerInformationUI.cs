@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+
 public class TowerInformationUI : MonoBehaviour
 {
     public static TowerInformationUI Instance;
@@ -49,4 +50,6 @@ public class TowerInformationUI : MonoBehaviour
         
 
     }
+    
+    
 }

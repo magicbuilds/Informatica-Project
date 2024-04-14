@@ -41,6 +41,7 @@ public class DeckCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         transform.position = upPosition.position;
         UIManager.Instance.LowerDeckCardUI(transform.parent.parent);
         statsScreen.SetActive(true);
+        UIManager.Instance.SetHoveringState(true);
     }
 
     public void OnPointerExit(PointerEventData eventData)
@@ -48,6 +49,8 @@ public class DeckCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         transform.position = downPosition.position;
         statsScreen.SetActive(false);
         UIManager.Instance.RaiseDeckCardUI();
+        UIManager.Instance.SetHoveringState(false);
+
     }
 
     public void OnPointerClick(PointerEventData eventData)

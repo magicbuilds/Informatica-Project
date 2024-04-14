@@ -12,6 +12,8 @@ public class EmptyChunk : MonoBehaviour
 
     private void OnMouseDown()
     {
+        if (UIManager.Instance.IsHoveringUI()) return;
+        
         if (GameManager.Instance.gameState == GameManager.GameState.ChoseNextChunk && isntAlreadyPressed)
         {
             

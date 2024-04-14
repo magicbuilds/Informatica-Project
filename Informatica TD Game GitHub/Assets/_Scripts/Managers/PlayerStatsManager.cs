@@ -4,6 +4,7 @@ using UnityEngine;
 public class PlayerStatsManager : MonoBehaviour
 {
     public static PlayerStatsManager Instance;
+    public GameManager GameManager;
 
     public float maxHealth = 50f;
     public float health;
@@ -33,9 +34,10 @@ public class PlayerStatsManager : MonoBehaviour
         {
             health = maxHealth;
         }
-        if (health < 0)
+        if (health <= 0)
         {
             GameManager.Instance.SwitchGameState(GameManager.GameState.EndOfGame);
+            
         }
 
         UIManager.Instance.UpdateHealthUI();

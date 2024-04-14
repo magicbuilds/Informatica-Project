@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class TileScript : MonoBehaviour
@@ -47,8 +48,11 @@ public class TileScript : MonoBehaviour
 
     private void OnMouseDown()
     {
+        if (UIManager.Instance.IsHoveringUI()) return;
+        
         if (tower != null)
         {
+            
             UIManager.Instance.ActivateTowerInformationUI(tower);
             
             UpdateRange();
@@ -66,7 +70,9 @@ public class TileScript : MonoBehaviour
                     
                 }
             }
+            
             UIManager.Instance.DeactivateTowerInformationUI();
+            
         }
     }
 

@@ -2,6 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class DrawCard : MonoBehaviour
 {
     private CardSO currentCard;
@@ -84,6 +85,8 @@ public class DrawCard : MonoBehaviour
         typeText.text = currentCard.GetCardType();
         typeText.color = currentCard.GetCardTypeColor();
     }
+    
+    
 
     public void OnCardSelected()
     {
