@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d968e75eda3bcde43b83bbb4d5adf8ff, type: 3}
   m_Name: Air Conditioner
   m_EditorClassIdentifier: 
-  baseDamage: 25
+  baseDamage: 0
   baseRange: 1.5
   baseFireRate: 0
-  baseSpecial: 0
+  baseSpecial: 25
   baseBulletSpeed: 0
   towerType: 7
   towerPrefab: {fileID: 7217467001008108073, guid: 3c00482175366824cb93557af817607b, type: 3}

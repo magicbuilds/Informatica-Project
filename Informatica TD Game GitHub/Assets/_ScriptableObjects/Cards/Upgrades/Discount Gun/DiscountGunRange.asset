@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b95c1925b878bc45ba52cd24fc062c6, type: 3}
   m_Name: DiscountGunRange
   m_EditorClassIdentifier: 
-  cardName: Discount Gun range upgrade
+  cardName: Discount Gun Range+
   rarity: 0
   cardType: 1
   tower: {fileID: 0}
@@ -20,4 +20,5 @@ MonoBehaviour:
   baseCost: 150
   discription: Discount Gun has a bigger range
   icon: {fileID: 21300000, guid: 9848f6e945a3c4b43b0f10008cb7e360, type: 3}
+  typeColor: {r: 0.80784315, g: 0.4862745, b: 0.12941177, a: 1}
   weight: 20

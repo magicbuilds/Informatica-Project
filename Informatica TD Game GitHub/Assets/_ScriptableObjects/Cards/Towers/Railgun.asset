@@ -20,4 +20,5 @@ MonoBehaviour:
   baseCost: 100
   discription: Basic sniper, long range, a lot of damage, slow shooting.
   icon: {fileID: 1966186572, guid: f8297e3cba8d3f34aa0e798b969288d2, type: 3}
+  typeColor: {r: 0.08627451, g: 0.6509804, b: 0.7607843, a: 1}
   weight: 65

@@ -14,6 +14,8 @@ public class DeckCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     [Header("StatsScreen")]
     [SerializeField] private GameObject statsScreen;
     [SerializeField] private TextMeshProUGUI statsText;
+    [SerializeField] private TextMeshProUGUI cardNameText;
+    [SerializeField] private TextMeshProUGUI typeText;
 
     [Header("Positions")]
     [SerializeField] public Transform downPosition;
@@ -29,6 +31,9 @@ public class DeckCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         icon.sprite = currentCard.icon;
 
         statsText.text = currentCard.GetStats();
+        cardNameText.text = currentCard.cardName;
+        typeText.text = currentCard.GetCardType();
+        typeText.color = currentCard.GetCardTypeColor();
     }
 
     public void OnPointerEnter(PointerEventData eventData)

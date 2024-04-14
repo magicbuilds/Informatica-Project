@@ -21,4 +21,5 @@ MonoBehaviour:
   discription: Basic tower that shoots dust at the enemies, reducing the price by
     a little bit.
   icon: {fileID: 1262442208, guid: f8297e3cba8d3f34aa0e798b969288d2, type: 3}
+  typeColor: {r: 0.08627451, g: 0.6509804, b: 0.7607843, a: 1}
   weight: 100

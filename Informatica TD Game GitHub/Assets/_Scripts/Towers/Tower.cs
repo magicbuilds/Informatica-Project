@@ -194,7 +194,7 @@ public class Tower : MonoBehaviour
     {
         foreach (EnemyStats enemy in targets)
         {
-            enemy.SlowEnemy(currentDamage);
+            enemy.SlowEnemy(currentSpecial);
         }
     }
 

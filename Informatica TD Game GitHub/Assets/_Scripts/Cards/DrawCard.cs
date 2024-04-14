@@ -10,7 +10,9 @@ public class DrawCard : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI nameText;
     [SerializeField] private TextMeshProUGUI amountText;
-    [SerializeField] private TextMeshProUGUI cardStatsText;
+    [SerializeField] private TextMeshProUGUI costText;
+    [SerializeField] private TextMeshProUGUI statsText;
+    [SerializeField] private TextMeshProUGUI typeText;
     [SerializeField] private Image icon;
 
     public void CardInitialization(CardSO spawnedCard)
@@ -20,19 +22,39 @@ public class DrawCard : MonoBehaviour
         switch (spawnedCard.rarity)
         {
             case CardSO.Rarity.common:
-                amount = Random.Range(2, 4);
+                if (WaveManager.Instance.waveIndex < 25)
+                {
+                    amount = Random.Range(2, 4);
+                }
+                else amount = Random.Range(2, 5);
+
                 nameText.color = Color.white;
                 break;
             case CardSO.Rarity.uncommon:
-                amount = Random.Range(1, 3);
+                if (WaveManager.Instance.waveIndex < 25)
+                {
+                    amount = Random.Range(1, 3);
+                }
+                else amount = Random.Range(2, 4);
+
                 nameText.color = Color.green;
                 break;
             case CardSO.Rarity.rare:
-                amount = 1;
+                if (WaveManager.Instance.waveIndex < 25)
+                {
+                    amount = 1;
+                }
+                else amount = Random.Range(1, 3);
+
                 nameText.color = Color.cyan;
                 break;
             case CardSO.Rarity.epic:
-                amount = 1;
+                if (WaveManager.Instance.waveIndex < 25)
+                {
+                    amount = 1;
+                }
+                else amount = Random.Range(1, 3);
+
                 nameText.color = Color.blue;
                 break;
             case CardSO.Rarity.legendary:
@@ -56,8 +78,11 @@ public class DrawCard : MonoBehaviour
         nameText.text = currentCard.cardName;
         amountText.text = amount + "X";
         icon.sprite = currentCard.icon;
-        cardStatsText.text = currentCard.GetStats();
-        
+
+        costText.text = currentCard.GetCost();
+        statsText.text = currentCard.GetStats();
+        typeText.text = currentCard.GetCardType();
+        typeText.color = currentCard.GetCardTypeColor();
     }
 
     public void OnCardSelected()

@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d968e75eda3bcde43b83bbb4d5adf8ff, type: 3}
   m_Name: DiscountGun
   m_EditorClassIdentifier: 
-  baseDamage: 0.25
+  baseDamage: 0
   baseRange: 2
   baseFireRate: 1.5
-  baseSpecial: 0
+  baseSpecial: 0.25
   baseBulletSpeed: 10
   towerType: 1
   towerPrefab: {fileID: 7217467001008108073, guid: 28d8734a5a7deb34f8aec3776c2503e9, type: 3}

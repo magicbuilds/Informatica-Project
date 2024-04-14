@@ -43,7 +43,7 @@ public class TicketScript : MonoBehaviour
 
         if (enemy.gameObject.TryGetComponent<EnemyStats>(out EnemyStats enemyStats))
         {
-            enemyStats.DealDamange(tower.currentDamage * enemyStats.health);
+            enemyStats.DealDamange(tower.currentSpecial * enemyStats.health);
             hasHitEnemy = true;
             Destroy(gameObject);
         }

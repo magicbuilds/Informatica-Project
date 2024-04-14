@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b95c1925b878bc45ba52cd24fc062c6, type: 3}
   m_Name: RailgunUpgradeCardRange
   m_EditorClassIdentifier: 
-  cardName: Railgun Range Upgrade
+  cardName: Railgun Range+
   rarity: 0
   cardType: 1
   tower: {fileID: 0}
@@ -20,4 +20,5 @@ MonoBehaviour:
   baseCost: 70
   discription: Railgun has a bigger range
   icon: {fileID: -1932013238, guid: f8297e3cba8d3f34aa0e798b969288d2, type: 3}
+  typeColor: {r: 0.80784315, g: 0.4862745, b: 0.12941177, a: 1}
   weight: 20
