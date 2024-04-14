@@ -9,7 +9,8 @@ public class VolumeSettings : MonoBehaviour
 {
     [SerializeField] private AudioMixer myMixer;
     [SerializeField] private Slider musicSlider;
-    [SerializeField] private Slider SFXSlider;
+    [SerializeField] private Slider EnemiesDeathSlider;
+    [SerializeField] private Slider TowersSlider;
 
     private void Start()
     {
@@ -22,7 +23,8 @@ public class VolumeSettings : MonoBehaviour
         else
         {
             SetMusicVolume();
-            SetSFXVolume();
+            SetEnemiesDeathVolume();
+            SetTowerVolume();
         }
     }
         
@@ -34,21 +36,29 @@ public class VolumeSettings : MonoBehaviour
         PlayerPrefs.SetFloat("musicVolume", volume);
     }
     
-    public void SetSFXVolume()
+    public void SetEnemiesDeathVolume()
     {
-        float volume = SFXSlider.value;
-        myMixer.SetFloat("SFX", Mathf.Log10(volume)*20);
-        PlayerPrefs.SetFloat("SFXVolume", volume);
+        float volume = EnemiesDeathSlider.value;
+        myMixer.SetFloat("Enemies", Mathf.Log10(volume)*20);
+        PlayerPrefs.SetFloat("EnemiesVolume", volume);
+    }
+    
+    public void SetTowerVolume()
+    {
+        float volume = TowersSlider.value;
+        myMixer.SetFloat("Towers", Mathf.Log10(volume)*20);
+        PlayerPrefs.SetFloat("TowersVolume", volume);
     }
 
 
     private void LoadVolume()
     {
         musicSlider.value = PlayerPrefs.GetFloat("musicVolume");
-        SFXSlider.value = PlayerPrefs.GetFloat("SFXVolume");
+        EnemiesDeathSlider.value = PlayerPrefs.GetFloat("SFXVolume");
 
-        SetSFXVolume();
+        SetEnemiesDeathVolume();
         SetMusicVolume();
+        SetTowerVolume();
 
     }
     

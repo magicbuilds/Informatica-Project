@@ -9,11 +9,22 @@ public class AudioManager : MonoBehaviour
 
     [Header("AudioSource")]
     [SerializeField] private AudioSource musicSource;
-    [SerializeField] private AudioSource SFXSource;
+    [SerializeField] private AudioSource EnemiesDeathSource;
+    [SerializeField] private AudioSource ShootingSource;
+    [SerializeField] private AudioSource SpeakerSource;
+    [SerializeField] private AudioSource CheckoutDiscountSource;
+    
+    
 
     [Header("AudioClip")] 
     public AudioClip background;
     public AudioClip death;
+    public AudioClip pew;
+    public AudioClip bass;
+    public AudioClip ching;
+    
+
+    
 
     private void Awake()
     {
@@ -26,8 +37,25 @@ public class AudioManager : MonoBehaviour
         musicSource.Play();
     }
 
-    public void PlaySFX(AudioClip clip)
+    public void PlayEnemiesDeath(AudioClip clip)
     {
-        SFXSource.PlayOneShot(clip);
+        EnemiesDeathSource.PlayOneShot(clip);
     }
+    
+    public void PlayPew(AudioClip clip)
+    {
+        ShootingSource.PlayOneShot(clip);
+    }
+
+    
+    public void PlayCheckoutDiscount(AudioClip clip)
+    {
+        CheckoutDiscountSource.PlayOneShot(clip);
+    }
+    
+    public void PlaySpeaker(AudioClip clip)
+    {
+        SpeakerSource.PlayOneShot(clip);
+    }
+    
 }

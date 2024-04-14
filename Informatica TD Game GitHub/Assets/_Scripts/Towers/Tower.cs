@@ -165,6 +165,7 @@ public class Tower : MonoBehaviour
         if (timeUntilFire >= 1f / currentFireRate)
         {
             ShootBullet();
+            AudioManager.Instance.PlayPew(AudioManager.Instance.pew);
 
             timeUntilFire = 0f;
         }
@@ -185,6 +186,7 @@ public class Tower : MonoBehaviour
         if (timeUntilFire >= 1f / currentFireRate)
         {
             ShootMultipleBullets();
+            AudioManager.Instance.PlaySpeaker(AudioManager.Instance.bass);
 
             timeUntilFire = 0f;
         }
@@ -203,6 +205,7 @@ public class Tower : MonoBehaviour
         if (timeUntilFire >= 1f / currentFireRate)
         {
             ShootTicket();
+            AudioManager.Instance.PlayCheckoutDiscount(AudioManager.Instance.ching);
 
             timeUntilFire = 0f;
         }
@@ -250,7 +253,7 @@ public class Tower : MonoBehaviour
             GameObject spawnedCustomer = Instantiate(ammoPrefab, firingPoints[0].position, Quaternion.identity);
             CustomerAI spawnedCustomerAI = spawnedCustomer.GetComponent<CustomerAI>();
             spawnedCustomerAI.tower = this;
-
+            
             peopleAtCheckout++;
         }
     }

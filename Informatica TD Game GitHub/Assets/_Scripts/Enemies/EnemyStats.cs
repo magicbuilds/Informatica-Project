@@ -65,7 +65,7 @@ public class EnemyStats : MonoBehaviour
             EnemyManager.Instance.ReduceEnemyCount(this);
             PlayerStatsManager.Instance.AddRemoveCoins(currentEnemy.baseCoins);
 
-            AudioManager.Instance.PlaySFX(AudioManager.Instance.death);
+            AudioManager.Instance.PlayEnemiesDeath(AudioManager.Instance.death);
             Destroy(gameObject);
         }
 

@@ -1,5 +1,19 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!244 &-7156994746728580067
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: d112c2cdd30b99e4a8c4c3845112b32b
+  m_EffectName: Attenuation
+  m_MixLevel: 7511b75920d10b941abcfa94ccb57bc9
+  m_Parameters: []
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
 --- !u!244 &-6822889328418863644
 AudioMixerEffectController:
   m_ObjectHideFlags: 3
@@ -53,7 +67,7 @@ AudioMixerGroupController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: SFX
+  m_Name: Enemies Death
   m_AudioMixer: {fileID: 24100000}
   m_GroupID: 600c6d5e7f7085b41a0fd0132bd43fbc
   m_Children: []
@@ -82,15 +96,18 @@ AudioMixerController:
   m_EnableSuspend: 1
   m_UpdateMode: 0
   m_ExposedParameters:
-  - guid: c81a7f843116082419d2c847b9a7a84f
-    name: Music
   - guid: c2e0ede0cc651f546bc78402d1ab7948
     name: SFX
+  - guid: c81a7f843116082419d2c847b9a7a84f
+    name: Music
+  - guid: cfe97b4f0bc13d54c93863f429f8a685
+    name: MyExposedParam
   m_AudioMixerGroupViews:
   - guids:
     - 7659b4749088d884d934314bd971879e
     - b9e215b7710d90144a9967c26170c7e8
     - 600c6d5e7f7085b41a0fd0132bd43fbc
+    - f89aaa6e2f2b4394fbb7229b2a693de3
     name: View
   m_CurrentViewIndex: 0
   m_TargetSnapshot: {fileID: 24500006}
@@ -106,6 +123,7 @@ AudioMixerGroupController:
   m_Children:
   - {fileID: -895519262292761812}
   - {fileID: -797109843365789288}
+  - {fileID: 3785462168653809158}
   m_Volume: 8b9e8ec0e9a18a4498287926c2c1488b
   m_Pitch: 49d16364ca2961245947faa701042f48
   m_Send: 00000000000000000000000000000000
@@ -148,3 +166,22 @@ AudioMixerSnapshotController:
     c4f808ea29eeb4743b60fdf9de702bef: 1
     f4497cdd9931e084a9fbbe8390008a6a: 0
   m_TransitionOverrides: {}
+--- !u!243 &3785462168653809158
+AudioMixerGroupController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Towers Sound
+  m_AudioMixer: {fileID: 24100000}
+  m_GroupID: f89aaa6e2f2b4394fbb7229b2a693de3
+  m_Children: []
+  m_Volume: cfe97b4f0bc13d54c93863f429f8a685
+  m_Pitch: 97341ff02ec52f747b8d144aa198da4f
+  m_Send: 00000000000000000000000000000000
+  m_Effects:
+  - {fileID: -7156994746728580067}
+  m_UserColorIndex: 0
+  m_Mute: 0
+  m_Solo: 0
+  m_BypassEffects: 0
