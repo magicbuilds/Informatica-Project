@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ESCMenu : MonoBehaviour
 {
@@ -23,10 +24,9 @@ public class ESCMenu : MonoBehaviour
         UIManager.Instance.SetHoveringState(false);
     }
 
-    public void QuitGame()
+    public void MainMenu()
     {
-        Debug.Log("Quit");
-        Application.Quit();
+        SceneManager.LoadSceneAsync(0);
     }
 
     public void ResumeGame()

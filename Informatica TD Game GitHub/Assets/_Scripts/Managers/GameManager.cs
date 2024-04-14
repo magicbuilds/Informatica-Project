@@ -50,6 +50,8 @@ public class GameManager : MonoBehaviour
                 UIManager.Instance.UpdateWaveText();
                 break;
             case GameState.EndOfWave:
+                InventoryManager.Instance.currentSelectedCard = null;
+
                 InventoryManager.Instance.SpawnDrawCards();
 
                 InputManager.Instance.DisablePlayerInput();

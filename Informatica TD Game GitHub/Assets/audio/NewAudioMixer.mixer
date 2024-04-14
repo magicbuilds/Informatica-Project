@@ -97,11 +97,11 @@ AudioMixerController:
   m_UpdateMode: 0
   m_ExposedParameters:
   - guid: c2e0ede0cc651f546bc78402d1ab7948
-    name: SFX
+    name: Enemies
   - guid: c81a7f843116082419d2c847b9a7a84f
     name: Music
   - guid: cfe97b4f0bc13d54c93863f429f8a685
-    name: MyExposedParam
+    name: Towers
   m_AudioMixerGroupViews:
   - guids:
     - 7659b4749088d884d934314bd971879e
