@@ -36,7 +36,7 @@ public class PlayerStatsManager : MonoBehaviour
         }
         if (health <= 0)
         {
-            GameManager.Instance.SwitchGameState(GameManager.GameState.EndOfGame);
+            GameManager.Instance.SwitchGameState(GameManager.GameState.GameOver);
             
         }
 

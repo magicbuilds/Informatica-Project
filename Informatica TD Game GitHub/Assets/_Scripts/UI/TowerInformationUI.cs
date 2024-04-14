@@ -8,10 +8,13 @@ public class TowerInformationUI : MonoBehaviour
 {
     public static TowerInformationUI Instance;
 
-    public CardSO selectedTowerCard;
     public GameObject selecterTowerObject;
 
+    [SerializeField] private GameObject sellButton;
+
     public List<Transform> upgradeSlots;
+
+    private bool deckCardIsSelected = false;
 
     private void Awake()
     {
@@ -23,33 +26,30 @@ public class TowerInformationUI : MonoBehaviour
 
     }
 
-    public void SetSelectedTower(GameObject tower)
-    {
-        
-        selecterTowerObject = tower;
-        
-    }
-
-    public void RemoveSelectedTower()
-    {
-        
-        selecterTowerObject = null;
-        
-    }
-
     public void SellTower()
     {
+        if (deckCardIsSelected) return;
+
         UIManager.Instance.SetHoveringState(false);
-        if (selectedTowerCard != null) 
+        if (selecterTowerObject != null) 
         {
-            PlayerStatsManager.Instance.AddRemoveCoins(selectedTowerCard.baseCost / 2);
+            float cost = selecterTowerObject.GetComponent<Tower>().towerCard.baseCost;
+            PlayerStatsManager.Instance.AddRemoveCoins(cost / 2);
 
             Destroy(selecterTowerObject);
             UIManager.Instance.DeactivateTowerInformationUI();
         }
-        
+    }   
 
+    public void DeckCardSelected()
+    {
+        deckCardIsSelected = true;
+        sellButton.SetActive(false);
     }
-    
-    
+
+    public void DeckCardDeselected()
+    {
+        deckCardIsSelected = false;
+        sellButton.SetActive(true);
+    }
 }

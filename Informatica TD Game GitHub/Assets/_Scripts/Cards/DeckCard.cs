@@ -26,8 +26,11 @@ public class DeckCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         currentCard = spawnedCard;
         
-        costText.text = currentCard.baseCost.ToString();
+        costText.text = "Cost: " + currentCard.baseCost.ToString();
+        costText.color = currentCard.GetCardTypeColor();
+
         nameText.text = currentCard.name;
+        nameText.color = currentCard.GetCardTypeColor();
         icon.sprite = currentCard.icon;
 
         statsText.text = currentCard.GetStats();
@@ -60,6 +63,7 @@ public class DeckCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         if (currentCard.cardType == CardSO.CardType.Tower)
         {
             InventoryManager.Instance.SetSelectedCard(this);
+            UIManager.Instance.ActivateTowerInformationUICard(currentCard);
         }
         if (currentCard.cardType == CardSO.CardType.Upgrade)
         {

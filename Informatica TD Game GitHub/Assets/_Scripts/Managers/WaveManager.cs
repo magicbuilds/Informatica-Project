@@ -78,6 +78,12 @@ public class WaveManager : MonoBehaviour
 
     public void SpawnNewWave()
     {
+        if (waveIndex >= wavesToSpawn.waves.Count)
+        {
+            GameManager.Instance.SwitchGameState(GameManager.GameState.Victory);
+            return;
+        }
+
         waveToSpawn = wavesToSpawn.waves[waveIndex];
 
         currentIndexAtWave = 0;

@@ -10,30 +10,25 @@ public class GameManager : MonoBehaviour
 
     public GameState gameState;
 
-    public float waveNum;
-
-    public GameObject gameOverUI;
-
     public enum GameState
     {
         StartUp,
         ChoseNextChunk,
         StartNewWave,
         EndOfWave,
-        EndOfGame
+        GameOver,
+        Victory
     }
 
     private void Awake()
     {
         Instance = this;
-
     }
 
     private void Start()
     {
         SwitchGameState(GameState.StartUp);
         SwitchGameState(GameState.ChoseNextChunk);
-
     }
 
     public void SwitchGameState(GameState state)
@@ -43,20 +38,29 @@ public class GameManager : MonoBehaviour
         {
             case GameState.StartUp:
                 ChunkManager.Instance.SpawnFirstChunk();
+                ChunkManager.Instance.HideAllEmptyChunks();
                 break;
             case GameState.ChoseNextChunk:
                 InputManager.Instance.EnablePlayerInput();
+                ChunkManager.Instance.ShowAllEmptyChunks();
                 break;
             case GameState.StartNewWave:
                 WaveManager.Instance.SpawnNewWave();
+                ChunkManager.Instance.HideAllEmptyChunks();
+                UIManager.Instance.UpdateWaveText();
                 break;
             case GameState.EndOfWave:
                 InventoryManager.Instance.SpawnDrawCards();
 
                 InputManager.Instance.DisablePlayerInput();
                 break;
-            case GameState.EndOfGame:
-                gameOverUI.SetActive(true);
+            case GameState.GameOver:
+                UIManager.Instance.ActivateGameOverUI();
+                Time.timeScale = 0f;
+                break;
+            case GameState.Victory:
+                UIManager.Instance.ActivateVictoryUI();
+                Time.timeScale = 0f;
                 break;
             default:
                 Debug.Log("Gamestate not found");
@@ -68,7 +72,7 @@ public class GameManager : MonoBehaviour
 
 
 
-    public void restart()
+    public void RestartGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }

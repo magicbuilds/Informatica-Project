@@ -66,8 +66,6 @@ public class TileScript : MonoBehaviour
                     PlayerStatsManager.Instance.AddRemoveCoins(-InventoryManager.Instance.currentSelectedCard.currentCard.baseCost);
                     SpawnTower();
                     InventoryManager.Instance.OnCardPlayed();
-                    
-                    
                 }
             }
             

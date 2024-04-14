@@ -1,7 +1,5 @@
-using System;
 using System.Collections.Generic;
 using TMPro;
-using Unity.PlasticSCM.Editor.WebApi;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -15,6 +13,7 @@ public class UIManager : MonoBehaviour
     [Header("EnemiesLeftUI")]
     [SerializeField] private TextMeshProUGUI enemiesLeftText;
     [SerializeField] private Slider enemiesLeftBar;
+    [SerializeField] private TextMeshProUGUI waveText;
 
     [Header("HealthBar")] 
     [SerializeField] private TextMeshProUGUI healthText;
@@ -49,6 +48,12 @@ public class UIManager : MonoBehaviour
     [Header("OptionsMenu")]
     [SerializeField] private GameObject optionsMenu;
 
+    [Header("GameOver")]
+    [SerializeField] private GameObject gameOverUI;
+
+    [Header("Victory")]
+    [SerializeField] private GameObject victoryUI;
+
     private bool isHoveringUI;
 
     private void Awake()
@@ -59,6 +64,8 @@ public class UIManager : MonoBehaviour
     public void OnESCPressed(InputAction.CallbackContext context)
     {
         if (currentUI == cardDrawUI) return;
+        else if (currentUI == gameOverUI) return;
+        else if (currentUI == victoryUI) return;
 
         else if (currentUI == escMenu) DeactivateESCMenu();
         else if (currentUI == towerInformationUI) DeactivateTowerInformationUI();
@@ -84,6 +91,11 @@ public class UIManager : MonoBehaviour
         enemiesLeftText.text = enemiesLeft + "/" + WaveManager.Instance.enemiesInThisWave;
         enemiesLeftBar.maxValue = WaveManager.Instance.enemiesInThisWave;
         enemiesLeftBar.value= enemiesLeft;
+    }
+
+    public void UpdateWaveText()
+    {
+        waveText.text = "Wave: " + WaveManager.Instance.waveIndex;
     }
 
     public void UpdateHealthUI()
@@ -144,7 +156,7 @@ public class UIManager : MonoBehaviour
 
     public void ActivateTowerInformationUI(Tower tower)
     {
-        TowerInformationUI.Instance.SetSelectedTower(tower.gameObject);
+        TowerInformationUI.Instance.selecterTowerObject = tower.gameObject;
 
         towerInformationUI.SetActive(true);
 
@@ -152,7 +164,18 @@ public class UIManager : MonoBehaviour
         cardStatsTowerInformationUI.text = tower.towerCard.GetStats();
         cardIconTowerInformationUI.sprite = tower.towerCard.icon;
 
-        TowerInformationUI.Instance.selectedTowerCard = tower.towerCard;
+        currentUI = towerInformationUI;
+    }
+
+    public void ActivateTowerInformationUICard(CardSO card)
+    {
+        towerInformationUI.SetActive(true);
+
+        TowerInformationUI.Instance.DeckCardSelected();
+
+        cardNameTowerInformationUI.text = card.cardName;
+        cardStatsTowerInformationUI.text = card.GetStats();
+        cardIconTowerInformationUI.sprite = card.icon;
 
         currentUI = towerInformationUI;
     }
@@ -160,7 +183,10 @@ public class UIManager : MonoBehaviour
     public void DeactivateTowerInformationUI()
     {
         towerInformationUI.SetActive(false);
-        TowerInformationUI.Instance.selectedTowerCard = null;
+        TowerInformationUI.Instance.selecterTowerObject = null;
+        TowerInformationUI.Instance.DeckCardDeselected();
+
+        InventoryManager.Instance.currentSelectedCard = null;
 
         currentUI = null;
     }
@@ -216,6 +242,18 @@ public class UIManager : MonoBehaviour
         optionsMenu.SetActive(false);
 
         currentUI = null;
+    }
+
+    public void ActivateGameOverUI()
+    {
+        gameOverUI.SetActive(true);
+        currentUI = gameOverUI;
+    }
+
+    public void ActivateVictoryUI()
+    {
+        victoryUI.SetActive(true);
+        currentUI = victoryUI;
     }
 
     public void RaiseDeckCardUI()

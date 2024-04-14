@@ -13,14 +13,12 @@ public class ESCMenu : MonoBehaviour
 
     public void ActivateESCMenu()
     {
-        Debug.Log("ACtivatedESC");
         Time.timeScale = 0f;
         UIManager.Instance.SetHoveringState(true);
     }
 
     public void DeactivateESCMenu()
     {
-        Debug.Log("deACtivatedESC");
         Time.timeScale = 1f;
         UIManager.Instance.SetHoveringState(false);
     }

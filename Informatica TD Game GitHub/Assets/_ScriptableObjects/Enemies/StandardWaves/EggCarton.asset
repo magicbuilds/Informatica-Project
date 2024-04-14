@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyName: Egg Carton
   baseHealth: 100
-  damage: 25
+  damage: 100
   speed: 0.75
   baseCoins: 5
   xSprite: {fileID: -521476395, guid: 01d99cf87cd31d44cbdcb241727b4862, type: 3}

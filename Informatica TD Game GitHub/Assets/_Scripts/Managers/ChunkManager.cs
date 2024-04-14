@@ -179,6 +179,22 @@ public class ChunkManager : MonoBehaviour
         GameManager.Instance.SwitchGameState((GameManager.GameState)((int)GameManager.Instance.gameState + 1));
     }
 
+    public void HideAllEmptyChunks()
+    {
+        foreach (EmptyChunk chunk in emptyChunks)
+        {
+            chunk.gameObject.SetActive(false);
+        }
+    }
+
+    public void ShowAllEmptyChunks()
+    {
+        foreach (EmptyChunk chunk in emptyChunks)
+        {
+            chunk.gameObject.SetActive(true);
+        }
+    }
+
     private List<Vector2> RotatedPositions(List<Vector2> positions, Directions rotation)
     {
         List<Vector2> rotatedPositions = new List<Vector2>();
