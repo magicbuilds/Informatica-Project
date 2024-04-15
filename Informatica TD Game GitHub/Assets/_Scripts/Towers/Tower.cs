@@ -53,13 +53,13 @@ public class Tower : MonoBehaviour
     {
         timeUntilFire += Time.deltaTime;
 
-        if (target == null)
+        if (target == null && towerCard.tower.towerType != TowerSO.towerTypes.Checkout)
         {
             FindTarget();
             return;
         }
 
-        if (!CheckTargetIsInRange())
+        if (target != null && !CheckTargetIsInRange())
         {
             target = null;
             return;
@@ -106,30 +106,6 @@ public class Tower : MonoBehaviour
 
     private void FindTarget()
     {
-        if (hasRandomEnemy)
-        {
-            if (EnemyManager.Instance.enemiesLeft.Count <= 0) return;
-
-            if (target == null)
-            {
-                int randomIndex = Random.Range(0, EnemyManager.Instance.enemiesLeft.Count);
-                target = EnemyManager.Instance.enemiesLeft[randomIndex];
-                if (Vector2.Distance(target.transform.position, transform.position) <= currentRange)
-                {
-                    if (towerCard.tower.towerType == TowerSO.towerTypes.Checkout && target.currentEnemy.isBoss == true)
-                    {
-                        target = null;
-                    }
-
-                    if (target.isTarget || target.isDead)
-                    {
-                        target = null;
-                    }
-                }
-            }
-            return;
-        }
-
         RaycastHit2D[] hits = Physics2D.CircleCastAll(transform.position, currentRange, (Vector2)
             transform.position, 0f, enemyMask);
         if (hits.Length > 0)
@@ -248,7 +224,7 @@ public class Tower : MonoBehaviour
 
     private void Checkout()
     {
-        if (peopleAtCheckout <= currentSpecial && target != null)
+        if (peopleAtCheckout < currentSpecial)
         {
             GameObject spawnedCustomer = Instantiate(ammoPrefab, firingPoints[0].position, Quaternion.identity);
             CustomerAI spawnedCustomerAI = spawnedCustomer.GetComponent<CustomerAI>();

@@ -24,7 +24,6 @@ public class CameraMovement : MonoBehaviour
     private void FixedUpdate()
     {
         rb.velocity = moveVector * baseMoveSpeed * camSize;
-        Debug.Log(moveVector + ", " + baseMoveSpeed + ", " + camSize);
     }
 
     public void OnMovementPerformed(InputAction.CallbackContext context)

@@ -25,49 +25,69 @@ public class CustomerAI : MonoBehaviour
 
     private void Update()
     {
-        if (target == null || target == stopPosition.transform)
+        //Check For Delay
+        if (timeWaiting < tower.currentFireRate) 
         {
-            if (target != stopPosition.transform) target = stopPosition.transform;
-            if (timeWaiting >= tower.waitTimeAtCheckout)
-            {
-                SetNewTarget();
-                timeWaiting = 0;
-            }
+            timeWaiting += Time.deltaTime;
+            return;
         }
 
+        if (target == null)
+        {
+            SetNewTarget();
+            return;
+        }
+
+        // Can Pickup Target Or is At Checkout
         if (Vector2.Distance(transform.position, target.position) < customerPickUpRange)
         {
-            if (stopPosition.transform != target)
+            //At Checkout
+            if (target == stopPosition.transform)
+            {
+                KillEnemy();
+                timeWaiting = 0;
+                SetNewTarget();
+            }
+
+            //At Enemy
+            else
             {
                 TakeCurrentTarget();
                 target = stopPosition.transform;
-            }
-            else
-            {
-                timeWaiting += Time.deltaTime;
-
-                if (holdingEnemy != null)
-                {
-                    KillEnemy();
-                }
-
             }
         }
 
         transform.position = Vector2.MoveTowards(transform.position, target.position, tower.currentBulletSpeed * Time.deltaTime);
         RotateTowardsTarget();
     }
+
     public void SetNewTarget()
     {
-        if (tower.target != null)
+        if (EnemyManager.Instance.enemiesLeft.Count <= 0)
         {
-            target = tower.target.transform;
-
-            holdingEnemy = target.GetComponent<EnemyStats>();
-            holdingEnemy.isTarget = true;
-
-            timeWaiting = 0;
+            target = stopPosition;
+            return;
         }
+
+        int randomIndex = Random.Range(0, EnemyManager.Instance.enemiesLeft.Count);
+        EnemyStats targetEnemy = EnemyManager.Instance.enemiesLeft[randomIndex];
+
+        if (targetEnemy.currentEnemy.isBoss == true)
+        {
+            targetEnemy = null;
+        }
+
+        if (targetEnemy.isTarget || targetEnemy.isDead)
+        {
+            targetEnemy = null;
+        }
+
+        if (targetEnemy != null)
+        {
+            target = targetEnemy.transform;
+            targetEnemy.isTarget = true;
+        }
+        holdingEnemy = targetEnemy;
     }
 
     private void TakeCurrentTarget()
@@ -79,9 +99,12 @@ public class CustomerAI : MonoBehaviour
 
     private void KillEnemy()
     {
-        holdingEnemy.DealDamange(holdingEnemy.health + 1);
+        if (holdingEnemy != null)
+        {
+            holdingEnemy.DealDamange(holdingEnemy.health + 1);
 
-        holdingEnemy = null;
+            holdingEnemy = null;
+        }
     }
 
     private void RotateTowardsTarget()

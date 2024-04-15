@@ -30,6 +30,12 @@ public class TileScript : MonoBehaviour
                 TowerSO selectedTower = InventoryManager.Instance.currentSelectedCard.currentCard.tower;
 
                 float diameter = selectedTower.baseRange * 2;
+
+                if (diameter <= 0)
+                {
+                    diameter = 0.5f;
+                }
+
                 rangeObject.transform.localScale = new Vector3(diameter, diameter, 1);
                 rangeObject.SetActive(true);
             }
