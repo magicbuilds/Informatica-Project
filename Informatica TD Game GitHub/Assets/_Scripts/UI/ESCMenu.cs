@@ -26,7 +26,7 @@ public class ESCMenu : MonoBehaviour
 
     public void MainMenu()
     {
-        SceneManager.LoadSceneAsync(0);
+        Application.Quit();
     }
 
     public void ResumeGame()

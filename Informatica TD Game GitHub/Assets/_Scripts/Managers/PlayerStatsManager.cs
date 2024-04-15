@@ -4,7 +4,6 @@ using UnityEngine;
 public class PlayerStatsManager : MonoBehaviour
 {
     public static PlayerStatsManager Instance;
-    public GameManager GameManager;
 
     public float maxHealth = 50f;
     public float health;
