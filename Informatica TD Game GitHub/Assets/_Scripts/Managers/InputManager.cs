@@ -43,10 +43,12 @@ public class InputManager : MonoBehaviour
     private void OnEnable()
     {
         input.Enable();
+        Debug.Log("Enabled");
     }
 
     private void OnDisable()
     {
         input.Disable();
+        Debug.Log("Dissabled");
     }
 }

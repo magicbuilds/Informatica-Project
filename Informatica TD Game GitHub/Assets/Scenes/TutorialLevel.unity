@@ -1149,7 +1149,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Quit
+  m_text: Main Menu
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8902ea6b4bc78914c97d320865bd4e8e, type: 2}
   m_sharedMaterial: {fileID: 50880192561981725, guid: 8902ea6b4bc78914c97d320865bd4e8e, type: 2}
@@ -5060,6 +5060,7 @@ MonoBehaviour:
   baseZoomSensitivity: 0.0005
   cam: {fileID: 519420031}
   camSize: 5
+  rb: {fileID: 0}
 --- !u!50 &519420034
 Rigidbody2D:
   serializedVersion: 4
@@ -7886,7 +7887,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Quit
+  m_text: Main Menu
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8902ea6b4bc78914c97d320865bd4e8e, type: 2}
   m_sharedMaterial: {fileID: 50880192561981725, guid: 8902ea6b4bc78914c97d320865bd4e8e, type: 2}
@@ -8741,7 +8742,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Quit
+  m_text: Main Menu
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8902ea6b4bc78914c97d320865bd4e8e, type: 2}
   m_sharedMaterial: {fileID: 50880192561981725, guid: 8902ea6b4bc78914c97d320865bd4e8e, type: 2}

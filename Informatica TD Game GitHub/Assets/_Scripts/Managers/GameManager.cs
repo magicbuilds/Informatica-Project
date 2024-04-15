@@ -37,6 +37,8 @@ public class GameManager : MonoBehaviour
         switch (state)
         {
             case GameState.StartUp:
+                Time.timeScale = 1f;
+
                 ChunkManager.Instance.SpawnFirstChunk();
                 ChunkManager.Instance.HideAllEmptyChunks();
                 break;

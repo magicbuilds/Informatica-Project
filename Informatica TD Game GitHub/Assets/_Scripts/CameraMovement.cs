@@ -9,7 +9,7 @@ public class CameraMovement : MonoBehaviour
 
     [SerializeField] private Camera cam;
     [SerializeField] private float camSize = 5f;
-    private Rigidbody2D rb;
+    [SerializeField] private Rigidbody2D rb;
 
     private float minCamSize = 1f;
     private float maxCamSize = 30f;
@@ -24,6 +24,7 @@ public class CameraMovement : MonoBehaviour
     private void FixedUpdate()
     {
         rb.velocity = moveVector * baseMoveSpeed * camSize;
+        Debug.Log(moveVector + ", " + baseMoveSpeed + ", " + camSize);
     }
 
     public void OnMovementPerformed(InputAction.CallbackContext context)
