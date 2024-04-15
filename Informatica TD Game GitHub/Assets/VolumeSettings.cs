@@ -54,7 +54,8 @@ public class VolumeSettings : MonoBehaviour
     private void LoadVolume()
     {
         musicSlider.value = PlayerPrefs.GetFloat("musicVolume");
-        EnemiesDeathSlider.value = PlayerPrefs.GetFloat("SFXVolume");
+        EnemiesDeathSlider.value = PlayerPrefs.GetFloat("EnemiesVolume");
+        TowersSlider.value = PlayerPrefs.GetFloat("TowersVolume");
 
         SetEnemiesDeathVolume();
         SetMusicVolume();

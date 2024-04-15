@@ -21,5 +21,5 @@ MonoBehaviour:
   correspondingEnemiesAmount: 010000000500000001000000
   correspondingWaitTime:
   - 0
-  - 25
-  - 25
+  - 15
+  - 15
